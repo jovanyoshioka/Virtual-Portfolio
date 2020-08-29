@@ -4,11 +4,13 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 h1, h2, h3, h4, p, figure, ul {
   margin: 0;
   padding: 0;
+  /* Without this, text is spaced out on other browsers like Safari. */
+  font-weight: 400;
 }
 
 /*** Navigation Bar ***/
@@ -184,9 +186,9 @@ div.diagonalBtn {
   font-size: 2.5vw;
   position: relative;
   overflow: hidden;
-  border: 5px solid #CCCCCC;
+  border: 0.25vw solid #CCCCCC;
   transition: border-color 0.75s;
-  border-radius: 10px;
+  border-radius: 0.5vw;
 }
 /* Clickable Button */
 div.diagonalBtn a.diagonalBtn {
@@ -433,7 +435,7 @@ body#landing div.blackBackground {
 /* Containers for Different Sections of the Page */
 body#home section#slideshowSection,
 body#home section#latestActivitySection {
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -895,15 +897,21 @@ body#contact main {
   background-image: linear-gradient(-15deg, #072F5C 0%, #0C54A5 57.5%, #CCCCCC 57.5%, #CCCCCC 58.5%, rgba(26,26,26,0.8) 58.5%);
   font-family: SuezOne;
 }
-/* Background Image Behind Main Container Gradient. */
-body#contact img {
-  min-width: 100%;
+/* Container for Background Image Behind Main Container. */
+body#contact div.imgContainer {
+  width: 100%;
   height: 65vh;
   background-color: #1A1A1A;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
+  overflow: hidden;
+}
+/* Background Image Behind Main Container Gradient. */
+body#contact div.imgContainer img {
+  min-width: 100%;
+  height: 100%;
 }
 /* General Styling for Contact Elements */
 body#contact main h1,
