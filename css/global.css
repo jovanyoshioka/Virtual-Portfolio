@@ -110,7 +110,7 @@ a.socialMediaIcon {
   color: #CCCCCC;
   transition: 0.25s;
   margin: 0 0.5vw 0 0;
-  border-radius: 10px;
+  border-radius: 0.5vw;
 }
 /* Specific Coloring for Different Social Media Icons */
 a.fa-linkedin-in { background-color: #007bb5; }
@@ -251,7 +251,7 @@ section.slideshow div.selectorsContainer button.slideshowSelectors {
   background-color: #888888;
   transition: background-color 1s;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.25vw;
 }
 /* Hovering Effect: Change Background Color to in Between Not Selected and Selected Colors */
 section.slideshow div.selectorsContainer button.slideshowSelectors:hover {
@@ -285,7 +285,7 @@ section.infoBanner {
 }
 /* Creates Padding for Info Text */
 section.infoBanner article {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   text-align: center;
   font-family: SuezOne;
@@ -924,13 +924,22 @@ body#contact main div {
 }
 /* "Connect With Me" Header */
 body#contact main h1 {
+  /* Manually set width to prevent text breaking on smaller devices. */
+  width: 62.5vw;
+  text-align: center;
   font-size: 6.75vw;
   margin: 0 32.5vw 27.5vh 0;
 }
 /* Contact Information Headers: "Email, Phone, Social Media" */
 body#contact main h2 { font-size: 4vw; }
-body#contact main h2.email { margin: 10vw 35% 0 0; }
-body#contact main h2.phone { margin: 0 0 12.5vw 50%; }
+body#contact main h2.email {
+  width: 45vw;
+  margin: 10vw 35vw 0 0;
+}
+body#contact main h2.phone {
+  width: 30vw;
+  margin: 0 0 12.5vw 50vw;
+}
 /* Styling for Email and Phone Links */
 body#contact main h2 a {
   font-size: 3vw;
@@ -947,10 +956,8 @@ body#contact main h2 a:hover {
 }
 /* Container for Social Media Header and Handles */
 body#contact main div {
-  width: auto;
-  padding: 1vw;
-  border-radius: 10px;
-  margin: 21vw 0 0 25%;
+  width: 55vw;
+  margin: 21vw 0 0 25vw;
 }
 /* Positioning of Social Media Header */
 body#contact main div h2 {

@@ -1487,6 +1487,6 @@ function alertIncompatibility()
 
     alert("Hello there!\n\nI have not yet optimized my virtual portfolio to be mobile " +
     "compatible. Some content may look out of place. I recommend proceeding on a larger " +
-    "screen. Sorry for the inconvenience.\n\n- Jovan")
+    "screen or turning your device to landscape orientation. Sorry for the inconvenience.\n\n- Jovan");
   }
 }
