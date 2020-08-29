@@ -1,0 +1,1474 @@
+/**********
+ * GLOBAL *
+ **********/
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, p, figure, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/*** Navigation Bar ***/
+/* Navigation Bar Container */
+nav {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  text-align: center;
+  padding: 0 0 0.75vw 1.5vw;
+  transition: background-color 0.25s;
+}
+/* Nav Groups: Left Side Elements, Center (Logo), Right Side Elements */
+nav ul {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+/* Individual Nav Elements */
+nav ul li { display: inline-block; }
+/* Individual Nav Links */
+nav ul li a {
+  font-size: 1.5vw;
+  font-family: SuezOne;
+  color: #CCCCCC;
+  transition: color 0.25s;
+  margin-right: 3vw;
+  padding-top: 1.25vw;
+  text-decoration: none;
+}
+/* Hovering Effect: Change Color of Text and Create Line on Top */
+nav ul li a:hover {
+  color: #EEEEEE;
+  border-top: 1vw solid #EEEEEE;
+  cursor: pointer;
+}
+/* Current Page's Link: Selected/Lighter Color */
+nav ul li a.active {
+  color: #EEEEEE;
+  border-top: 1vw solid #EEEEEE;
+}
+/* Extra Spacing for Left Nav Links to Have Logo in Center and Have the Navigation
+   Bar Look Even on Both Sides. */
+nav ul:nth-of-type(1) li:not(:nth-of-type(3)) a { margin-right: 4vw; }
+/* Styling for Logo in Center of Nav Bar */
+nav ul#logoContainer { position: relative; }
+nav ul#logoContainer li { padding-top: 0.85vw; }
+nav ul#logoContainer li a { border: none; }
+nav ul#logoContainer li a div {
+  height: 3.75vw;
+  width: 3.25vw;
+  display: inline-block;
+  vertical-align: middle;
+  transition: 0.25s;
+  /* Background-Image Instead of <img> for Fading Hovering Effect */
+  background-image: url("../assets/logo_cccccc.png");
+  background-size: 100% 100%;
+}
+/* Hovering Effect: Change Background-Image to Lighter Color of Logo */
+nav ul#logoContainer li a:hover div { background-image: url("../assets/logo_eeeeee.png"); }
+
+/*** Footer ***/
+/* Footer Container */
+footer {
+  padding: 1.5vw 0 1vw 0;
+  text-align: center;
+  background-color: #4E4E4E;
+}
+/* Footer Horizontal Line to Divide Icons and Copyright Statement */
+footer div {
+  width: 33%;
+  border-top: 0.1vw solid #CCCCCC;
+  margin: 1.25vw auto 0.75vw auto;
+}
+/* Styling for Copyright Statement Text */
+footer small {
+  font-size: 0.75vw;
+  font-family: SuezOne;
+  display: block;
+  color: #CCCCCC;
+}
+/* Styling for Copyright Symbol */
+footer small span#copyrightSymbol {
+  font-size: 1.25vw;
+  vertical-align: middle;
+}
+
+/*** Social Media Icons ***/
+/* Social Media Icon Element */
+a.socialMediaIcon {
+  padding: 0.85vw 1vw 0.85vw 1vw;
+  font-size: 2vw;
+  text-decoration: none;
+  color: #CCCCCC;
+  transition: 0.25s;
+  margin: 0 0.5vw 0 0;
+  border-radius: 10px;
+}
+/* Specific Coloring for Different Social Media Icons */
+a.fa-linkedin-in { background-color: #007bb5; }
+a.fa-github {
+  background-color: #CCCCCC;
+  color: #211F1F;
+}
+a.fa-twitter { background-color: #55ACEE; }
+a.fa-facebook-f {
+  background-color: #3B5998;
+  padding: 0.85vw 1.375vw 0.85vw 1.375vw;
+}
+a.fa-envelope { background-color: #D44638; }
+
+/* Hovering Effect: Change Icon Color to Lighter Color (Highlight) */
+a.fa-linkedin-in:hover,
+a.fa-twitter:hover,
+a.fa-facebook-f:hover,
+a.fa-envelope:hover {
+  color: #EEEEEE;
+}
+a.fa-github:hover { background-color: #EEEEEE; }
+
+/*** Animation Preparation Classes ***/
+/* Prepares Element for Slide Up and Fade in Animation */
+.slideUpFadeInPrep {
+  opacity: 0;
+  transform: translateY(5vh);
+}
+/* Prepares Element for Slide Right and Fade in Animation */
+.slideRightFadeInPrep {
+  opacity: 0;
+  transform: translateX(-5vw);
+}
+
+/*** Animations ***/
+/* Animation: SVG Path "Draws" Itself */
+@keyframes drawSVG {
+  to { stroke-dashoffset: 0; }
+}
+/* Animation: Slides Element Vertically (up or down) (with transform: translateY(+/- x%)). */
+@keyframes slideVerticalTranslate {
+  to { transform: translateY(0); }
+}
+/* Animation: Slides Element Horizontally (left or right) (with left: +/- 100%). */
+@keyframes slideHorizontalLeft {
+  to { left: 0; }
+}
+/* Animation: Slides Element Horizontally (left or right) (with transform: translateX(+/- x%)). */
+@keyframes slideHorizontalTranslate {
+  to { transform: translateX(0); }
+}
+/* Animation: Slides Element to the Right (with left: 0) */
+@keyframes slideRight {
+  from { left: 0; }
+  to { left: 5vw; }
+}
+/* Animation: Fade in (with opacity: 0) */
+@keyframes fadeIn {
+  from { opacity: 0.0; }
+  to { opacity: 1.0; }
+}
+/* Animation: Fade out (with opacity: 1) */
+@keyframes fadeOut {
+  to { opacity: 0.0; }
+}
+
+/*** Diagonal Slide Button ***/
+/* Button Container */
+div.diagonalBtn {
+  width: 15.65vw;
+  height: auto;
+  font-size: 2.5vw;
+  position: relative;
+  overflow: hidden;
+  border: 5px solid #CCCCCC;
+  transition: border-color 0.75s;
+  border-radius: 10px;
+}
+/* Clickable Button */
+div.diagonalBtn a.diagonalBtn {
+  background-color: #0C54A5;
+  padding: 1vw;
+  text-decoration: none;
+}
+/* Button Text */
+div.diagonalBtn a.diagonalBtn span {
+  position: relative;
+  font-family: SuezOne;
+  color: #CCCCCC;
+  transition: color 0.75s;
+}
+/* Diagonal Element */
+div.diagonalBtn a.diagonalBtn::before {
+  content: '';
+  width: 125%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: skewX(-45deg) translateX(-110%);
+  transition: transform 0.75s;
+  background-color: #367FCF;
+}
+/* Hovering Effect: Change Cursor to Pointer and Change Button Border Color */
+div.diagonalBtn:hover {
+  cursor: pointer;
+  border-color: #EEEEEE;
+}
+/* Hovering Effect: Change Color of Button Text */
+div.diagonalBtn:hover a.diagonalBtn span { color: #EEEEEE; }
+/* Hovering Effect: Slide Diagonal Element Into View */
+div.diagonalBtn:hover a.diagonalBtn::before { transform: skewX(-45deg) translateX(-10%); }
+
+/*** Slideshow ***/
+/* Slideshow Images */
+section.slideshow img.slideshowImages {
+  min-width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.0;
+  transition: opacity 1s;
+}
+/* Slideshow Button Selectors Container */
+section.slideshow div.selectorsContainer {
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  text-align: center;
+}
+/* Slideshow Button Selectors */
+section.slideshow div.selectorsContainer button.slideshowSelectors {
+  width: 50px;
+  height: 100%;
+  margin-right: 10px;
+  background-color: #888888;
+  transition: background-color 1s;
+  border: none;
+  border-radius: 5px;
+}
+/* Hovering Effect: Change Background Color to in Between Not Selected and Selected Colors */
+section.slideshow div.selectorsContainer button.slideshowSelectors:hover {
+  cursor: pointer;
+  transition: background-color 0.25s;
+  background-color: #AAAAAA;
+}
+section.slideshow div.selectorsContainer button.slideshowSelectors:focus { outline: none; }
+/* ".active" Class is Assigned to Selected Selector for Darkened Background Color */
+section.slideshow div.selectorsContainer button.active { background-color: #CCCCCC !important; }
+
+/*** Tint ***/
+/* Tint element commonly placed over images */
+div.tint {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1A1A1A;
+  opacity: 0.5;
+}
+
+/*** Info Banner ***/
+/* Container for Banner */
+section.infoBanner {
+  width: 100%;
+  height: auto;
+  background-color: #0C54A5;
+  padding: 1vw 0 2vw 0;
+}
+/* Creates Padding for Info Text */
+section.infoBanner article {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: SuezOne;
+  color: #CCCCCC;
+}
+/* Styling for Title */
+section.infoBanner article h1 {
+  font-size: 4vw;
+  padding: 0 0 0.65vw 0;
+}
+/* Styling for Secondary Title/Closing */
+section.infoBanner article h2 {
+  font-size: 2.5vw;
+  padding: 0.65vw 0 0 0;
+}
+/* Styling for Body Text */
+section.infoBanner article div p {
+  font-size: 2vw;
+  padding: 0 0 0.5vw 0;
+}
+/* Styling for Links Within Body Text */
+section.infoBanner article div p a {
+  text-decoration: underline;
+  color: #CCCCCC;
+  transition: color 0.5s;
+}
+section.infoBanner article div p a:hover {
+  color: #EEEEEE;
+}
+
+/* Styling for Button  */
+section.infoBanner div.diagonalBtn { margin: 0 auto; }
+
+/*** Bouncing Arrow ***/
+/* Bouncing Animation */
+@keyframes bounce {
+  from { transform: translateY(-2vh); }
+  to { transform: translateY(0); }
+}
+/* Arrow */
+div#bouncingArrow {
+  font-size: 3vw;
+  position: absolute;
+  bottom: 0;
+  left: 48%;
+  transform: translateY(-1vh);
+  color: #CCCCCC;
+  z-index: 3;
+  animation: bounce 1.5s ease alternate infinite;
+}
+
+/*********
+ * INDEX *
+ *********/
+body#index { background-color: #1A1A1A; }
+body#index h1 {
+  font-size: 3vw;
+  font-family: SuezOne;
+  text-align: center;
+  margin-top: 30vh;
+  color: #CCCCCC;
+}
+body#index h1 a {
+  color: #CCCCCC;
+  transition: color 0.25s;
+}
+body#index h1 a:hover { color: #EEEEEE; }
+
+/***********
+ * LANDING *
+ ***********/
+/* Colors Background of Page */
+body#landing { background-color: #1A1A1A; }
+
+/* Style Elements to Take Up Entire Browser Size */
+body#landing div.radialGradient,
+body#landing canvas#particlesCanvas,
+body#landing svg,
+body#landing div.blackBackground {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Create Dark Outer, Light Inner Effect and Prepare for Fade In */
+body#landing div.radialGradient {
+  background-image: radial-gradient(#AAAAAA, #1A1A1A);
+  opacity: 0.0;
+}
+
+/* Minimizes JY Logo to Make Room for Redirect Button */
+@keyframes minimizeLogo {
+  to { height: 88vh }
+}
+/* Styling JY Logo */
+body#landing svg {
+  fill: transparent;
+  stroke: #EEEEEE;
+  stroke-width: 75;
+  z-index: 2;
+}
+/* Background Color of Logo - Must Use Another Path Because Other Will Fill Letter Holes */
+body#landing svg g path:nth-of-type(1) {
+  fill: #1A1A1A;
+  stroke: none;
+}
+/* Preparing and Executing Paths for Self-Drawing */
+body#landing svg g path:nth-of-type(2) {
+  stroke-dasharray: 47600;
+  stroke-dashoffset: 47600;
+  animation: drawSVG 4s ease-out forwards;
+}
+body#landing svg g path:nth-of-type(3) {
+  stroke-dasharray: 4300;
+  stroke-dashoffset: 4300;
+  animation: drawSVG 0.5s linear 1.25s forwards;
+}
+body#landing svg g path:nth-of-type(4) {
+  stroke-dasharray: 5650;
+  stroke-dashoffset: 5650;
+  animation: drawSVG 0.5s linear 2s forwards;
+}
+
+/* Styling Redirect Button */
+body#landing div.diagonalBtn {
+  width: 19.935vw;
+  font-size: 3vw;
+  position: absolute;
+  bottom: 3.5vh;
+  left: 40.0325vw;
+  opacity: 0.0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Making Page Fade Out Background Black and Preparing for Element Fade In */
+body#landing div.blackBackground {
+  background-color: #000000;
+  opacity: 0.0;
+}
+
+/********
+ * HOME *
+ ********/
+/* Containers for Different Sections of the Page */
+body#home section#slideshowSection,
+body#home section#latestActivitySection {
+  width: 100vw;
+  overflow: hidden;
+}
+
+/*** Slideshow (Top) Section ***/
+/* Container for Slideshow and Name */
+body#home section#slideshowSection {
+  height: 100vh;
+  background-color: #1A1A1A;
+}
+
+/* Slideshow Container */
+body#home section#slideshowSection section.slideshow {
+  width: 65%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #333333;
+}
+/* Fading Effect for Slideshow Images */
+body#home section#slideshowSection section.slideshow div#fadingGradient {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: linear-gradient(to right, rgba(26,26,26,0.2), rgba(26,26,26,1.0));
+}
+
+/* Container for Name and Button on the Right of Page */
+body#home section#slideshowSection section#name {
+  width: 35%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #1A1A1A;
+  text-align: center;
+}
+body#home canvas#particlesCanvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body#home section#slideshowSection section#name div.canvasHider {
+  width: 100%;
+  height: 22vw;
+  position: absolute;
+  top: 29vh;
+  left: 0;
+  background-color: #1A1A1A;
+}
+/* Text Elements for Name */
+body#home section#slideshowSection section#name h1 {
+  font-size: 5vw;
+  color: #EEEEEE;
+  font-family: Sarina;
+  position: relative;
+}
+body#home section#slideshowSection section#name h1#firstName { margin-top: 30vh; }
+body#home section#slideshowSection section#name h1#lastName { margin-bottom: 3vh; }
+/* Centering Learn More Diagonal Button */
+body#home section#slideshowSection section#name div { margin: 0 auto; }
+
+/*** Latest Activity (Bottom) Section ***/
+/* Container for Latest Activity of Jovan */
+body#home section#latestActivitySection {
+  height: 90vh;
+  width: 100%;
+  background-image: linear-gradient(-70deg, #2A2A2A 25%, #1A1A1A 55%);
+}
+/* Container for Latest Activity Header and Info */
+body#home section#latestActivitySection section#text {
+  width: 49%;
+  height: 100%;
+  display: inline-block;
+  float: left;
+}
+/* Container for Latest Activity Header Shapes and Text */
+body#home section#latestActivitySection section#text header {
+  width: 100%;
+  height: 9vw;
+  margin: 5% 0 0 0;
+  position: relative;
+}
+/* Latest Activity Header Outer and Inner Shape Elements */
+body#home section#latestActivitySection section#text header div {
+  position: absolute;
+  top: 0;
+  left: -100%;
+}
+body#home section#latestActivitySection section#text header div#headerOuterShape {
+  width: 100%;
+  height: 100%;
+  background-color: #CCCCCC;
+  clip-path: polygon(0% 0%, 100% 0%, 87% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 87% 100%, 0% 100%);
+}
+body#home section#latestActivitySection section#text header div#headerInnerShape {
+  width: 97%;
+  height: 82%;
+  background-color: #0C54A5;
+  clip-path: polygon(0% 0%, 100% 0%, 88.5% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 88.5% 100%, 0% 100%);
+  margin: 1.75% 0 0 0;
+}
+/* Latest Activity Header Text */
+body#home section#latestActivitySection section#text header div#headerInnerShape h1#headerText {
+  font-family: SuezOne;
+  font-size: 3vw;
+  color: #CCCCCC;
+  text-align: center;
+  margin: 4% 5% 0 0;
+}
+/* Latest Activity Info Container */
+body#home section#latestActivitySection section#text article {
+  width: 90%;
+  margin: 7.5% 0 0 5%;
+  font-family: SuezOne;
+  color: #CCCCCC;
+}
+/* Latest Activity Info Text */
+body#home section#latestActivitySection section#text article h1#latestActivityTitle {
+  font-size: 4vw;
+  margin: -6.5% 0 0 0;
+}
+body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 2vw; }
+/* Latest Activity Learn More Button */
+body#home section#latestActivitySection section#text article div#latestActivityBtn { margin: 2% 0 0 0; }
+
+/* SVG Container for Latest Activity Picture */
+body#home section#latestActivitySection svg {
+  width: 50%;
+  height: 100%;
+  float: right;
+  margin: 0 1% 0 0;
+  display: inline-block;
+}
+/* Hovering Effect: Highlight Latest Activity Picture */
+body#home section#latestActivitySection svg:hover path { stroke: #EEEEEE; }
+/* Styling SVG Paths That Makeup Latest Activity Picture */
+body#home section#latestActivitySection svg path {
+  stroke: #CCCCCC;
+  stroke-width: 3;
+  fill: none;
+  transition: 0.25s stroke;
+}
+/* Specific Stroke Styling for Paths Based on Length of Path */
+body#home section#latestActivitySection svg path:nth-of-type(1),
+body#home section#latestActivitySection svg path:nth-of-type(2),
+body#home section#latestActivitySection svg path:nth-of-type(3),
+body#home section#latestActivitySection svg path:nth-of-type(4) {
+  stroke-dasharray: 1700;
+  stroke-dashoffset: 1700;
+}
+body#home section#latestActivitySection svg path:nth-of-type(5),
+body#home section#latestActivitySection svg path:nth-of-type(6) {
+  stroke-dasharray: 675;
+  stroke-dashoffset: 675;
+}
+body#home section#latestActivitySection svg path:nth-of-type(7) {
+  stroke-dasharray: 450;
+  stroke-dashoffset: 450;
+}
+body#home section#latestActivitySection svg path:nth-of-type(8) {
+  stroke-dasharray: 335;
+  stroke-dashoffset: 335;
+}
+
+/*********
+ * ABOUT *
+ *********/
+/* Container for Profile Picture and About Me Information Section */
+body#about section#biographySection {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: #1A1A1A;
+  background-image: linear-gradient(rgba(26,26,26,0.6),rgba(26,26,26,0.6)), url("../assets/meeting.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+/* Circular Profile Picture Element */
+body#about section#biographySection div.profilePic {
+  width: 32.5vw;
+  height: 30vw;
+  position: absolute;
+  margin: 11% 0 0 0;
+  left: 10%;
+  background-image: url("../assets/profilePic.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 0.5vw solid #CCCCCC;
+  border-radius: 50%;
+  animation: slideVerticalTranslate 1s ease-out forwards,
+             fadeIn 0.75s linear 0.25s forwards;
+}
+/* Container for About Me Information */
+body#about section#biographySection article {
+  width: 76%;
+  height: 87.5%;
+  padding: 9.5% 10% 5% 0;
+  float: right;
+  font-family: SuezOne;
+  color: #CCCCCC;
+  animation: slideHorizontalTranslate 1s ease-out 0.5s forwards,
+             fadeIn 0.75s linear 0.75s forwards;
+}
+/* Element Causes Info Text to Wrap Around Profile Picture Element */
+body#about section#biographySection article div {
+  width: 30vw;
+  height: 40vw;
+  margin: -7.5% 1vw 0 0;
+  float: left;
+  /* On Internet Explorer (not supported), text will be aligned straight. */
+  shape-outside: circle();
+  -webkit-shape-outside: circle();
+}
+/* About Me Information Text Styling */
+body#about section#biographySection article h1 { font-size: 4vw; }
+body#about section#biographySection article h2 {
+  font-size: 2.5vw;
+  margin: -0.75vw 0 1vw 0;
+}
+body#about section#biographySection article p { font-size: 1.5vw; }
+
+/* Container for Resume Header and Download Button */
+body#about section#resumeSection {
+  padding: 2vw 0 3vw 0;
+}
+/* Specific Button Styling for Resume Download Button */
+body#about section#resumeSection div#resumeBtn {
+  width: 24.45vw;
+  font-size: 3.5vw;
+}
+
+/* General Styling for Section Header Containers */
+body#about header {
+  width: 100%;
+  height: auto;
+  text-align: center
+}
+body#about header:nth-of-type(odd) { background-color: #1A1A1A; }
+body#about header:nth-of-type(even) { background-color: #0C54A5; }
+/* General Styling for Section Header Text */
+body#about header h1 {
+  width: 80%;
+  font-size: 5vw;
+  font-family: SuezOne;
+  color: #CCCCCC;
+  padding: 1% 0 1% 0;
+  margin: 0 auto;
+}
+
+/* General Styling for About Section Containers: Education, Skills, Spotlights */
+body#about section.infoSection {
+  width: 100%;
+  height: 75vh;
+  position: relative;
+  font-family: SuezOne;
+  color: #CCCCCC;
+}
+/* General Styling for Left and Right Info Sections Within About Section */
+body#about section.infoSection section {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+}
+body#about section.infoSection section:nth-of-type(1) { left: 0; }
+body#about section.infoSection section:nth-of-type(2) { right: 0; }
+/* Background image for Left/Right Info Section */
+body#about section.infoSection section img {
+  min-width: 100%;
+  height: 100%;
+  position: absolute;
+}
+/* Title for Left/Right Info Section */
+body#about section.infoSection section h1.title {
+  font-size: 4vw;
+  position: absolute;
+  text-align: center;
+  transition: transform 0.5s;
+}
+
+/* Styling Background Color in Case Background Image Does Not Load */
+body#about section#educationSection { background-color: #1A1A1A;}
+/* Specific Positioning for "Hardin Valley Academy" Title */
+body#about section#educationSection section.hva h1.title {
+  top: 15.5vw;
+  left: 4.5%;
+}
+/* Hovering Effect: Slide Title to Top of Section to Make Room for Info Text */
+body#about section#educationSection section.hva:hover h1.title { transform: translateY(-280%); }
+/* Specific Positioning for "University of Tennessee Knoxville" Title */
+body#about section#educationSection section.utk h1.title {
+  top: 12.5vw;
+  left: 0;
+}
+/* Hovering Effect: SLide Title to Top of Section to Make Room for Info Text */
+body#about section#educationSection section.utk:hover h1.title { transform: translateY(-115%); }
+/* Container for Education Information Text. */
+body#about section#educationSection section article.info {
+  width: 91%;
+  position: absolute;
+  left: 2.5%;
+  padding: 0 2% 0 2%;
+  transform: translateY(150%);
+  transition: transform 0.5s;
+}
+/* Hovering Effect: Slide Information Text Into View */
+body#about section#educationSection section:hover article.info { transform: translateY(-5%); }
+/* Specific Positioning for Hardin Valley Academy Information */
+body#about section#educationSection section.hva article.info {
+  height: 79%;
+  top: 7.5vw;
+}
+/* Specific Positioning for University of Tennessee Knoxville Information */
+body#about section#educationSection section.utk article.info {
+  height: 65%;
+  top: 12.5vw;
+}
+/* Styling for Education Information Text */
+body#about section#educationSection section article.info h2 {
+  font-size: 1.75vw;
+  text-decoration: underline;
+}
+body#about section#educationSection section article.info p {
+  font-size: 1.25vw;
+  margin: -0.25vw 0 0 0;
+}
+/* Styling for Links Within Information Text */
+body#about section#educationSection section article.info p a {
+  color: #CCCCCC;
+  transition: color 0.5s;
+  text-decoration: none;
+  font-style: italic;
+}
+body#about section#educationSection section article.info p a:hover { color: #EEEEEE; }
+
+/* Styling Background Color in Case Background Image Does Not Load */
+body#about section#spotlightsSection { background-color: #1A1A1A; }
+/* Specific Positioning for HVA Student Spotlight Title */
+body#about section#spotlightsSection section.hva h1.title {
+  top: 34%;
+  left: 0;
+}
+/* Specific Positioning for ORNL Intern Spotlight Title */
+body#about section#spotlightsSection section.ornl h1.title {
+  font-size: 3vw;
+  top: 37.5%;
+  left: 0;
+}
+/* Hovering Effect: Slide Up Title to Make Top and Bottom Even When Button is Displayed */
+body#about section#spotlightsSection section:hover h1.title { transform: translateY(-50%); }
+/* Specific Styling for "View Spotlight" Button */
+body#about section#spotlightsSection section div.diagonalBtn {
+  width: 23.45vw;
+  font-size: 3vw;
+  position: absolute;
+  left: 25.5%;
+  bottom: 20%;
+  opacity: 0;
+  transition: border-color 0.75s, opacity 0.5s;
+}
+/* Hovering Effect: Fade In View Spotlight Button */
+body#about section#spotlightsSection section:hover div.diagonalBtn { opacity: 1.0; }
+
+/* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
+body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
+/* Container for Skills Section */
+body#about section#skillsSection {
+  background-color: #0C54A5;
+  background-image: linear-gradient(rgba(12,84,165,0.8),rgba(12,84,165,0.8)), url("../assets/code_symbol.png");
+  background-repeat: no-repeat;
+  background-size: 70% 100%;
+  background-position: center;
+}
+/* General Styling for Skills Languages/Tools Sections */
+body#about section#skillsSection section {
+  height: 92.5%;
+  display: inline-block;
+  text-align: center;
+  overflow-y: auto;
+}
+/* General Styling for Languages/Tools Sections' Title */
+body#about section#skillsSection section h1.sectionTitle {
+  font-size: 2vw;
+  border-bottom: 2px solid #CCCCCC;
+  margin: 0 auto 2% auto;
+  padding: 0 0 1% 0;
+}
+/* General Positioning for Languages/TooLs Sections' Table */
+body#about section#skillsSection section table { margin: 0 auto; }
+
+/* Container for Languages Title and Table */
+body#about section#skillsSection section.languages {
+  width: 45%;
+  margin: 0 0 1.5% 10%;
+  float: left;
+}
+/* Styling Width of Section Title to Define How Large Border-Bottom is. */
+body#about section#skillsSection section.languages h1.sectionTitle { width: 95%; }
+/* Styling Languages Column in Table */
+body#about section#skillsSection section.languages table tr td {
+  font-size: 1.25vw;
+  text-align: left;
+  padding: 0;
+}
+/* Positioning Levels Column in Table */
+body#about section#skillsSection section.languages table tr td:nth-of-type(2) { padding: 0 0 0 1.5vw; }
+/* Position Levels' Intensity Keys */
+body#about section#skillsSection section.languages table tr td:nth-of-type(2) span:nth-of-type(1) { float: left; }
+body#about section#skillsSection section.languages table tr td:nth-of-type(2) span:nth-of-type(2) { float: right; }
+/* Styling Individual Level Elements */
+body#about section#skillsSection section.languages table tr td.levelsContainer div {
+  width: 5vw;
+  height: 1vw;
+  margin: 0 0 0 -0.1vw;
+  display: inline-block;
+  background-color: transparent;
+  border: 3px solid #CCCCCC;
+  transform: skewX(-10deg);
+}
+/* Animation: "Activates" Level by Changing Background Color to #759ECB */
+@keyframes activateLevel {
+  to { background-color: #759ECB; }
+}
+
+/* Container for Tools Title and List/Table */
+body#about section#skillsSection section.tools {
+  width: 32.5%;
+  margin: 0 10% 1.5% 0;
+  float: right;
+}
+/* Styling Width of Section Title to Define How Large Border-Bottom is */
+body#about section#skillsSection section.tools h1.sectionTitle { width: 35%; }
+/* Specific Styling for Tool Rows */
+body#about section#skillsSection section.tools table tr td.tool {
+  font-size: 2vw;
+  opacity: 0.0;
+}
+/* Preparing for Slide In Fade In Animation by Offsetting/Translating Horizontally. */
+body#about section#skillsSection section.tools table tr:nth-of-type(odd) td.tool { transform: translateX(-5vw); }
+body#about section#skillsSection section.tools table tr:nth-of-type(even) td.tool { transform: translateX(5vw); }
+
+/***********
+ * CONTACT *
+ ***********/
+/* Container for "Connect With Me" Header and Contact Information. */
+body#contact main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Creates separation of colors and tinted background image on top half. */
+  background-image: linear-gradient(-15deg, #072F5C 0%, #0C54A5 57.5%, #CCCCCC 57.5%, #CCCCCC 58.5%, rgba(26,26,26,0.8) 58.5%);
+  font-family: SuezOne;
+}
+/* Background Image Behind Main Container Gradient. */
+body#contact img {
+  min-width: 100%;
+  height: 65vh;
+  background-color: #1A1A1A;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+/* General Styling for Contact Elements */
+body#contact main h1,
+body#contact main h2.email,
+body#contact main h2.phone,
+body#contact main div {
+  transform: rotate(-15deg);
+  color: #CCCCCC;
+  position: absolute;
+}
+/* "Connect With Me" Header */
+body#contact main h1 {
+  font-size: 6.75vw;
+  margin: 0 32.5vw 27.5vh 0;
+}
+/* Contact Information Headers: "Email, Phone, Social Media" */
+body#contact main h2 { font-size: 4vw; }
+body#contact main h2.email { margin: 10vw 35% 0 0; }
+body#contact main h2.phone { margin: 0 0 12.5vw 50%; }
+/* Styling for Email and Phone Links */
+body#contact main h2 a {
+  font-size: 3vw;
+  display: block;
+  margin: -1vw 0 0 5vw;
+  transition: color 0.25s;
+  text-decoration: none;
+  color: #CCCCCC;
+}
+/* Hovering Effect: Brighten color of links */
+body#contact main h2 a:hover {
+  color: #EEEEEE;
+  cursor: pointer;
+}
+/* Container for Social Media Header and Handles */
+body#contact main div {
+  width: auto;
+  padding: 1vw;
+  border-radius: 10px;
+  margin: 21vw 0 0 25%;
+}
+/* Positioning of Social Media Header */
+body#contact main div h2 {
+  margin: -1vw 0 -1vw 0;
+}
+/* Specific Positioning for First Social Media Icons in Each Row */
+body#contact main div a.fa-linkedin-in,
+body#contact main div a.fa-twitter { margin-left: 5vw; }
+/* Specific Positioning for Second Social Media Icons In Each Row */
+body#contact main div a.fa-github,
+body#contact main div a.fa-facebook-f { margin: 1vw 0.5vw 0 2.5vw; }
+/* Styling for Social Media Handle Link */
+body#contact main div a.handle {
+  font-size: 2vw;
+  transition: color 0.25s;
+  text-decoration: none;
+  color: #CCCCCC;
+}
+/* Hovering Effect: Brighten Color of Social Media Link */
+body#contact main div a.handle:hover {
+  color: #EEEEEE;
+  cursor: pointer;
+}
+
+/*********************************
+ * PROJECTS, EXPERIENCES, AWARDS *
+ *********************************/
+/* Projects, Experiences, and Awards Pages Have ".content" Class */
+body.content {
+  /* Color of Diagonal Section Dividers */
+  background-color: #CCCCCC;
+}
+
+/*** Content Slideshow Navigation Section ***/
+/* Container for Content Slideshow Navigation */
+body.content section.slideshow {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: #1A1A1A;
+}
+/* Blurred Slideshow Image Background for Slideshow Section */
+body.content section.slideshow div#blurredBackground {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  transition: 1s;
+}
+/* Container for Slideshow Image, Text, and Learn More Button */
+body.content section.slideshow div.infoContainer {
+  width: 65%;
+  height: 75%;
+  position: absolute;
+  top: 12.5%;
+  left: 17.5%;
+  overflow: hidden;
+}
+/* Sizing Slideshow Images */
+body.content section.slideshow div.infoContainer img.slideshowImages {
+  min-width: 100%;
+  height: 100%;
+}
+/* General Styling for Slideshow Text */
+body.content section.slideshow div.infoContainer h1#slideshowTitle,
+body.content section.slideshow div.infoContainer h2#slideshowSubtitle,
+body.content section.slideshow div.infoContainer h2#slideshowTime {
+  color: #CCCCCC;
+  font-family: SuezOne;
+  position: relative;
+  left: 0;
+  text-align: center;
+}
+/* Styling for Slide Title */
+body.content section.slideshow div.infoContainer h1#slideshowTitle {
+  font-size: 4.25vw;
+  margin: 10% 0 0 0;
+}
+/* Styling for Slide Time Text */
+body.content section.slideshow div.infoContainer h2#slideshowSubtitle,
+body.content section.slideshow div.infoContainer h2#slideshowTime {
+  font-size: 2.75vw;
+  margin: -2% 0 8% 0;
+}
+body.content section.slideshow div.infoContainer h2#slideshowSubtitle { margin: -1% 0 3% 0; }
+body.content section.slideshow div.infoContainer h2#slideshowTime { margin: 0 0 5% 0; }
+/* Styling for Slide Learn More Button */
+body.content section.slideshow div.infoContainer div#slideshowBtn {
+  width: 18.35vw;
+  font-size: 3vw;
+  margin: 0 auto;
+  /* Hide for Initial Page Load: Shown by JavaScript */
+  visibility: hidden;
+}
+/* Styling for Slideshow Selectors */
+body.content section.slideshow div.selectorsContainer button.slideshowSelectors {
+  width: 22.5px;
+  height: 100%;
+  margin-right: 5px;
+}
+/* Styling Next/Previous Slide Buttons */
+body.content section.slideshow button#slideshowPreviousBtn,
+body.content section.slideshow button#slideshowNextBtn {
+  width: 12.5%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  border: none;
+  background-color: transparent;
+}
+body.content section.slideshow button#slideshowPreviousBtn:hover,
+body.content section.slideshow button#slideshowNextBtn:hover { cursor: pointer; }
+body.content section.slideshow button#slideshowPreviousBtn:focus,
+body.content section.slideshow button#slideshowNextBtn:focus { outline: none; }
+/* Specific Styling for Previous and Next Buttons */
+body.content section.slideshow button#slideshowPreviousBtn {
+  left: 0;
+  background-image: linear-gradient(to right, #1A1A1A, transparent);
+}
+body.content section.slideshow button#slideshowNextBtn {
+  right: 0;
+  background-image: linear-gradient(to left, #1A1A1A, transparent);
+}
+/* Styling for Previous/Next Button Icons */
+body.content section.slideshow button#slideshowPreviousBtn i,
+body.content section.slideshow button#slideshowNextBtn i {
+  color: #CCCCCC;
+  font-size: 2.5vw;
+  transition: 0.5s;
+}
+/* Hovering Effect: Brighten Color and Move Left/Right */
+body.content section.slideshow button#slideshowPreviousBtn:hover i,
+body.content section.slideshow button#slideshowNextBtn:hover i { color: #EEEEEE; }
+body.content section.slideshow button#slideshowPreviousBtn:hover i { transform: translateX(-25%); }
+body.content section.slideshow button#slideshowNextBtn:hover i { transform: translateX(25%); }
+
+/*** Content Sections ***/
+/* General Styling for Content Sections */
+body.content section.light,
+body.content section.dark {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 50% 100%;
+}
+/* General Styling for Light Content Sections */
+body.content section.light {
+  background-color: #0C54A5;
+  /* Variable for Repeatedly Used Linear-Gradient */
+  --light-gradient: linear-gradient(rgba(12,84,165,0.8),rgba(12,84,165,0.8));
+  background-position: right center;
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
+  -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
+}
+/* General Styling for Dark Content Sections */
+body.content section.dark {
+  background-color: #1A1A1A;
+  /* Variable for Repeatedly Used Linear-Gradient */
+  --dark-gradient: linear-gradient(rgba(26,26,26,0.8),rgba(26,26,26,0.8));
+  background-position: left center;
+  clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
+}
+/* Special Styling for First Section: Straight Top */
+body.content section:nth-of-type(2) {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+}
+/* Special Styling if Last Section is Light: Straight Bottom */
+body.content section:last-of-type:nth-child(odd) {
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+}
+/* Special Styling if Last Section is Dark: Straight Bottom */
+body.content section:last-of-type:nth-child(even) {
+  clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
+}
+
+/* General Styling for "Border" Element of Image */
+body.content section.light figure,
+body.content section.dark figure {
+  width: 37.5%;
+  height: 40%;
+  position: absolute;
+  background-color: #CCCCCC;
+}
+/* Positioning Top Border for Light Sections' Images */
+body.content section.light figure:first-of-type {
+  top: 9%;
+  left: 2%;
+}
+/* Positioning Bottom Border for Light Sections' Images */
+body.content section.light figure:last-of-type {
+  top: 52%;
+  left: 9%;
+}
+/* Positioning Top Border for Dark Sections' Images */
+body.content section.dark figure:first-of-type {
+  top: 9%;
+  right: 2%;
+}
+/* Positioning Bottom Border for Dark Sections' Images */
+body.content section.dark figure:last-of-type {
+  top: 52%;
+  right: 9%;
+}
+/* Special Positioning for First Content Section's Image Borders (Due to Straight Top) */
+body.content section:nth-of-type(2) figure:first-of-type { top: 6%; }
+body.content section:nth-of-type(2) figure:last-of-type { top: 49%; }
+/* Special Positioning for Last Content Section's Image Borders (Due to Straight Bottom) */
+body.content section:last-of-type:nth-child(odd) figure:first-of-type,
+body.content section:last-of-type:nth-child(even) figure:first-of-type { top: 11%; }
+body.content section:last-of-type:nth-child(odd) figure:last-of-type,
+body.content section:last-of-type:nth-child(even) figure:last-of-type { top: 54.5%; }
+
+/* General Styling for Image Containers */
+body.content section.light figure div,
+body.content section.dark figure div {
+  width: 95%;
+  height: 90%;
+  position: absolute;
+  top: 5%;
+  left: 2.5%;
+  overflow: hidden;
+  background-color: #1A1A1A;
+  text-align: center;
+  /* Centers Position Absolute Images */
+  display: flex;
+  align-items: center;
+}
+
+/* Shaping of Top Image Borders and Containers for Light Section */
+body.content section.light figure:first-of-type,
+body.content section.light figure:first-of-type div {
+  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
+}
+/* Shaping of Bottom Image Borders and Containers for Light Section */
+body.content section.light figure:last-of-type,
+body.content section.light figure:last-of-type div {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+}
+/* Shaping of Top Image Borders and Containers for Dark Section */
+body.content section.dark figure:first-of-type,
+body.content section.dark figure:first-of-type div {
+  clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
+}
+/* Shaping of Bottom Image Borders and Containers for Dark Section */
+body.content section.dark figure:last-of-type,
+body.content section.dark figure:last-of-type div {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+}
+/* Removal of Previous Image Border and Container Shapings Due to
+   Straight Top/Bottom of First and Last Sections */
+body.content section:nth-of-type(2) figure:first-of-type,
+body.content section:nth-of-type(2) figure:first-of-type div,
+body.content section:last-of-type figure:last-of-type,
+body.content section:last-of-type figure:last-of-type div {
+  clip-path: none;
+  -webkit-clip-path: none;
+}
+
+/* Styling of Content Images/Videos */
+body.content section.light figure div img,
+body.content section.dark figure div img,
+body.content section.light figure div video,
+body.content section.dark figure div video {
+  width: auto;
+  height: 100%;
+  /* Automatically Centered By Parent Display Flex */
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+/* Styling for Blurred Background Image/Video */
+body.content section.light figure div img.blurred,
+body.content section.dark figure div img.blurred,
+body.content section.light figure div video.blurred,
+body.content section.dark figure div video.blurred {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+body.content section.light figure div video.blurred,
+body.content section.dark figure div video.blurred { height: auto; }
+/* Animation to Fade In Video Play Button to 0.75 Opacity When Video Ends. */
+@keyframes fadeInPlayButton {
+  from { opacity: 0.0; }
+  to { opacity: 0.65; }
+}
+/* Styling for Play Button Element */
+body.content section.light figure div button,
+body.content section.dark figure div button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1A1A1A;
+  opacity: 0.65;
+  border: none;
+  z-index: 2;
+}
+body.content section.light figure div button:hover,
+body.content section.dark figure div button:hover { cursor: pointer; }
+/* Styling Play Symbol for Play Button */
+body.content section.light figure div button i,
+body.content section.dark figure div button i {
+  color: #CCCCCC;
+  transition: color 0.25s;
+  font-size: 5vw;
+}
+body.content section.light figure div button:hover i,
+body.content section.dark figure div button:hover i { color: #EEEEEE; }
+
+/* General Styling of Content Info Article Container */
+body.content section.light article,
+body.content section.dark article {
+  width: 47.5%;
+  height: 85%;
+  color: #CCCCCC;
+  font-family: SuezOne;
+}
+/* Specific Positioning of Light Article Container */
+body.content section.light article {
+  float: right;
+  padding: 3.5% 2.5% 3.5% 0;
+}
+/* Specific Positioning of Dark Article Container */
+body.content section.dark article {
+  float: left;
+  padding: 3.5% 0 3.5% 2.5%;
+}
+/* Positioning for First Content Section's Article Due to Straight Top */
+body.content section:nth-of-type(2) article { padding: 2% 2.5% 2% 0; }
+
+/* Styling for Article Title */
+body.content section.light article h1,
+body.content section.dark article h1 {
+  font-size: 3vw;
+  text-align: center;
+}
+/* Styling for Article Time Text */
+body.content section.light article h2,
+body.content section.dark article h2,
+body.content section.light article h3,
+body.content section.dark article h3 {
+  font-size: 2vw;
+  text-align: center;
+}
+body.content section.light article h2,
+body.content section.dark article h2 { margin: -1% 0 0 0; }
+body.content section.light article h3,
+body.content section.dark article h3 { margin: 1% 0 2% 0; }
+/* Styling for Article Body Text */
+body.content section.light article p,
+body.content section.dark article p {
+  font-size: 1.225vw;
+  margin: 1.25% 0 0 0;
+}
+/* Style Links in Articles */
+body.content section.light article p a,
+body.content section.dark article p a {
+  color: #CCCCCC;
+  transition: color 0.25s;
+}
+/* Hovering Effect: Brighten Link Color */
+body.content section.light article p a:hover,
+body.content section.dark article p a:hover { color: #EEEEEE; }
+
+/* Resizing of Background Images for Various Sections */
+body.content section.light.resize,
+body.content section.dark.resize { background-size: 50% 75%; }
+
+/* Repeatedly Used Background Image for Content Sections */
+body.content section.light.first { background-image: var(--light-gradient), url("../assets/frc_logo.png"); }
+body.content section.dark.first { background-image: var(--dark-gradient), url("../assets/frc_logo.png"); }
+body.content section.light.codeTN { background-image: var(--light-gradient), url("../assets/codetn_logo.png"); }
+body.content section.dark.codeTN { background-image: var(--dark-gradient), url("../assets/codetn_logo.png"); }
+
+/************
+ * PROJECTS *
+ ************/
+/* Links to Code */
+body#projects section.light article h4,
+body#projects section.dark article h4 { text-align: center; margin: 1% 0 0 0; }
+body#projects section.light article h4 a,
+body#projects section.dark article h4 a {
+  font-size: 1.75vw;
+  color: #CCCCCC;
+  text-decoration: underline;
+  transition: color 0.25s;
+}
+body#projects section.light article h4 a:hover,
+body#projects section.dark article h4 a:hover {
+  cursor: pointer;
+  color: #EEEEEE;
+}
+
+/* Background Images for Content Sections */
+body#projects section.light.droneFleet { background-image: var(--light-gradient), url("../assets/droneFleet_background.png"); }
+body#projects section.dark.droneFleet { background-image: var(--dark-gradient), url("../assets/droneFleet_background.png"); }
+body#projects section.light.portfolio { background-image: var(--light-gradient), url("../assets/logo_cccccc.png"); }
+body#projects section.dark.portfolio { background-image: var(--dark-gradient), url("../assets/logo_cccccc.png"); }
+body#projects section.light.alienX { background-image: var(--light-gradient), url("../assets/alienX_background.png"); }
+body#projects section.dark.alienX { background-image: var(--dark-gradient), url("../assets/alienX_background.png"); }
+body#projects section.light.assassinPlugin { background-image: var(--light-gradient), url("../assets/assassin_plugin_background.png"); }
+body#projects section.dark.assassinPlugin { background-image: var(--dark-gradient), url("../assets/assassin_plugin_background.png"); }
+body#projects section.light.pathFollowing { background-image: var(--light-gradient), url("../assets/pathFollowing_background.png"); }
+body#projects section.dark.pathFollowing { background-image: var(--dark-gradient), url("../assets/pathFollowing_background.png"); }
+body#projects section.light.e-ssue { background-image: var(--light-gradient), url("../assets/e-ssue_background.png"); }
+body#projects section.dark.e-ssue { background-image: var(--dark-gradient), url("../assets/e-ssue_background.png"); }
+body#projects section.light.rCar,
+body#projects section.dark.rCar { background-size: 50% 45%; }
+body#projects section.light.rCar { background-image: var(--light-gradient), url("../assets/rcar_background.png"); }
+body#projects section.dark.rCar { background-image: var(--dark-gradient), url("../assets/rcar_background.png"); }
+
+/***************
+ * EXPERIENCES *
+ ***************/
+/* Background Images for Content Sections */
+body#experiences section.light.ornlInternship { background-image: linear-gradient(rgba(12,84,165,0.3),rgba(12,84,165,0.3)), url("../assets/ornl_leaf.png"); }
+body#experiences section.dark.ornlInternship { background-image: linear-gradient(rgba(26,26,26,0.3),rgba(26,26,26,0.3)), url("../assets/ornl_leaf.png"); }
+
+/**********
+ * AWARDS *
+ **********/
+/* Container for Awards Image and Info */
+body#awards section.light,
+body#awards section.dark { height: 60vh; }
+
+/* Styling Image Border */
+body#awards section.light figure,
+body#awards section.dark figure { height: 77.5%; }
+/* Positioning Border for Light Sections' Image */
+body#awards section.light figure {
+  top: 11%;
+  left: 2%;
+}
+/* Positioning Border for Dark Sections' Image */
+body#awards section.dark figure {
+  top: 11%;
+  right: 2%;
+}
+/* Specific Positioning for First and Last Sections' Borders */
+body#awards section:nth-of-type(2) figure { top: 8.5%; }
+body#awards section:last-of-type figure { top: 14.5%;}
+/* Shaping of Image Border and Container for Light Sections */
+body#awards section.light figure,
+body#awards section.light figure div {
+  clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 95%);
+  -webkit-clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 95%);
+}
+/* Shaping of Image Border and Container for Dark Sections */
+body#awards section.dark figure,
+body#awards section.dark figure div {
+  clip-path: polygon(0% 0%, 100% 5%, 100% 95%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 5%, 100% 95%, 0% 100%);
+}
+/* Specific Shaping of Image Border and Container for First and Last Sections */
+body#awards section:nth-of-type(2) figure,
+body#awards section:nth-of-type(2) figure div {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 95%);
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 95%);
+}
+body#awards section:last-of-type:nth-child(odd) figure,
+body#awards section:last-of-type:nth-child(odd) figure div {
+  clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
+}
+body#awards section:last-of-type:nth-child(even) figure,
+body#awards section:last-of-type:nth-child(even) figure div {
+  clip-path: polygon(0% 0%, 100% 5%, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0% 0%, 100% 5%, 100% 100%, 0% 100%);
+}
+
+/* General Styling Article Containers */
+body#awards section.light article,
+body#awards section.dark article {
+  width: 56%;
+  position: absolute;
+}
+/* Specific Positioning of Light Article Container */
+body#awards section.light article {
+  padding: 4.5% 2.25% 3.5% 0;
+  right: 0;
+}
+/* Specific Positioning of Dark Article Container */
+body#awards section.dark article {
+  padding: 4.5% 0 3.5% 2.25%;
+  left: 0;
+}
+/* Specific Positioning of First and Last Sections' Article Containers */
+body#awards section:nth-of-type(2) article { padding-top: 3.5%; }
+body#awards section:last-of-type article { padding-top: 5%; }
+/* Styling Article Title, Subtitle, Time, and Information Text */
+body#awards section.light article h1,
+body#awards section.dark article h1 { font-size: 3.65vw; }
+body#awards section.light article h2,
+body#awards section.dark article h2,
+body#awards section.light article h3,
+body#awards section.dark article h3 { font-size: 2.75vw; }
+body#awards section.light article p,
+body#awards section.dark article p {
+  font-size: 2.25vw;
+  text-align: center;
+}
+
+/* Awards' Background Images */
+body#awards section.light.apScholar { background-image: var(--light-gradient), url("../assets/collegeboard_logo.png"); }
+body#awards section.dark.apScholar { background-image: var(--dark-gradient), url("../assets/collegeboard_logo.png"); }
+body#awards section.light.bohr { background-image: var(--light-gradient), url("../assets/hva_logo.png"); }
+body#awards section.dark.bohr { background-image: var(--dark-gradient), url("../assets/hva_logo.png"); }
+body#awards section.light.fbla,
+body#awards section.dark.fbla { background-size: 50% 75%; }
+body#awards section.light.fbla { background-image: var(--light-gradient), url("../assets/fbla_logo.png"); }
+body#awards section.dark.fbla { background-image: var(--dark-gradient), url("../assets/fbla_logo.png"); }

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Jovan Yoshioka</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Website showcasing Jovan Yoshioka's coding experience.">
+    <meta name="keywords" content="Jovan, Jovi, Yoshioka">
+    <meta name="author" content="Jovan Yoshioka">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
+    <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
+    <script src="../js/main.js"></script>
+    <style>
+      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
+      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
+    </style>
+  </head>
+  <body id="experiences" class="content">
+    <!-- Navigation bar -->
+    <nav></nav>
+
+    <!-- Content slideshow navigation section -->
+    <section class="slideshow">
+      <!-- Blurred background with image matching slide's image -->
+      <div id="blurredBackground"></div>
+      <!-- Tint for blurred background -->
+      <div class="tint"></div>
+      <!-- Container for slide's image, title, time, and learn more button -->
+      <div class="infoContainer">
+        <!-- Slideshow's slides/Images -->
+        <!-- Custom title, time, and dest attributes used for other slide content -->
+        <img class="slideshowImages" section=".ornlInternship" src="../assets/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
+        <img class="slideshowImages" section=".frc" src="../assets/frc_alliance.jpg" alt="Image of Jovan with his alliance partners at an FRC competition." />
+        <img class="slideshowImages" section=".codeTN" src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+        <!-- Tint for slide image -->
+        <div class="tint"></div>
+        <!-- Slide title text: set with JavaScript -->
+        <h1 id="slideshowTitle"></h1>
+        <!-- Slide company text: set with JavaScript -->
+        <h2 id="slideshowSubtitle"></h2>
+        <!-- Slide time text: set with JavaScript -->
+        <h2 id="slideshowTime"></h2>
+        <!-- Learn more button: path based on slide image's dest attribute -->
+        <div id="slideshowBtn" class="diagonalBtn">
+          <a id="slideshowAnchor" class="diagonalBtn" onclick="smoothScrollTo('')"><span>Learn more</span></a>
+        </div>
+      </div>
+      <!-- Slide selectors container: autofilled with JavaScript -->
+      <div class="selectorsContainer"></div>
+      <!-- Buttons to switch to next or previous slide -->
+      <button id="slideshowPreviousBtn" onclick="selectPreviousSlide()"><i class="fas fa-chevron-left"></i></button>
+      <button id="slideshowNextBtn" onclick="selectNextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </section>
+
+    <!-- First content section must be "light" colored -->
+    <!-- ORNL Internship -->
+    <section class="ornlInternship light">
+      <!-- Content Images' Borders, Containers, and Elements -->
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/ornl_campus.jpg" />
+          <img src="../assets/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/ornl_intern_spotlight.jpg" />
+          <img src="../assets/ornl_intern_spotlight.jpg" alt="Image of Jovan interning at ORNL." />
+        </div>
+      </figure>
+      <!-- Content Info -->
+      <article>
+        <h1>Full Stack Developer Intern</h1>
+        <h2>Oak Ridge National Laboratory (ORNL)</h2>
+        <h3>Summer 2019</h3>
+        <p>
+          Developed the National Household Travel Survey (NHTS) web application
+          funded by the U.S. Department of Transportation Federal Highway Administration.
+          The NHTS web application takes data collected from the National Household
+          Travel Survey and creates visual representations (e.g. graphs, diagrams,
+          tables) of that data for federal and state agencies, researchers, and
+          other consumers to find trends in travel and improve the infrastructure
+          in their areas.
+        </p>
+        <p>
+          My mentors were Dr. Ross Wang, an R&D Staff Member in the Transportation
+          Analytics & Decision Sciences Group at ORNL, and Gina Accawi, a Technical
+          Senior Staff Member at ORNL specializing in energy consumption analysis.
+        </p>
+        <p>
+          I worked to resolve issues/bugs, utilizing team management
+          tools like GitLab, and conceptualized, designed, and coded several key
+          features, including a custom variables system that improved the UX by
+          allowing users to have more query results tailored to their needs. Through
+          this internship, I learned AngularJS and C#, and refined my previous Bootstrap
+          experience.
+        </p>
+        <p>
+          Want to learn more? Check out my special <a href="https://orise.orau.gov/ornl/experiences/high-school/yoshioka.html" target="_blank">intern spotlight</a>.
+        </p>
+      </article>
+    </section>
+
+    <!-- FRC -->
+    <section class="frc first resize dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/frc_teaching.jpg" />
+          <img src="../assets/frc_teaching.jpg" alt="Image of Jovan teaching an underclassmen programming." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/frc_gameplay.jpg" />
+          <img src="../assets/frc_gameplay.jpg" alt="Image of Jovan driving his team's robot at competition." />
+        </div>
+      </figure>
+      <article>
+        <h1>FIRST Robotics Competition</h1>
+        <h2>FRC 3824: HVA RoHAWKtics</h2>
+        <h3>Fall 2016 - Spring 2020</h3>
+        <p>
+          The FIRST Robotics Competition (FRC) is an international high school robotics
+          competition where teams work to create an industry-sized robot to play
+          an annually created 3-on-3 robot game. The HVA RoHAWKtics was my high
+          school's robotics team where I served in several leadership positions.
+        </p>
+        <p>
+          As Executive Captain (2019-2020), I oversaw a team of over forty-five students and adult
+          mentors. I made sure all subteams and subteam captains were working efficiently
+          and effectively, organized and led team meetings, and conversed with students
+          and mentors to determine the team's next steps.
+        </p>
+        <p>
+          As Programming Captain
+          (2017-2020), I led the programming of the robot and taught underclassmen
+          how to code.
+        </p>
+        <p>
+          With the prestigious honor of being Robot Driver (2018-2020),
+          I controlled our robot's movement during competitive matches while collaborating
+          with our alliance partners (other teams on my team's side).
+        </p>
+      </article>
+    </section>
+
+    <!-- CodeTN -->
+    <section class="codeTN light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/codetn_solesurvivors.jpg" />
+          <img src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan's CodeTN 2019 team." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/codetn_dreamteam.jpg" />
+          <img src="../assets/codetn_dreamteam.jpg" alt="Image of Jovan's CodeTN 2018 team." />
+        </div>
+      </figure>
+      <article>
+        <h1>CodeTN Competition</h1>
+        <h2>Hardin Valley Academy</h2>
+        <h3>Fall 2016 - Spring 2019</h3>
+        <p>
+          CodeTN was a coding competition where students were tasked to create
+          a web application that solves a school or community problem. My teams
+          created two award-winning web applications, "plan it" and "Rcar."
+        </p>
+        <p>
+          plan it was a job shift scheduler built for companies and volunteering
+          organizations looking to assign times as well as specific job tasks to individuals.
+        </p>
+        <p>
+          <a href="projects.html?section=rCar" target="_blank">Rcar</a> was a ride-sharing
+          service that allowed those going to the same places to connect and carpool
+          ultimately creating a greater community and helping the environment by
+          reducing car exhaust pollution.
+        </p>
+        <p>
+          As Team Captain (2018-2019), I organized each person's role on the team and led
+          the design process.
+        </p>
+        <p>
+          As Front-End Lead (2016-2019), I distributed the various tasks
+          required to develop the front-end portion of our web application to my
+          teammates and made sure those tasks were being completed with great quality
+          and within a certain amount of time.
+        </p>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <script type="text/javascript">
+      // Load include content.
+      includeContent();
+
+      // Set copyright year.
+      setCopyrightYear();
+
+      window.addEventListener('load', function () {
+        // Initialize slideshow.
+        initSlideshow();
+
+        // Scrolls to an element on load if specified in URL.
+        scrollOnLoad(getURLAttribute("section"));
+
+        // Alert user of mobile incompatibility if screen is small enough.
+        alertIncompatibility();
+      });
+
+      window.addEventListener('scroll', function() {
+        // Change color of nav background if page is scrolled.
+        changeNavBackgroundColor();
+      });
+    </script>
+  </body>
+</html>

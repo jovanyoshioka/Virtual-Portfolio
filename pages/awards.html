@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Jovan Yoshioka</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Website showcasing Jovan Yoshioka's coding experience.">
+    <meta name="keywords" content="Jovan, Jovi, Yoshioka">
+    <meta name="author" content="Jovan Yoshioka">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
+    <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
+    <script src="../js/main.js"></script>
+    <style>
+      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
+      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
+    </style>
+  </head>
+  <body id="awards" class="content">
+    <!-- Navigation bar -->
+    <nav></nav>
+
+    <!-- Content slideshow navigation section -->
+    <section class="slideshow">
+      <!-- Blurred background with image matching slide's image -->
+      <div id="blurredBackground"></div>
+      <!-- Tint for blurred background -->
+      <div class="tint"></div>
+      <!-- Container for slide's image, title, time, and learn more button -->
+      <div class="infoContainer">
+        <!-- Slideshow's slides/Images -->
+        <!-- Custom title, time, and dest attributes used for other slide content -->
+        <img class="slideshowImages" section=".apScholar" src="../assets/calculus.jpg" alt="Image of calculus homework." />
+        <img class="slideshowImages" section=".bohr" src="../assets/bohr_recipient.jpg" alt="Image of Jovan in his graduation gown in Hardin Valley Academy." />
+        <img class="slideshowImages" section=".chairmans20" src="../assets/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
+        <img class="slideshowImages" section=".fbla19" src="../assets/fbla19_cover.jpg" alt="Image of all FBLA 2019 competitors." />
+        <img class="slideshowImages" section=".codeTN" src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan's 2019 CodeTN team." />
+        <img class="slideshowImages" section=".deansList" src="../assets/deansList_cover.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." />
+        <img class="slideshowImages" section=".volunteer" src="../assets/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
+        <img class="slideshowImages" section=".fbla18" src="../assets/fbla18_cover.jpg" alt="Image representing cyber security." />
+        <img class="slideshowImages" section=".chairmans17" src="../assets/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+        <!-- Tint for slide image -->
+        <div class="tint"></div>
+        <!-- Slide title text: set with JavaScript -->
+        <h1 id="slideshowTitle"></h1>
+        <!-- Slide subtitle text: set with JavaScript -->
+        <h2 id="slideshowSubtitle"></h2>
+        <!-- Slide time text: set with JavaScript -->
+        <h2 id="slideshowTime"></h2>
+        <!-- Learn more button: path based on slide image's dest attribute -->
+        <div id="slideshowBtn" class="diagonalBtn">
+          <a id="slideshowAnchor" class="diagonalBtn" onclick="smoothScrollTo('')"><span>Learn more</span></a>
+        </div>
+      </div>
+      <!-- Slide selectors container: autofilled with JavaScript -->
+      <div class="selectorsContainer"></div>
+      <!-- Buttons to switch to next or previous slide -->
+      <button id="slideshowPreviousBtn" onclick="selectPreviousSlide()"><i class="fas fa-chevron-left"></i></button>
+      <button id="slideshowNextBtn" onclick="selectNextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </section>
+
+    <!-- First content section must be "light" colored -->
+    <!-- AP Scholar with Distinction -->
+    <section class="apScholar light">
+      <!-- Content Image's Borders, Containers, and Elements -->
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/ap_certificate.jpg" />
+          <img src="../assets/ap_certificate.jpg" alt="Image of AP Scholar with Distinction certificate." />
+        </div>
+      </figure>
+      <!-- Content Info -->
+      <article>
+        <h1>AP Scholar with Distinction</h1>
+        <h2>CollegeBoard</h2>
+        <h3>Summer 2020</h3>
+        <p>Received an average score of at least 3.5 on all Advanced Placement (AP) Exams taken, and scores of 3 or higher on five or more of these exams.</p>
+      </article>
+    </section>
+
+    <!-- Bohr Award -->
+    <section class="bohr dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/bohr_award.jpg" />
+          <img src="../assets/bohr_award.jpg" alt="Image of recognition of Bohr Award." />
+        </div>
+      </figure>
+      <article>
+        <h1>Bohr Award</h1>
+        <h2>HVA STEM Academy</h2>
+        <h3>Spring 2020</h3>
+        <p>Most well-rounded STEM (Science Technology Engineering Mathematics) student at Hardin Valley Academy.</p>
+      </article>
+    </section>
+
+    <!-- Chairmans 2020 -->
+    <section class="chairmans20 first resize light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/chairmans20.jpg" />
+          <img src="../assets/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
+        </div>
+      </figure>
+      <article>
+        <h1>Chairman's Award</h1>
+        <h2>FIRST</h2>
+        <h3>Spring 2020</h3>
+        <p>Most prestigious award at FIRST. Recipient team is an example of what other teams should strive to be. Only team in Tennessee to receive this award twice.</p>
+      </article>
+    </section>
+
+    <!-- FBLA 2019 -->
+    <section class="fbla19 fbla dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/fbla19.jpg" />
+          <img src="../assets/fbla19.jpg" alt="Image of Jovan with his first place FBLA 2019 award." />
+        </div>
+      </figure>
+      <article>
+        <h1>1st Place: State & Nationals</h1>
+        <h2>FBLA Coding and Programming</h2>
+        <h3>Summer 2019</h3>
+        <p>Best at conceptualizing, designing, coding, and presenting to several panels of judges, and a public audience in the finals, a <a href="projects.html?section=e-ssue">dynamic app</a>.</p>
+      </article>
+    </section>
+
+    <!-- CodeTN 2019 -->
+    <section class="codeTN light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/codetn_solesurvivors.jpg" />
+          <img src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+        </div>
+      </figure>
+      <article>
+        <h1>2nd Place: CodeTN Competition</h1>
+        <h2>CodeTN</h2>
+        <h3>Spring 2019</h3>
+        <p>Excelled in creating and presenting to a panel of judges and audience a <a href="projects.html?section=rCar">web application</a> that solves a school or community problem.</p>
+      </article>
+    </section>
+
+    <!-- Dean's List Semi-Finalist -->
+    <section class="deansList first resize dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/deansList.jpg" />
+          <img src="../assets/deansList.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." />
+        </div>
+      </figure>
+      <article>
+        <h1>Dean's List Semi-Finalist</h1>
+        <h2>FIRST</h2>
+        <h3>Spring 2019</h3>
+        <p>Granted to two students within a FIRST Robotics Competition team who show great leadership and dedication to the program.</p>
+      </article>
+    </section>
+
+    <!-- Outstanding Volunteer -->
+    <section class="volunteer first resize light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/fll.jpg" />
+          <img src="../assets/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
+        </div>
+      </figure>
+      <article>
+        <h1>Outstanding Volunteer Award</h1>
+        <h2>FIRST</h2>
+        <h3>Winter 2018</h3>
+        <p>FIRST Lego League (FLL) volunteer whose dedication is seen as a positive and vital component to the competition's success.</p>
+      </article>
+    </section>
+
+    <!-- FBLA 2018 -->
+    <section class="fbla18 fbla dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/fbla18.jpg" />
+          <img src="../assets/fbla18.jpg" alt="Image of Jovan at an FBLA conference." />
+        </div>
+      </figure>
+      <article>
+        <h1>2nd Place: Regional</h1>
+        <h2>FBLA Cyber Security</h2>
+        <h3>Spring 2018</h3>
+        <p>Excelled in a test of cyber security knowledge.</p>
+      </article>
+    </section>
+
+    <!-- Chairmans 2017 -->
+    <section class="chairmans17 first resize light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/chairmans17.jpg" />
+          <img src="../assets/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+        </div>
+      </figure>
+      <article>
+        <h1>Chairman's Award</h1>
+        <h2>FIRST</h2>
+        <h3>Spring 2017</h3>
+        <p>Most prestigious award at FIRST. Recipient team is an example of what other teams should strive to be. First team in Tennessee to receive this award.</p>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <script type="text/javascript">
+      // Load include content.
+      includeContent();
+
+      // Set copyright year.
+      setCopyrightYear();
+
+      window.addEventListener('load', function () {
+        // Initialize slideshow.
+        initSlideshow();
+
+        // Scrolls to an element on load if specified in URL.
+        scrollOnLoad(getURLAttribute("section"));
+
+        // Alert user of mobile incompatibility if screen is small enough.
+        alertIncompatibility();
+      });
+
+      window.addEventListener('scroll', function() {
+        // Change color of nav background if page is scrolled.
+        changeNavBackgroundColor();
+      });
+    </script>
+  </body>
+</html>

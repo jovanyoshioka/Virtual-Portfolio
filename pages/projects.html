@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Jovan Yoshioka</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Website showcasing Jovan Yoshioka's coding experience.">
+    <meta name="keywords" content="Jovan, Jovi, Yoshioka">
+    <meta name="author" content="Jovan Yoshioka">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
+    <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
+    <script src="../js/main.js"></script>
+    <style>
+      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
+      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
+    </style>
+  </head>
+  <body id="projects" class="content">
+    <!-- Navigation bar -->
+    <nav></nav>
+
+    <!-- Content slideshow navigation section -->
+    <section class="slideshow">
+      <!-- Blurred background with image matching slide's image -->
+      <div id="blurredBackground"></div>
+      <!-- Tint for blurred background -->
+      <div class="tint"></div>
+      <!-- Container for slide's image, title, time, and learn more button -->
+      <div class="infoContainer">
+        <!-- Slideshow's slides/Images -->
+        <!-- Custom title, time, and dest attributes used for other slide content -->
+        <img class="slideshowImages" section=".droneFleet" src="../assets/telloedu.jpg" alt="Image of a Tello EDU drone." />
+        <img class="slideshowImages" section=".portfolio" src="../assets/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
+        <img class="slideshowImages" section=".alienX" src="../assets/alienX_robot.jpg" alt="Image of AlienX." />
+        <img class="slideshowImages" section=".assassinPlugin" src="../assets/assassin_plugin_cover.jpg" alt="Image of Minecraft." />
+        <img class="slideshowImages" section=".pathFollowing" src="../assets/paths.jpg" alt="Image of path planning lines." />
+        <img class="slideshowImages" section=".e-ssue" src="../assets/e-ssue_cover.jpg" alt="Image of E-ssue home page." />
+        <img class="slideshowImages" section=".rCar" src="../assets/rcar_cover.jpg" alt="Image of Rcar home page." />
+        <!-- Tint for slide image -->
+        <div class="tint"></div>
+        <!-- Slide title text: set with JavaScript -->
+        <h1 id="slideshowTitle"></h1>
+        <!-- Slide subtitle text: set with JavaScript -->
+        <h2 id="slideshowSubtitle"></h2>
+        <!-- Slide time text: set with JavaScript -->
+        <h2 id="slideshowTime"></h2>
+        <!-- Learn more button: path based on slide image's dest attribute -->
+        <div id="slideshowBtn" class="diagonalBtn">
+          <a id="slideshowAnchor" class="diagonalBtn" onclick="smoothScrollTo('')"><span>Learn more</span></a>
+        </div>
+      </div>
+      <!-- Slide selectors container: autofilled with JavaScript -->
+      <div class="selectorsContainer"></div>
+      <!-- Buttons to switch to next or previous slide -->
+      <button id="slideshowPreviousBtn" onclick="selectPreviousSlide()"><i class="fas fa-chevron-left"></i></button>
+      <button id="slideshowNextBtn" onclick="selectNextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </section>
+
+    <!-- First content section must be "light" colored -->
+    <!-- Drone Fleet -->
+    <section class="droneFleet resize light">
+      <!-- Content Images' Borders, Containers, and Elements -->
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/telloedu.jpg" />
+          <img src="../assets/telloedu.jpg" alt="Image of a Tello EDU drone." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/telloedus.jpg" />
+          <img src="../assets/telloedus.jpg" alt="Image of Tello EDU drones Jovan is working with." />
+        </div>
+      </figure>
+      <!-- Content Info -->
+      <article>
+        <h1>Drone Fleet</h1>
+        <h2>Python, OpenCV, OpenPose</h2>
+        <h3>Summer 2020 - Present</h3>
+        <p>
+          The Drone Fleet project is a long-term project I intend to work on throughout
+          college. The ultimate goal of this project is for self-development in programming
+          physical machines. I currently envision three different phases: Premade,
+          Build, and Connect.
+        </p>
+        <p>
+          I am currently in the Premade phase, learning and coding premade drones called
+          Tello EDUs sold by DJI, a technology company that sells "aerial photography
+          systems." I will utilize the swarm functionality and programmability in order
+          to create a fleet that can follow me around and individually perform commands
+          based on my body gestures using OpenCV and OpenPose coded in Python.
+        </p>
+        <p>
+          The Build phase will consist of me attempting to construct, program, and fly
+          my own drones. I will use electronics like gyroscopes and accelerometers, and
+          program with PIDs in order to have steady flight.
+        </p>
+        <p>
+          The Connect phase will be when I apply my vision processing and command
+          programming from the Premade phase to my personally built drones.
+        </p>
+      </article>
+    </section>
+
+    <!-- Virtual Portfolio -->
+    <section class="portfolio dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/portfolio_cover.jpg" />
+          <img src="../assets/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted><source src="../assets/portfolio.mp4" type="video/mp4"></video>
+          <video muted><source src="../assets/portfolio.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <h1>Virtual Portfolio</h1>
+        <h2>HTML5, CSS3, JavaScript</h2>
+        <h3>Summer 2020</h3>
+        <p>
+          Wanting to compile my projects, experiences, and awards in one place, and
+          desiring to add my own touch, I decided to conceptualize, design, code,
+          and publish my very own virtual portfolio website. What you are browsing
+          right now is the product of that decision; I hope you like it.
+        </p>
+        <p>
+           Not only was this a fun project to work on, but it served as a great learning
+          and development opportunity for me during the extended break from school
+          I received due to COVID-19. By coding this completely from scratch, and without
+          the help of coding frameworks or libraries, I greatly improved my HTML, CSS, and
+          especially JavaScript skills. I branched out of my comfort zone
+          and tried coding a JavaScript canvas animation for the first time,
+          and I am pleased with the outcome, both with the physical product and the knowledge
+          I have gained. I also improved my coding skills in general, commenting more often,
+          making better use of whitespace, and focusing on code-reusability and modularity.
+        </p>
+        <p>
+          If you have any comments, questions, or suggestions, please feel free to
+          <a href="contact.html" target="_blank">reach out to me</a>; I would love to hear from you.
+        </p>
+        <h4><a href="https://github.com/jovanyoshioka/Virtual-Portfolio" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
+    <!-- AlienX Robot Code -->
+    <section class="alienX resize light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/alienX_robot.jpg" />
+          <img src="../assets/alienX_robot.jpg" alt="Image of AlienX." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted><source src="../assets/alienX.mp4" type="video/mp4"></video>
+          <video muted><source src="../assets/alienX.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <h1>AlienX Robot Code</h1>
+        <h2>Java, WPILib</h2>
+        <h3>Spring 2020</h3>
+        <p>
+          AlienX was my team's robot for the FIRST Robotics Competition 2020 game,
+          Infinite Recharge. Watch the game animation <a href="https://www.youtube.com/watch?v=gmiYWTmFRVE" target="_blank">here</a>.
+          The objective of the game was to launch yellow balls, into a goal, climb
+          onto a teetering bar, and spin a color wheel. As Robot Driver, I controlled
+          AlienX's movement on the field.
+        </p>
+        <p>
+          AlienX required sophisticated control systems. PIDs (controlling
+          output to meet a certain setpoint) were used to control the powercell launcher
+          wheels' RPMs. Vision processing (tracking reflective tape) was used to
+          aim towards the goal. Spline trajectories were implemented for smoother
+          movement during the autonomous period of the game. A sonar sensor (measures
+          distance through sound waves) algorithm was made to automatically index
+          the powercells in the chamber. RGB LEDs were coded to turn either red,
+          blue, or purple signifying if the robot was correctly connected to the
+          field. Additionally, the LEDs would toggle between red and green when
+          launching to signify if all control systems were ready for launch (launcher
+          wheels were up to speed, angle of launcher was at its setpoint, and chassis
+          was turned towards the goal by vision processing).
+        </p>
+        <h4><a href="https://github.com/HVA-FRC-3824/Competition2020" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
+    <!-- Minecraft Assassin Plugin -->
+    <section class="assassinPlugin resize dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/assassin_plugin_cmds.jpg" />
+          <img src="../assets/assassin_plugin_cmds.jpg" alt="Image of commands implemented by assassin plugin." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted><source src="../assets/assassin_plugin.mp4" type="video/mp4"></video>
+          <video muted><source src="../assets/assassin_plugin.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <h1>Minecraft Assassin Plugin</h1>
+        <h2>Java, Spigot API</h2>
+        <h3>Spring 2020</h3>
+        <p>
+          In early 2020, FIRST, an organization that hosts several
+          robotics competitions, had officially suspended all
+          competitions due to COVID-19. This left my team and myself devastated
+          after all of our hard work had been ruined.
+        </p>
+        <p>
+          With no school, and therefore no homework, and many businesses closing,
+          leaving many jobless, my team needed a way to stay connected and keep
+          ourselves occupied. With this, we decided to start our own team Minecraft
+          multiplayer server. Minecraft is a sandbox video game where you can explore,
+          gather resources, build, and fight monsters and other players.
+        </p>
+        <p>
+          To make the server more enjoyable for those who got bored of standard Minecraft,
+          I decided to create a plugin that allowed people to place public bounties and hire assassins
+          to take out specific targets for in-game monetary rewards. This added
+          a thrilling factor to the game for when someone hired an assassin, it
+          would simply announce to everyone "A new assassination contract has been
+          activated! Watch out." without disclosing who the target was. The paranoia
+          created a new level of excitement for everyone keeping our server alive.
+        </p>
+        <h4><a href="https://github.com/jovanyoshioka/Assassin-Plugin" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
+    <!-- Path Following Code -->
+    <section class="pathFollowing light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/paths.jpg" />
+          <img src="../assets/paths.jpg" alt="Image of path planning lines." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted><source src="../assets/path_following.mp4" type="video/mp4"></video>
+          <video muted><source src="../assets/path_following.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <h1>Path Following Code</h1>
+        <h2>Java, WPILib, Pathfinder</h2>
+        <h3>Winter 2019</h3>
+        <p>
+          In order to be better prepared for the upcoming robotics season, I took
+          the initiative of bringing a team robot home with me over winter break
+          and programmed it in my garage.
+        </p>
+        <p>
+          The objective was to integrate autonomous path following where one can
+          draw trajectories on a map of the field and have the robot automatically
+          follow that path based on auto-generated kinematic values. These values would consist
+          of an x and y position relative to the bottom left of the field map,
+          position, instantaneous velocity, and instantaneous acceleration values of the robot,
+          and heading in radians. To ensure the robot was consistent with these values,
+          encoders were mounted on the wheels of the robot to measure
+          the number of wheel revolutions and therefore be able to tell its position,
+          velocity, or acceleration. A gyro was also used to determine the robot's
+          heading.
+        </p>
+        <p>
+          I was successful in implementing autonomous path following, and was able
+          to essentially program a set of commands that would place two game pieces
+          in the goals where most teams' robots could only place one.
+        </p>
+        <h4><a href="https://github.com/HVA-FRC-3824/ChassisBot-Winter2019" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
+    <!-- E-ssue -->
+    <section class="e-ssue dark">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/e-ssue_cover.jpg" />
+          <img src="../assets/e-ssue_cover.jpg" alt="Image of E-ssue home page." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted><source src="../assets/e-ssue.mp4" type="video/mp4"></video>
+          <video muted><source src="../assets/e-ssue.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <h1>E-ssue</h1>
+        <h2>HTML5, CSS3, JavaScript, PHP, MySQL</h2>
+        <h3>Summer 2019</h3>
+        <p>
+          E-ssue was a web application designed to manage the issuance of E-books
+          to students. E-ssue's main feature was its ability to create different class pages
+          for instructors to add students to, create a list of E-books, and assign
+          those E-books to the added students. In addition, users can track students'
+          class grades, view weekly reports of all E-books assigned, interact with
+          E-BOT, E-ssue's custom-made artificial intelligence Q&A bot, and view a
+          thirteen page user manual. There are also two different user interfaces
+          to choose from to improve the user experience: tables and modals, and
+          drag and drop.
+        </p>
+        <p>
+          This web application was created for the Future Business Leaders of America (FBLA)
+          Coding and Programming Competitive Event. I ended up receiving first place
+          in the state of Tennessee and first place in the nation as well. I designed,
+          coded, and tested the state competition version in three days and added a
+          week worth of additions for the national competition version.
+        </p>
+        <p>
+          This was the first web application I created both the front end and back end
+          solely by myself from scratch without any code frameworks or libraries.
+        </p>
+        <h4><a href="https://github.com/jovanyoshioka/E-ssue" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
+    <!-- Rcar -->
+    <section class="rCar resize light">
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/rcar_home.jpg" />
+          <img src="../assets/rcar_home.jpg" alt="Image of Rcar home page." />
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <img class="blurred" src="../assets/rcar_chat.jpg" />
+          <img src="../assets/rcar_chat.jpg" alt="Image of chat feature of Rcar." />
+        </div>
+      </figure>
+      <article>
+        <h1>Rcar (Front End)</h1>
+        <h2>HTML5, CSS3, JavaScript, jQuery</h2>
+        <h3>Spring 2019</h3>
+        <p>
+          Rcar was a web application that served as a ride-sharing service that
+          allowed those going to the same destination or event to connect with each
+          other, socialize, and carpool. Rcar's main feature was its group chat
+          functionality where individuals looking to carpool could get to know
+          each other and coordinate what time and place to be picked up at. I created
+          a custom-built emoticons system that would allow users to select facial
+          expressions, and a color, to send to the group chat. In order to achieve
+          this, I developed an algorithm that would encode the selected emoticon,
+          send that encoded emoticon to the database, and when retrieved, parse
+          the emoticon. Other features of Rcar included a list of nearby events,
+          a list of individuals going to nearby events that a user could possibly
+          connect with, and a contacts list.
+        </p>
+        <p>
+          By promoting socializing and carpooling, Rcar would ultimately
+          create a more closely bonded community and would help the environment by
+          reducing car exhaust pollution.
+        </p>
+        <p>
+          This web application was created by myself and three other individuals
+          for the <a href="experiences.html?section=codeTN" target="_blank">CodeTN Competition</a>
+          and won second place.
+        </p>
+      </article>
+    </section>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <script type="text/javascript">
+      // Load include content.
+      includeContent();
+
+      // Set copyright year.
+      setCopyrightYear();
+
+      window.addEventListener('load', function () {
+        // Initialize slideshow.
+        initSlideshow();
+
+        // Scrolls to an element on load if specified in URL.
+        scrollOnLoad(getURLAttribute("section"));
+
+        // Alert user of mobile incompatibility if screen is small enough.
+        alertIncompatibility();
+      });
+
+      window.addEventListener('scroll', function() {
+        // Change color of nav background if page is scrolled.
+        changeNavBackgroundColor();
+      });
+    </script>
+  </body>
+</html>
