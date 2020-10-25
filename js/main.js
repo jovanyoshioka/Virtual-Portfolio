@@ -616,7 +616,7 @@ function smoothScrollTo(target, duration)
   // Subtract half of dead space and nav bar height to set target position with
   // the element in the middle of the screen.
   var targetPos = document.querySelector(target).offsetTop - (deadSpace/2 + navBarHeight);
-
+  
   // Position of scroll bar when animation begins.
   var startPos = window.pageYOffset;
 
@@ -643,7 +643,7 @@ function smoothScrollTo(target, duration)
     var timeElapsed = currentTime - startTime;
     // Scroll to next position calculated by getNextPose() function.
     window.scrollTo(0, getNextPose(timeElapsed, startPos, distance, duration));
-
+    
     if (timeElapsed < duration)
     {
       // If animation's time elapsed has not exceeded defined duration of animation,

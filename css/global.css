@@ -326,16 +326,20 @@ section.infoBanner div.diagonalBtn { margin: 0 auto; }
   to { transform: translateY(0); }
 }
 /* Arrow */
-div#bouncingArrow {
+button#bouncingArrow {
   font-size: 3vw;
   position: absolute;
   bottom: 0;
   left: 48%;
   transform: translateY(-1vh);
   color: #CCCCCC;
+  background-color: transparent;
+  border: none;
   z-index: 3;
   animation: bounce 1.5s ease alternate infinite;
 }
+button#bouncingArrow:hover { cursor: pointer; }
+button#bouncingArrow:focus { outline: none; }
 
 /*********
  * INDEX *
@@ -730,14 +734,18 @@ body#about section#educationSection section.hva h1.title {
   left: 4.5%;
 }
 /* Hovering Effect: Slide Title to Top of Section to Make Room for Info Text */
-body#about section#educationSection section.hva:hover h1.title { transform: translateY(-280%); }
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#educationSection section.hva:hover h1.title,
+body#about section#educationSection section.hva:target h1.title { transform: translateY(-280%); }
 /* Specific Positioning for "University of Tennessee Knoxville" Title */
 body#about section#educationSection section.utk h1.title {
   top: 12.5vw;
   left: 0;
 }
 /* Hovering Effect: SLide Title to Top of Section to Make Room for Info Text */
-body#about section#educationSection section.utk:hover h1.title { transform: translateY(-115%); }
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#educationSection section.utk:hover h1.title,
+body#about section#educationSection section.utk:target h1.title { transform: translateY(-115%); }
 /* Container for Education Information Text. */
 body#about section#educationSection section article.info {
   width: 91%;
@@ -748,7 +756,9 @@ body#about section#educationSection section article.info {
   transition: transform 0.5s;
 }
 /* Hovering Effect: Slide Information Text Into View */
-body#about section#educationSection section:hover article.info { transform: translateY(-5%); }
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#educationSection section:hover article.info,
+body#about section#educationSection section:target article.info { transform: translateY(-5%); }
 /* Specific Positioning for Hardin Valley Academy Information */
 body#about section#educationSection section.hva article.info {
   height: 79%;
@@ -791,7 +801,9 @@ body#about section#spotlightsSection section.ornl h1.title {
   left: 0;
 }
 /* Hovering Effect: Slide Up Title to Make Top and Bottom Even When Button is Displayed */
-body#about section#spotlightsSection section:hover h1.title { transform: translateY(-50%); }
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#spotlightsSection section:hover h1.title,
+body#about section#spotlightsSection section:target h1.title { transform: translateY(-50%); }
 /* Specific Styling for "View Spotlight" Button */
 body#about section#spotlightsSection section div.diagonalBtn {
   width: 23.45vw;
@@ -803,7 +815,9 @@ body#about section#spotlightsSection section div.diagonalBtn {
   transition: border-color 0.75s, opacity 0.5s;
 }
 /* Hovering Effect: Fade In View Spotlight Button */
-body#about section#spotlightsSection section:hover div.diagonalBtn { opacity: 1.0; }
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#spotlightsSection section:hover div.diagonalBtn,
+body#about section#spotlightsSection section:target div.diagonalBtn { opacity: 1.0; }
 
 /* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
 body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
