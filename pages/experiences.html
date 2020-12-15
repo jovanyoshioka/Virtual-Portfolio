@@ -10,10 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/global.css">
     <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
-      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   </head>
   <body id="experiences" class="content">
     <!-- Navigation bar -->
@@ -29,9 +28,21 @@
       <div class="infoContainer">
         <!-- Slideshow's slides/Images -->
         <!-- Custom title, time, and dest attributes used for other slide content -->
-        <img class="slideshowImages" section=".ornlInternship" src="../assets/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
-        <img class="slideshowImages" section=".frc" src="../assets/frc_alliance.jpg" alt="Image of Jovan with his alliance partners at an FRC competition." />
-        <img class="slideshowImages" section=".codeTN" src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/ornl_campus.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/ornl_campus.jpg">
+          <img class="slideshowImages" section=".ornlInternship" src="../assets/experiences/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_alliance.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/frc_alliance.jpg">
+          <img class="slideshowImages" section=".frc" src="../assets/experiences/frc_alliance.jpg" alt="Image of Jovan with his alliance partners at an FRC competition." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+          <img class="slideshowImages" section=".codeTN" src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+        </picture>
         <!-- Tint for slide image -->
         <div class="tint"></div>
         <!-- Slide title text: set with JavaScript -->
@@ -58,23 +69,45 @@
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
-          <img class="blurred" src="../assets/ornl_campus.jpg" />
-          <img src="../assets/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ornl_campus.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ornl_campus.jpg">
+            <img class="blurred" src="../assets/experiences/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ornl_campus.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ornl_campus.jpg">
+            <img src="../assets/experiences/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <img class="blurred" src="../assets/ornl_intern_spotlight.jpg" />
-          <img src="../assets/ornl_intern_spotlight.jpg" alt="Image of Jovan interning at ORNL." />
+          <picture>
+            <source type="image/webp" srcset="../assets/about/ornl_intern_spotlight.webp">
+            <source type="image/jpeg" srcset="../assets/about/ornl_intern_spotlight.jpg">
+            <img class="blurred" src="../assets/about/ornl_intern_spotlight.jpg" alt="Image of Jovan interning at ORNL blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/about/ornl_intern_spotlight.webp">
+            <source type="image/jpeg" srcset="../assets/about/ornl_intern_spotlight.jpg">
+            <img src="../assets/about/ornl_intern_spotlight.jpg" alt="Image of Jovan interning at ORNL." loading="lazy" />
+          </picture>
         </div>
       </figure>
-      <!-- Content Info -->
+      <!-- Content Info With Background Image -->
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/ornl_leaf.webp">
+          <source type="image/png" srcset="../assets/experiences/ornl_leaf.png">
+          <img class="higher" src="../assets/experiences/ornl_leaf.png" alt="Image of ORNL's logo." loading="lazy" />
+        </picture>
+        <div class="tint less"></div>
         <h1>Full Stack Developer Intern</h1>
         <h2>Oak Ridge National Laboratory (ORNL)</h2>
         <h3>Summer 2019</h3>
         <p>
-          Developed the National Household Travel Survey (NHTS) web application
+          Developed the <a href="https://nhts.ornl.gov/" target="_blank">National Household Travel Survey (NHTS) web application</a>
           funded by the U.S. Department of Transportation Federal Highway Administration.
           The NHTS web application takes data collected from the National Household
           Travel Survey and creates visual representations (e.g. graphs, diagrams,
@@ -83,9 +116,10 @@
           in their areas.
         </p>
         <p>
-          My mentors were Dr. Ross Wang, an R&D Staff Member in the Transportation
-          Analytics & Decision Sciences Group at ORNL, and Gina Accawi, a Technical
-          Senior Staff Member at ORNL specializing in energy consumption analysis.
+          My mentors were <a href="https://www.ornl.gov/staff-profile/ross-wang" target="_blank">Dr. Ross Wang</a>, 
+          an R&D Staff Member in the Transportation Analytics & Decision Sciences Group 
+          at ORNL, and <a href="https://www.ornl.gov/staff-profile/gina-k-accawi">Gina Accawi</a>, 
+          a Technical Senior Staff Member at ORNL specializing in energy consumption analysis.
         </p>
         <p>
           I worked to resolve issues/bugs, utilizing team management
@@ -105,17 +139,39 @@
     <section class="frc first resize dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/frc_teaching.jpg" />
-          <img src="../assets/frc_teaching.jpg" alt="Image of Jovan teaching an underclassmen programming." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/frc_teaching.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/frc_teaching.jpg">
+            <img class="blurred" src="../assets/experiences/frc_teaching.jpg" alt="Image of Jovan teaching an underclassmen programming blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/frc_teaching.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/frc_teaching.jpg">
+            <img src="../assets/experiences/frc_teaching.jpg" alt="Image of Jovan teaching an underclassmen programming." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <img class="blurred" src="../assets/frc_gameplay.jpg" />
-          <img src="../assets/frc_gameplay.jpg" alt="Image of Jovan driving his team's robot at competition." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/frc_gameplay.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/frc_gameplay.jpg">
+            <img class="blurred" src="../assets/experiences/frc_gameplay.jpg" alt="Image of Jovan driving his team's robot at competition blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/frc_gameplay.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/frc_gameplay.jpg">
+            <img src="../assets/experiences/frc_gameplay.jpg" alt="Image of Jovan driving his team's robot at competition." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/frc_logo.png">
+          <img src="../assets/experiences/frc_logo.png" alt="Image of FIRST's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>FIRST Robotics Competition</h1>
         <h2>FRC 3824: HVA RoHAWKtics</h2>
         <h3>Fall 2016 - Spring 2020</h3>
@@ -148,17 +204,39 @@
     <section class="codeTN light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/codetn_solesurvivors.jpg" />
-          <img src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan's CodeTN 2019 team." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+            <img class="blurred" src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan's CodeTN 2019 team blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+            <img src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan's CodeTN 2019 team." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <img class="blurred" src="../assets/codetn_dreamteam.jpg" />
-          <img src="../assets/codetn_dreamteam.jpg" alt="Image of Jovan's CodeTN 2018 team." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_dreamteam.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_dreamteam.jpg">
+            <img class="blurred" src="../assets/experiences/codetn_dreamteam.jpg" alt="Image of Jovan's CodeTN 2018 team blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_dreamteam.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_dreamteam.jpg">
+            <img src="../assets/experiences/codetn_dreamteam.jpg" alt="Image of Jovan's CodeTN 2018 team." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/codetn_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/codetn_logo.png">
+          <img class="higher" src="../assets/experiences/codetn_logo.png" alt="Image of CodeTN's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>CodeTN Competition</h1>
         <h2>Hardin Valley Academy</h2>
         <h3>Fall 2016 - Spring 2019</h3>

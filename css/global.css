@@ -1,3 +1,8 @@
+/*********
+ * FONTS *
+ *********/
+@font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); font-display: swap;}
+@font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); font-display: swap; }
 /**********
  * GLOBAL *
  **********/
@@ -351,6 +356,10 @@ body#index h1 {
   text-align: center;
   margin-top: 30vh;
   color: #CCCCCC;
+  /* Only show message if not redirected immediately. */
+  /* This removes unpleasant flash of text when redirect is immediate. */
+  opacity: 0.0;
+  animation: 0.5s fadeIn 1s linear forwards;
 }
 body#index h1 a {
   color: #CCCCCC;
@@ -363,6 +372,12 @@ body#index h1 a:hover { color: #EEEEEE; }
  ***********/
 /* Colors Background of Page */
 body#landing { background-color: #1A1A1A; }
+
+/* "main" Container to Resolve LCP Error in Lighthouse */
+body#landing main {
+  width: 100%;
+  height: 100vh;
+}
 
 /* Style Elements to Take Up Entire Browser Size */
 body#landing div.radialGradient,
@@ -617,25 +632,34 @@ body#about section#biographySection {
   height: 100vh;
   position: relative;
   background-color: #1A1A1A;
-  background-image: linear-gradient(rgba(26,26,26,0.6),rgba(26,26,26,0.6)), url("../assets/meeting.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
   overflow: hidden;
 }
+/* Page's Background Image: As Element, Not CSS "background-image", For WEBP. */
+body#about section#biographySection img {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+}
+/* Styling Tint Darker Than Its Global Styling To Make Text Easier To Read */
+body#about section#biographySection div.tint { opacity: 0.6; }
 /* Circular Profile Picture Element */
 body#about section#biographySection div.profilePic {
   width: 32.5vw;
   height: 30vw;
   position: absolute;
-  margin: 11% 0 0 0;
   left: 10%;
-  background-image: url("../assets/profilePic.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
+  margin: 11% 0 0 0;
   border: 0.5vw solid #CCCCCC;
   border-radius: 50%;
+  overflow: hidden;
   animation: slideVerticalTranslate 1s ease-out forwards,
              fadeIn 0.75s linear 0.25s forwards;
+}
+/* Profile Pic's Background Image: As Element, Not CSS "background-image", For WEBP. */
+body#about section#biographySection div.profilePic img {
+  min-width: 100.5%;
+  height: 100.25%;
+  margin: -0.125% 0 0 -0.25%;
 }
 /* Container for About Me Information */
 body#about section#biographySection article {
@@ -822,13 +846,7 @@ body#about section#spotlightsSection section:target div.diagonalBtn { opacity: 1
 /* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
 body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
 /* Container for Skills Section */
-body#about section#skillsSection {
-  background-color: #0C54A5;
-  background-image: linear-gradient(rgba(12,84,165,0.8),rgba(12,84,165,0.8)), url("../assets/code_symbol.png");
-  background-repeat: no-repeat;
-  background-size: 70% 100%;
-  background-position: center;
-}
+body#about section#skillsSection { background-color: #0C54A5; }
 /* General Styling for Skills Languages/Tools Sections */
 body#about section#skillsSection section {
   height: 92.5%;
@@ -1116,25 +1134,16 @@ body.content section.dark {
   width: 100%;
   height: 90vh;
   position: relative;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 50% 100%;
 }
 /* General Styling for Light Content Sections */
 body.content section.light {
   background-color: #0C54A5;
-  /* Variable for Repeatedly Used Linear-Gradient */
-  --light-gradient: linear-gradient(rgba(12,84,165,0.8),rgba(12,84,165,0.8));
-  background-position: right center;
   clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
   -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%);
 }
 /* General Styling for Dark Content Sections */
 body.content section.dark {
   background-color: #1A1A1A;
-  /* Variable for Repeatedly Used Linear-Gradient */
-  --dark-gradient: linear-gradient(rgba(26,26,26,0.8),rgba(26,26,26,0.8));
-  background-position: left center;
   clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
   -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%);
 }
@@ -1201,10 +1210,6 @@ body.content section.dark figure div {
   left: 2.5%;
   overflow: hidden;
   background-color: #1A1A1A;
-  text-align: center;
-  /* Centers Position Absolute Images */
-  display: flex;
-  align-items: center;
 }
 
 /* Shaping of Top Image Borders and Containers for Light Section */
@@ -1248,8 +1253,9 @@ body.content section.light figure div video,
 body.content section.dark figure div video {
   width: auto;
   height: 100%;
-  /* Automatically Centered By Parent Display Flex */
+  /* Center Image */
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
   margin: auto;
@@ -1260,10 +1266,6 @@ body.content section.dark figure div img.blurred,
 body.content section.light figure div video.blurred,
 body.content section.dark figure div video.blurred {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   filter: blur(8px);
   -webkit-filter: blur(8px);
 }
@@ -1320,6 +1322,37 @@ body.content section.dark article {
 /* Positioning for First Content Section's Article Due to Straight Top */
 body.content section:nth-of-type(2) article { padding: 2% 2.5% 2% 0; }
 
+/* Styling for Article Background Images */
+body.content section.light article img,
+body.content section.dark article img {
+  width: 50%;
+  position: fixed;
+  top: 15%;
+  z-index: -2;
+}
+body.content section.light article img { right: 0; }
+body.content section.dark article img { left: 0; }
+body.content section.light article img.higher,
+body.content section.dark article img.higher { top: 5%; }
+body.content section.light article img.lower,
+body.content section.dark article img.lower { top: 30%; }
+/* Tints for Article Background Images */
+body.content section.light article div.tint,
+body.content section.dark article div.tint {
+  width: 50%;
+  position: fixed;
+  opacity: 0.75;
+  z-index: -1;
+}
+body.content section.light article div.tint {
+  left: auto;
+  right: 0;
+  background-color: #0C54A5;
+}
+body.content section.dark article div.tint { background-color: #1A1A1A; }
+body.content section.light article div.tint.less,
+body.content section.dark article div.tint.less { opacity: 0.3; }
+
 /* Styling for Article Title */
 body.content section.light article h1,
 body.content section.dark article h1 {
@@ -1354,16 +1387,6 @@ body.content section.dark article p a {
 body.content section.light article p a:hover,
 body.content section.dark article p a:hover { color: #EEEEEE; }
 
-/* Resizing of Background Images for Various Sections */
-body.content section.light.resize,
-body.content section.dark.resize { background-size: 50% 75%; }
-
-/* Repeatedly Used Background Image for Content Sections */
-body.content section.light.first { background-image: var(--light-gradient), url("../assets/frc_logo.png"); }
-body.content section.dark.first { background-image: var(--dark-gradient), url("../assets/frc_logo.png"); }
-body.content section.light.codeTN { background-image: var(--light-gradient), url("../assets/codetn_logo.png"); }
-body.content section.dark.codeTN { background-image: var(--dark-gradient), url("../assets/codetn_logo.png"); }
-
 /************
  * PROJECTS *
  ************/
@@ -1382,31 +1405,6 @@ body#projects section.dark article h4 a:hover {
   cursor: pointer;
   color: #EEEEEE;
 }
-
-/* Background Images for Content Sections */
-body#projects section.light.droneFleet { background-image: var(--light-gradient), url("../assets/droneFleet_background.png"); }
-body#projects section.dark.droneFleet { background-image: var(--dark-gradient), url("../assets/droneFleet_background.png"); }
-body#projects section.light.portfolio { background-image: var(--light-gradient), url("../assets/logo_cccccc.png"); }
-body#projects section.dark.portfolio { background-image: var(--dark-gradient), url("../assets/logo_cccccc.png"); }
-body#projects section.light.alienX { background-image: var(--light-gradient), url("../assets/alienX_background.png"); }
-body#projects section.dark.alienX { background-image: var(--dark-gradient), url("../assets/alienX_background.png"); }
-body#projects section.light.assassinPlugin { background-image: var(--light-gradient), url("../assets/assassin_plugin_background.png"); }
-body#projects section.dark.assassinPlugin { background-image: var(--dark-gradient), url("../assets/assassin_plugin_background.png"); }
-body#projects section.light.pathFollowing { background-image: var(--light-gradient), url("../assets/pathFollowing_background.png"); }
-body#projects section.dark.pathFollowing { background-image: var(--dark-gradient), url("../assets/pathFollowing_background.png"); }
-body#projects section.light.e-ssue { background-image: var(--light-gradient), url("../assets/e-ssue_background.png"); }
-body#projects section.dark.e-ssue { background-image: var(--dark-gradient), url("../assets/e-ssue_background.png"); }
-body#projects section.light.rCar,
-body#projects section.dark.rCar { background-size: 50% 45%; }
-body#projects section.light.rCar { background-image: var(--light-gradient), url("../assets/rcar_background.png"); }
-body#projects section.dark.rCar { background-image: var(--dark-gradient), url("../assets/rcar_background.png"); }
-
-/***************
- * EXPERIENCES *
- ***************/
-/* Background Images for Content Sections */
-body#experiences section.light.ornlInternship { background-image: linear-gradient(rgba(12,84,165,0.3),rgba(12,84,165,0.3)), url("../assets/ornl_leaf.png"); }
-body#experiences section.dark.ornlInternship { background-image: linear-gradient(rgba(26,26,26,0.3),rgba(26,26,26,0.3)), url("../assets/ornl_leaf.png"); }
 
 /**********
  * AWARDS *
@@ -1479,6 +1477,13 @@ body#awards section.dark article {
 /* Specific Positioning of First and Last Sections' Article Containers */
 body#awards section:nth-of-type(2) article { padding-top: 3.5%; }
 body#awards section:last-of-type article { padding-top: 5%; }
+
+/* Styling Article Background Images/Tints to Be Wider Than Default */
+body#awards section.light article img,
+body#awards section.dark article img { width: 58.25%; }
+body#awards section.light article div.tint,
+body#awards section.dark article div.tint { width: 58.25%; }
+
 /* Styling Article Title, Subtitle, Time, and Information Text */
 body#awards section.light article h1,
 body#awards section.dark article h1 { font-size: 3.65vw; }
@@ -1491,13 +1496,3 @@ body#awards section.dark article p {
   font-size: 2.25vw;
   text-align: center;
 }
-
-/* Awards' Background Images */
-body#awards section.light.apScholar { background-image: var(--light-gradient), url("../assets/collegeboard_logo.png"); }
-body#awards section.dark.apScholar { background-image: var(--dark-gradient), url("../assets/collegeboard_logo.png"); }
-body#awards section.light.bohr { background-image: var(--light-gradient), url("../assets/hva_logo.png"); }
-body#awards section.dark.bohr { background-image: var(--dark-gradient), url("../assets/hva_logo.png"); }
-body#awards section.light.fbla,
-body#awards section.dark.fbla { background-size: 50% 75%; }
-body#awards section.light.fbla { background-image: var(--light-gradient), url("../assets/fbla_logo.png"); }
-body#awards section.dark.fbla { background-image: var(--dark-gradient), url("../assets/fbla_logo.png"); }

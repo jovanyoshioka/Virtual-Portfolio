@@ -10,10 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/global.css">
     <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
-      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   </head>
   <body id="awards" class="content">
     <!-- Navigation bar -->
@@ -29,15 +28,51 @@
       <div class="infoContainer">
         <!-- Slideshow's slides/Images -->
         <!-- Custom title, time, and dest attributes used for other slide content -->
-        <img class="slideshowImages" section=".apScholar" src="../assets/calculus.jpg" alt="Image of calculus homework." />
-        <img class="slideshowImages" section=".bohr" src="../assets/bohr_recipient.jpg" alt="Image of Jovan in his graduation gown in Hardin Valley Academy." />
-        <img class="slideshowImages" section=".chairmans20" src="../assets/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
-        <img class="slideshowImages" section=".fbla19" src="../assets/fbla19_cover.jpg" alt="Image of all FBLA 2019 competitors." />
-        <img class="slideshowImages" section=".codeTN" src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan's 2019 CodeTN team." />
-        <img class="slideshowImages" section=".deansList" src="../assets/deansList_cover.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." />
-        <img class="slideshowImages" section=".volunteer" src="../assets/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
-        <img class="slideshowImages" section=".fbla18" src="../assets/fbla18_cover.jpg" alt="Image representing cyber security." />
-        <img class="slideshowImages" section=".chairmans17" src="../assets/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/calculus.webp">
+          <source type="image/jpeg" srcset="../assets/awards/calculus.jpg">
+          <img class="slideshowImages" section=".apScholar" src="../assets/awards/calculus.jpg" alt="Image of calculus homework." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/bohr_recipient.webp">
+          <source type="image/jpeg" srcset="../assets/awards/bohr_recipient.jpg">
+          <img class="slideshowImages" section=".bohr" src="../assets/awards/bohr_recipient.jpg" alt="Image of Jovan in his graduation gown in Hardin Valley Academy." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/chairmans20.webp">
+          <source type="image/jpeg" srcset="../assets/awards/chairmans20.jpg">
+          <img class="slideshowImages" section=".chairmans20" src="../assets/awards/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/fbla19_cover.webp">
+          <source type="image/jpeg" srcset="../assets/awards/fbla19_cover.jpg">
+          <img class="slideshowImages" section=".fbla19" src="../assets/awards/fbla19_cover.jpg" alt="Image of all FBLA 2019 competitors." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+          <img class="slideshowImages" section=".codeTN" src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan's 2019 CodeTN team." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/deansList_cover.webp">
+          <source type="image/jpeg" srcset="../assets/awards/deansList_cover.jpg">
+          <img class="slideshowImages" section=".deansList" src="../assets/awards/deansList_cover.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/fll.webp">
+          <source type="image/jpeg" srcset="../assets/awards/fll.jpg">
+          <img class="slideshowImages" section=".volunteer" src="../assets/awards/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/fbla18_cover.webp">
+          <source type="image/jpeg" srcset="../assets/awards/fbla18_cover.jpg">
+          <img class="slideshowImages" section=".fbla18" src="../assets/awards/fbla18_cover.jpg" alt="Image representing cyber security." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/chairmans17.webp">
+          <source type="image/jpeg" srcset="../assets/awards/chairmans17.jpg">
+          <img class="slideshowImages" section=".chairmans17" src="../assets/awards/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+        </picture>
         <!-- Tint for slide image -->
         <div class="tint"></div>
         <!-- Slide title text: set with JavaScript -->
@@ -64,12 +99,26 @@
       <!-- Content Image's Borders, Containers, and Elements -->
       <figure>
         <div>
-          <img class="blurred" src="../assets/ap_certificate.jpg" />
-          <img src="../assets/ap_certificate.jpg" alt="Image of AP Scholar with Distinction certificate." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/ap_certificate.webp">
+            <source type="image/jpeg" srcset="../assets/awards/ap_certificate.jpg">
+            <img class="blurred" src="../assets/awards/ap_certificate.jpg" alt="Image of AP Scholar with Distinction certificate blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/ap_certificate.webp">
+            <source type="image/jpeg" srcset="../assets/awards/ap_certificate.jpg">
+            <img src="../assets/awards/ap_certificate.jpg" alt="Image of AP Scholar with Distinction certificate blurred." loading="lazy" />
+          </picture>
         </div>
       </figure>
-      <!-- Content Info -->
+      <!-- Content Info With Background Image -->
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/collegeboard_logo.webp">
+          <source type="image/png" srcset="../assets/awards/collegeboard_logo.png">
+          <img class="higher" src="../assets/awards/collegeboard_logo.png" alt="Image of CollegeBoard's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>AP Scholar with Distinction</h1>
         <h2>CollegeBoard</h2>
         <h3>Summer 2020</h3>
@@ -81,11 +130,25 @@
     <section class="bohr dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/bohr_award.jpg" />
-          <img src="../assets/bohr_award.jpg" alt="Image of recognition of Bohr Award." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/bohr_award.webp">
+            <source type="image/jpeg" srcset="../assets/awards/bohr_award.jpg">
+            <img class="blurred" src="../assets/awards/bohr_award.jpg" alt="Image of recognition of Bohr Award blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/bohr_award.webp">
+            <source type="image/jpeg" srcset="../assets/awards/bohr_award.jpg">
+            <img src="../assets/awards/bohr_award.jpg" alt="Image of recognition of Bohr Award." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/hva_logo.webp">
+          <source type="image/png" srcset="../assets/awards/hva_logo.png">
+          <img class="higher" src="../assets/awards/hva_logo.png" alt="Image of HVA's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Bohr Award</h1>
         <h2>HVA STEM Academy</h2>
         <h3>Spring 2020</h3>
@@ -97,11 +160,25 @@
     <section class="chairmans20 first resize light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/chairmans20.jpg" />
-          <img src="../assets/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/chairmans20.webp">
+            <source type="image/jpeg" srcset="../assets/awards/chairmans20.jpg">
+            <img class="blurred" src="../assets/awards/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/chairmans20.webp">
+            <source type="image/jpeg" srcset="../assets/awards/chairmans20.jpg">
+            <img src="../assets/awards/chairmans20.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2020 award." />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/frc_logo.png">
+          <img src="../assets/experiences/frc_logo.png" alt="Image of FIRST's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Chairman's Award</h1>
         <h2>FIRST</h2>
         <h3>Spring 2020</h3>
@@ -113,11 +190,25 @@
     <section class="fbla19 fbla dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/fbla19.jpg" />
-          <img src="../assets/fbla19.jpg" alt="Image of Jovan with his first place FBLA 2019 award." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fbla19.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fbla19.jpg">
+            <img class="blurred" src="../assets/awards/fbla19.jpg" alt="Image of Jovan with his first place FBLA 2019 award blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fbla19.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fbla19.jpg">
+            <img src="../assets/awards/fbla19.jpg" alt="Image of Jovan with his first place FBLA 2019 award." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/fbla_logo.webp">
+          <source type="image/png" srcset="../assets/awards/fbla_logo.png">
+          <img src="../assets/awards/fbla_logo.png" alt="Image of FBLA's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>1st Place: State & Nationals</h1>
         <h2>FBLA Coding and Programming</h2>
         <h3>Summer 2019</h3>
@@ -129,11 +220,25 @@
     <section class="codeTN light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/codetn_solesurvivors.jpg" />
-          <img src="../assets/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+            <img class="blurred" src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/codetn_solesurvivors.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/codetn_solesurvivors.jpg">
+            <img src="../assets/experiences/codetn_solesurvivors.jpg" alt="Image of Jovan and his CodeTN 2019 team." />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/codetn_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/codetn_logo.png">
+          <img class="higher" src="../assets/experiences/codetn_logo.png" alt="Image of CodeTN's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>2nd Place: CodeTN Competition</h1>
         <h2>CodeTN</h2>
         <h3>Spring 2019</h3>
@@ -145,11 +250,25 @@
     <section class="deansList first resize dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/deansList.jpg" />
-          <img src="../assets/deansList.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/deansList.webp">
+            <source type="image/jpeg" srcset="../assets/awards/deansList.jpg">
+            <img class="blurred" src="../assets/awards/deansList.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/deansList.webp">
+            <source type="image/jpeg" srcset="../assets/awards/deansList.jpg">
+            <img src="../assets/awards/deansList.jpg" alt="Image of Jovan as a Dean's List Semi-Finalist." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/frc_logo.png">
+          <img src="../assets/experiences/frc_logo.png" alt="Image of FIRST's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Dean's List Semi-Finalist</h1>
         <h2>FIRST</h2>
         <h3>Spring 2019</h3>
@@ -161,11 +280,25 @@
     <section class="volunteer first resize light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/fll.jpg" />
-          <img src="../assets/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fll.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fll.jpg">
+            <img class="blurred" src="../assets/awards/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fll.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fll.jpg">
+            <img src="../assets/awards/fll.jpg" alt="Image of event Jovan received the Outstanding Volunteer award at." />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/frc_logo.png">
+          <img src="../assets/experiences/frc_logo.png" alt="Image of FIRST's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Outstanding Volunteer Award</h1>
         <h2>FIRST</h2>
         <h3>Winter 2018</h3>
@@ -177,11 +310,25 @@
     <section class="fbla18 fbla dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/fbla18.jpg" />
-          <img src="../assets/fbla18.jpg" alt="Image of Jovan at an FBLA conference." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fbla18.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fbla18.jpg">
+            <img class="blurred" src="../assets/awards/fbla18.jpg" alt="Image of Jovan at an FBLA conference blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/fbla18.webp">
+            <source type="image/jpeg" srcset="../assets/awards/fbla18.jpg">
+            <img src="../assets/awards/fbla18.jpg" alt="Image of Jovan at an FBLA conference." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/awards/fbla_logo.webp">
+          <source type="image/png" srcset="../assets/awards/fbla_logo.png">
+          <img src="../assets/awards/fbla_logo.png" alt="Image of FBLA's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>2nd Place: Regional</h1>
         <h2>FBLA Cyber Security</h2>
         <h3>Spring 2018</h3>
@@ -193,11 +340,25 @@
     <section class="chairmans17 first resize light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/chairmans17.jpg" />
-          <img src="../assets/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/chairmans17.webp">
+            <source type="image/jpeg" srcset="../assets/awards/chairmans17.jpg">
+            <img class="blurred" src="../assets/awards/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/awards/chairmans17.webp">
+            <source type="image/jpeg" srcset="../assets/awards/chairmans17.jpg">
+            <img src="../assets/awards/chairmans17.jpg" alt="Image of HVA RoHAWKtics and their Chairmans 2017 award." />
+          </picture>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/frc_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/frc_logo.png">
+          <img src="../assets/experiences/frc_logo.png" alt="Image of FIRST's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Chairman's Award</h1>
         <h2>FIRST</h2>
         <h3>Spring 2017</h3>

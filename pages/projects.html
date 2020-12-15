@@ -10,10 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/global.css">
     <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
-      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   </head>
   <body id="projects" class="content">
     <!-- Navigation bar -->
@@ -29,13 +28,41 @@
       <div class="infoContainer">
         <!-- Slideshow's slides/Images -->
         <!-- Custom title, time, and dest attributes used for other slide content -->
-        <img class="slideshowImages" section=".droneFleet" src="../assets/telloedu.jpg" alt="Image of a Tello EDU drone." />
-        <img class="slideshowImages" section=".portfolio" src="../assets/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
-        <img class="slideshowImages" section=".alienX" src="../assets/alienX_robot.jpg" alt="Image of AlienX." />
-        <img class="slideshowImages" section=".assassinPlugin" src="../assets/assassin_plugin_cover.jpg" alt="Image of Minecraft." />
-        <img class="slideshowImages" section=".pathFollowing" src="../assets/paths.jpg" alt="Image of path planning lines." />
-        <img class="slideshowImages" section=".e-ssue" src="../assets/e-ssue_cover.jpg" alt="Image of E-ssue home page." />
-        <img class="slideshowImages" section=".rCar" src="../assets/rcar_cover.jpg" alt="Image of Rcar home page." />
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/telloedu.webp">
+          <source type="image/jpeg" srcset="../assets/projects/telloedu.jpg">
+          <img class="slideshowImages" section=".droneFleet" src="../assets/projects/telloedu.jpg" alt="Image of a Tello EDU drone." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/portfolio_cover.webp">
+          <source type="image/jpeg" srcset="../assets/projects/portfolio_cover.jpg">
+          <img class="slideshowImages" section=".portfolio" src="../assets/projects/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/alienX_robot.webp">
+          <source type="image/jpeg" srcset="../assets/projects/alienX_robot.jpg">
+          <img class="slideshowImages" section=".alienX" src="../assets/projects/alienX_robot.jpg" alt="Image of AlienX." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/assassin_plugin_cover.webp">
+          <source type="image/jpeg" srcset="../assets/projects/assassin_plugin_cover.jpg">
+          <img class="slideshowImages" section=".assassinPlugin" src="../assets/projects/assassin_plugin_cover.jpg" alt="Image of Minecraft." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/paths.webp">
+          <source type="image/jpeg" srcset="../assets/projects/paths.jpg">
+          <img class="slideshowImages" section=".pathFollowing" src="../assets/projects/paths.jpg" alt="Image of path planning lines." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/e-ssue_cover.webp">
+          <source type="image/jpeg" srcset="../assets/projects/e-ssue_cover.jpg">
+          <img class="slideshowImages" section=".e-ssue" src="../assets/projects/e-ssue_cover.jpg" alt="Image of an E-ssue class page." />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/rcar_chat.webp">
+          <source type="image/jpeg" srcset="../assets/projects/rcar_chat.jpg">
+          <img class="slideshowImages" section=".rCar" src="../assets/projects/rcar_chat.jpg" alt="Image of Rcar's chat feature." />
+        </picture>
         <!-- Tint for slide image -->
         <div class="tint"></div>
         <!-- Slide title text: set with JavaScript -->
@@ -62,20 +89,42 @@
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
-          <img class="blurred" src="../assets/telloedu.jpg" />
-          <img src="../assets/telloedu.jpg" alt="Image of a Tello EDU drone." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/telloedu.webp">
+            <source type="image/jpeg" srcset="../assets/projects/telloedu.jpg">
+            <img class="blurred" src="../assets/projects/telloedu.jpg" alt="Image of a Tello EDU drone blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/telloedu.webp">
+            <source type="image/jpeg" srcset="../assets/projects/telloedu.jpg">
+            <img src="../assets/projects/telloedu.jpg" alt="Image of a Tello EDU drone." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <img class="blurred" src="../assets/telloedus.jpg" />
-          <img src="../assets/telloedus.jpg" alt="Image of Tello EDU drones Jovan is working with." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/tello_video.webp">
+            <source type="image/jpeg" srcset="../assets/projects/tello_video.jpg">
+            <img class="blurred" src="../assets/projects/tello_video.jpg" alt="Image of Tello EDU drones Jovan is working with blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/tello_video.webp">
+            <source type="image/jpeg" srcset="../assets/projects/tello_video.jpg">
+            <img src="../assets/projects/tello_video.jpg" alt="Image of Tello EDU drones Jovan is working with blurred." loading="lazy" />
+          </picture>
         </div>
       </figure>
-      <!-- Content Info -->
+      <!-- Content Info With Background Image -->
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/droneFleet_background.webp">
+          <source type="image/png" srcset="../assets/projects/droneFleet_background.png">
+          <img src="../assets/projects/droneFleet_background.png" alt="Image of Tello EDU drawing." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Drone Fleet</h1>
-        <h2>Python, OpenCV, OpenPose</h2>
+        <h2>Python, OpenCV, OpenPose, TelloSDK</h2>
         <h3>Summer 2020 - Present</h3>
         <p>
           The Drone Fleet project is a long-term project I intend to work on throughout
@@ -99,6 +148,7 @@
           The Connect phase will be when I apply my vision processing and command
           programming from the Premade phase to my personally built drones.
         </p>
+        <h4><a href="https://github.com/jovanyoshioka/Drone-Fleet" target="_blank">View Code</a><h4></h4>
       </article>
     </section>
 
@@ -106,21 +156,31 @@
     <section class="portfolio dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/portfolio_cover.jpg" />
-          <img src="../assets/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/portfolio_cover.webp">
+            <source type="image/jpeg" srcset="../assets/projects/portfolio_cover.jpg">
+            <img class="blurred" src="../assets/projects/portfolio_cover.jpg" alt="Image of virtual portfolio home page blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/portfolio_cover.webp">
+            <source type="image/jpeg" srcset="../assets/projects/portfolio_cover.jpg">
+            <img src="../assets/projects/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <video class="blurred" muted><source src="../assets/portfolio.mp4" type="video/mp4"></video>
-          <video muted><source src="../assets/portfolio.mp4" type="video/mp4"></video>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/portfolio.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/portfolio.mp4" type="video/mp4"></video>
           <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
         </div>
       </figure>
       <article>
+        <img class="higher" src="../assets/logo_cccccc.png" alt="Image of Jovan's logo." />
+        <div class="tint"></div>
         <h1>Virtual Portfolio</h1>
         <h2>HTML5, CSS3, JavaScript</h2>
-        <h3>Summer 2020</h3>
+        <h3>Summer 2020 - Present</h3>
         <p>
           Wanting to compile my projects, experiences, and awards in one place, and
           desiring to add my own touch, I decided to conceptualize, design, code,
@@ -150,18 +210,32 @@
     <section class="alienX resize light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/alienX_robot.jpg" />
-          <img src="../assets/alienX_robot.jpg" alt="Image of AlienX." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/alienX_robot.webp">
+            <source type="image/jpeg" srcset="../assets/projects/alienX_robot.jpg">
+            <img class="blurred" src="../assets/projects/alienX_robot.jpg" alt="Image of AlienX blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/alienX_robot.webp">
+            <source type="image/jpeg" srcset="../assets/projects/alienX_robot.jpg">
+            <img src="../assets/projects/alienX_robot.jpg" alt="Image of AlienX." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <video class="blurred" muted><source src="../assets/alienX.mp4" type="video/mp4"></video>
-          <video muted><source src="../assets/alienX.mp4" type="video/mp4"></video>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/alienX.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/alienX.mp4" type="video/mp4"></video>
           <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/alienX_background.webp">
+          <source type="image/png" srcset="../assets/projects/alienX_background.png">
+          <img src="../assets/projects/alienX_background.png" alt="Image of AlienX button design." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>AlienX Robot Code</h1>
         <h2>Java, WPILib</h2>
         <h3>Spring 2020</h3>
@@ -194,18 +268,32 @@
     <section class="assassinPlugin resize dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/assassin_plugin_cmds.jpg" />
-          <img src="../assets/assassin_plugin_cmds.jpg" alt="Image of commands implemented by assassin plugin." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/assassin_plugin_cmds.webp">
+            <source type="image/jpeg" srcset="../assets/projects/assassin_plugin_cmds.jpg">
+            <img class="blurred" src="../assets/projects/assassin_plugin_cmds.jpg" alt="Image of commands implemented by assassin plugin blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/assassin_plugin_cmds.webp">
+            <source type="image/jpeg" srcset="../assets/projects/assassin_plugin_cmds.jpg">
+            <img src="../assets/projects/assassin_plugin_cmds.jpg" alt="Image of commands implemented by assassin plugin." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <video class="blurred" muted><source src="../assets/assassin_plugin.mp4" type="video/mp4"></video>
-          <video muted><source src="../assets/assassin_plugin.mp4" type="video/mp4"></video>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/assassin_plugin.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/assassin_plugin.mp4" type="video/mp4"></video>
           <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/assassin_plugin_background.webp">
+          <source type="image/png" srcset="../assets/projects/assassin_plugin_background.png">
+          <img src="../assets/projects/assassin_plugin_background.png" alt="Image of a Minecraft Sword." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Minecraft Assassin Plugin</h1>
         <h2>Java, Spigot API</h2>
         <h3>Spring 2020</h3>
@@ -239,18 +327,32 @@
     <section class="pathFollowing light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/paths.jpg" />
-          <img src="../assets/paths.jpg" alt="Image of path planning lines." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/paths.webp">
+            <source type="image/jpeg" srcset="../assets/projects/paths.jpg">
+            <img class="blurred" src="../assets/projects/paths.jpg" alt="Image of path planning lines blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/paths.webp">
+            <source type="image/jpeg" srcset="../assets/projects/paths.jpg">
+            <img src="../assets/projects/paths.jpg" alt="Image of path planning lines." />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <video class="blurred" muted><source src="../assets/path_following.mp4" type="video/mp4"></video>
-          <video muted><source src="../assets/path_following.mp4" type="video/mp4"></video>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/path_following.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/path_following.mp4" type="video/mp4"></video>
           <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/pathFollowing_background.webp">
+          <source type="image/png" srcset="../assets/projects/pathFollowing_background.png">
+          <img class="higher" src="../assets/projects/pathFollowing_background.png" alt="Image of generic path arrows." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>Path Following Code</h1>
         <h2>Java, WPILib, Pathfinder</h2>
         <h3>Winter 2019</h3>
@@ -284,18 +386,32 @@
     <section class="e-ssue dark">
       <figure>
         <div>
-          <img class="blurred" src="../assets/e-ssue_cover.jpg" />
-          <img src="../assets/e-ssue_cover.jpg" alt="Image of E-ssue home page." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/e-ssue_home.webp">
+            <source type="image/jpeg" srcset="../assets/projects/e-ssue_home.jpg">
+            <img class="blurred" src="../assets/projects/e-ssue_home.jpg" alt="Image of E-ssue home page blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/e-ssue_home.webp">
+            <source type="image/jpeg" srcset="../assets/projects/e-ssue_home.jpg">
+            <img src="../assets/projects/e-ssue_home.jpg" alt="Image of E-ssue home page." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <video class="blurred" muted><source src="../assets/e-ssue.mp4" type="video/mp4"></video>
-          <video muted><source src="../assets/e-ssue.mp4" type="video/mp4"></video>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/e-ssue.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/e-ssue.mp4" type="video/mp4"></video>
           <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
         </div>
       </figure>
       <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/e-ssue_background.webp">
+          <source type="image/png" srcset="../assets/projects/e-ssue_background.png">
+          <img class="higher" src="../assets/projects/e-ssue_background.png" alt="Image of a E-ssue's logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
         <h1>E-ssue</h1>
         <h2>HTML5, CSS3, JavaScript, PHP, MySQL</h2>
         <h3>Summer 2019</h3>
@@ -329,19 +445,41 @@
     <section class="rCar resize light">
       <figure>
         <div>
-          <img class="blurred" src="../assets/rcar_home.jpg" />
-          <img src="../assets/rcar_home.jpg" alt="Image of Rcar home page." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/rcar_home.webp">
+            <source type="image/jpeg" srcset="../assets/projects/rcar_home.jpg">
+            <img class="blurred" src="../assets/projects/rcar_home.jpg" alt="Image of Rcar home page blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/rcar_home.webp">
+            <source type="image/jpeg" srcset="../assets/projects/rcar_home.jpg">
+            <img src="../assets/projects/rcar_home.jpg" alt="Image of Rcar home page." loading="lazy" />
+          </picture>
         </div>
       </figure>
       <figure>
         <div>
-          <img class="blurred" src="../assets/rcar_chat.jpg" />
-          <img src="../assets/rcar_chat.jpg" alt="Image of chat feature of Rcar." />
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/rcar_chat.webp">
+            <source type="image/jpeg" srcset="../assets/projects/rcar_chat.jpg">
+            <img class="blurred" src="../assets/projects/rcar_chat.jpg" alt="Image of chat feature of Rcar blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/rcar_chat.webp">
+            <source type="image/jpeg" srcset="../assets/projects/rcar_chat.jpg">
+            <img src="../assets/projects/rcar_chat.jpg" alt="Image of chat feature of Rcar." />
+          </picture>
         </div>
       </figure>
       <article>
-        <h1>Rcar (Front End)</h1>
-        <h2>HTML5, CSS3, JavaScript, jQuery</h2>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/rcar_background.webp">
+          <source type="image/png" srcset="../assets/projects/rcar_background.png">
+          <img class="lower" src="../assets/projects/rcar_background.png" alt="Image of Rcar logo." loading="lazy" />
+        </picture>
+        <div class="tint"></div>
+        <h1>Rcar</h1>
+        <h2>HTML5, CSS3, JavaScript, jQuery, PHP, MySQL</h2>
         <h3>Spring 2019</h3>
         <p>
           Rcar was a web application that served as a ride-sharing service that
@@ -380,6 +518,11 @@
 
       // Set copyright year.
       setCopyrightYear();
+
+      window.addEventListener('DOMContentLoaded', function() {
+        // Set thumbnails for project videos since they are preload="none".
+        setProjectsThumbnails();
+      });
 
       window.addEventListener('load', function () {
         // Initialize slideshow.

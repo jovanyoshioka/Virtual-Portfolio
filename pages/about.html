@@ -10,10 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/global.css">
     <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
-      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   </head>
   <body id="about">
     <!-- Navigation bar -->
@@ -21,8 +20,21 @@
 
     <!-- Biography section -->
     <section id="biographySection">
-      <!-- Profile pic element with background-image -->
-      <div class="profilePic slideUpFadeInPrep"></div>
+      <!-- Background image with tint -->
+      <picture>
+        <source type="image/webp" srcset="../assets/about/meeting.webp">
+        <source type="image/jpeg" srcset="../assets/about/meeting.jpg">
+        <img src="../assets/about/meeting.jpg" alt="Image of Jovan leading a robotics team meeting." />
+      </picture>
+      <div class="tint"></div>
+      <!-- Profile pic shape and image -->
+      <div class="profilePic slideUpFadeInPrep">
+        <picture>
+          <source type="image/webp" srcset="../assets/about/profilePic.webp">
+          <source type="image/jpeg" srcset="../assets/about/profilePic.jpg">
+          <img src="../assets/about/profilePic.jpg" alt="Image of Jovan." />
+        </picture>
+      </div>
       <!-- Greeting and about me -->
       <article class="slideRightFadeInPrep">
         <!-- Element causes text to wrap around circular profile pic -->
@@ -67,7 +79,11 @@
       <!-- Hardin Valley Academy section -->
       <section class="hva">
         <!-- Background image -->
-        <img src="../assets/hva.jpg" />
+        <picture>
+          <source type="image/webp" srcset="../assets/about/hva.webp">
+          <source type="image/jpeg" srcset="../assets/about/hva.jpg">
+          <img src="../assets/about/hva.jpg" alt="Image of Hardin Valley Academy." loading="lazy" />
+        </picture>
         <!-- Tint above image and below text -->
         <div class="tint"></div>
         <!-- School information -->
@@ -103,7 +119,11 @@
       <!-- University of Tennessee Knoxville section -->
       <section class="utk">
         <!-- Background image -->
-        <img src="../assets/utk.jpg" />
+        <picture>
+          <source type="image/webp" srcset="../assets/about/utk.webp">
+          <source type="image/jpeg" srcset="../assets/about/utk.jpg">
+          <img src="../assets/about/utk.jpg" alt="Image of the University of Tennessee Knoxville." loading="lazy" />
+        </picture>
         <!-- Tint above image and below text -->
         <div class="tint"></div>
         <!-- School information -->
@@ -193,7 +213,11 @@
       <!-- Hardin Valley Academy Student Spotlight section -->
       <section class="hva">
         <!-- Background image -->
-        <img src="../assets/hva_student_spotlight.jpg" />
+        <picture>
+          <source type="image/webp" srcset="../assets/about/hva_student_spotlight.webp">
+          <source type="image/jpeg" srcset="../assets/about/hva_student_spotlight.jpg">
+          <img src="../assets/about/hva_student_spotlight.jpg" alt="Jovan's Student Spotlight Image." loading="lazy" />
+        </picture>
         <!-- Tint over image, below text -->
         <div class="tint"></div>
         <!-- Spotlight title and button to open new tab to spotlight website -->
@@ -207,7 +231,11 @@
       <!-- Oak Ridge National Laboratory Intern Spotlight section -->
       <section class="ornl">
         <!-- Background image -->
-        <img src="../assets/ornl_intern_spotlight.jpg" />
+        <picture>
+          <source type="image/webp" srcset="../assets/about/ornl_intern_spotlight.webp">
+          <source type="image/jpeg" srcset="../assets/about/ornl_intern_spotlight.jpg">
+          <img src="../assets/about/ornl_intern_spotlight.jpg" alt="Jovan's Intern Spotlight Image." loading="lazy" />
+        </picture>
         <!-- Tint over image, below text -->
         <div class="tint"></div>
         <!-- Spotlight title and button to open new tab to spotlight website -->

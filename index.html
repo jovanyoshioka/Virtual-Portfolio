@@ -9,14 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="icon" href="assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: SuezOne; src: url('assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
   </head>
   <body id="index">
-    <h1>Redirecting momentarily.<br>If you are not being redirected, please click <a href="pages/landing.html">here</a>.</h1>
-    <script src="js/main.js"></script>
+    <h1>Redirecting momentarily.<br>Please make sure JavaScript is enabled.<br>If you are still not being redirected, please click <a href="pages/landing.html">here</a>.</h1>
     <script type="text/javascript">
+      // Immediately redirect to landing page.
       window.location.href = "pages/landing.html";
     </script>
   </body>

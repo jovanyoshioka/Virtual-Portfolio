@@ -10,10 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/global.css">
     <link rel="stylesheet" type="text/css" href="../assets/fontawesome/css/all.css">
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
-    <style>
-      @font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); }
-      @font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); }
-    </style>
+    <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   </head>
   <body id="contact">
     <!-- Navigation bar -->
@@ -21,7 +20,11 @@
 
     <!-- Background image behind main container -->
     <div class="imgContainer">
-      <img src="../assets/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
+      <picture>
+        <source type="image/webp" srcset="../assets/contact/contact.webp">
+        <source type="image/jpeg" srcset="../assets/contact/contact.jpg">
+        <img src="../assets/contact/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
+      </picture>
     </div>
 
     <!-- Contact information container -->

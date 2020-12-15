@@ -812,39 +812,57 @@ function getURLAttribute(passedAttribute)
  */
 function playVideos(playButtonNode)
 {
-  // Get parent node.
+  // Get parent node, aka container of video siblings to playButtonNode.
   var parent = playButtonNode.parentNode;
   // Get all children, should contain videos.
   var children = parent.childNodes;
-  // Defines video length used to show play button after video is done.
-  var videoLength = 0;
 
-  // Loop through all children and play video children.
+  // Loop through all children and load & play video elements.
   for (var i = 0; i < children.length; i++)
   {
-    // Determine if child is a video element. If so, play it.
+    // Look for first video element, play the rest after the video file has loaded.
+    // Note: If trying to play all videos at once, without preloading, an exception is generated.
     if (children[i].tagName == "VIDEO")
     {
-      // Play video.
-      children[i].play();
-
-      if (videoLength == 0)
+      // Listener handler for playing all videos after the initial video file is loaded.
+      function playVids()
       {
-        // Set videoLength to duration of video if videoLength is not already set.
-        // Multiply by 1000 to convert seconds to milliseconds, which setTimeout uses.
-        videoLength = children[i].duration * 1000;
+        // Disable and fade out play button.
+        playButtonNode.style.pointerEvents = "none";
+        playButtonNode.style.animation = "fadeOut 0.5s linear forwards";
+
+        // Find and play all other video elements.
+        for (var j = i+1; j < children.length; j++)
+        {
+          if (children[j].tagName == "VIDEO")
+          {
+            children[j].play();
+          }
+        }
       }
+      // Listener handler for showing the play button again and removing event listeners.
+      function endVids(event)
+      {
+        // Fade in play button.
+        playButtonNode.style.pointerEvents = "auto";
+        playButtonNode.style.animation = "fadeInPlayButton 0.5s linear forwards";
+
+        // Remove event listeners.
+        event.target.removeEventListener("canplay", playVids);
+        event.target.removeEventListener("ended", endVids);
+      }
+
+      // Begin loading/playing video that all video elements will display.
+      // Note: load() causes a cancelled video file download while play() does not.
+      children[i].play();
+      // Event listeners for when ready to play and when to end videos (ie show play button and remove listeners).
+      children[i].addEventListener("canplay", playVids);
+      children[i].addEventListener("ended", endVids);
+
+      // Initialized all videos with first video element, so stop the loop.
+      break;
     }
   }
-
-  // Disable and fade out play button.
-  playButtonNode.style.pointerEvents = "none";
-  playButtonNode.style.animation = "fadeOut 0.5s linear forwards";
-  // Fade in play button after video is finished playing (based on video length).
-  setTimeout(function() {
-    playButtonNode.style.pointerEvents = "auto";
-    playButtonNode.style.animation = "fadeInPlayButton 0.5s linear forwards";
-  }, videoLength);
 }
 
 /******************
@@ -1023,9 +1041,11 @@ function changeSlideshowText(isInitialize, delay, elementID, newText)
 
     // setTimeout using potential passed in delay (in milliseconds).
     setTimeout(function() {
+      const ANIMATION_DURATION = 0.5;
+
       // Animate text element to slide to the right and fade out (as if it were leaving).
-      element.style.animation = SLIDE_RIGHT_ANIMATION + " 0.5s ease-in forwards, " +
-                                FADE_OUT_ANIMATION + " 0.5s ease-in forwards";
+      element.style.animation = SLIDE_RIGHT_ANIMATION + " " + ANIMATION_DURATION + "s ease-in forwards, " +
+                                FADE_OUT_ANIMATION + " " + ANIMATION_DURATION + "s ease-in forwards";
       // setTimeout used to wait for previous animation to be complete before proceeding.
       // Text element must be invisible before changing text and moving element
       // to the left for re-entry.
@@ -1036,9 +1056,9 @@ function changeSlideshowText(isInitialize, delay, elementID, newText)
         element.innerHTML = newText;
         // Animate text element to slide to the right from the left and fade in
         // (as if it were entering).
-        element.style.animation = SLIDE_HORIZONTAL_ANIMATION_LEFT + " 0.5s ease-in forwards, " +
-                                  FADE_IN_ANIMATION + " 0.5s ease-out forwards";
-      }, 500);
+        element.style.animation = SLIDE_HORIZONTAL_ANIMATION_LEFT + " " + ANIMATION_DURATION + "s ease-in forwards, " +
+                                  FADE_IN_ANIMATION + " " + ANIMATION_DURATION + "s ease-out forwards";
+      }, ANIMATION_DURATION*1000);
     }, delay);
   } else
   {
@@ -1071,16 +1091,16 @@ function updateSlideshowContent(showIndex, isInit)
     var parent = document.querySelector(section);
 
     // Change blurredBackground image to that of imgElement's src.
-    document.getElementById("blurredBackground").style.backgroundImage = "url('" + imgElement.src + "')";
+    document.getElementById("blurredBackground").style.backgroundImage = "url('" + imgElement.currentSrc + "')";
 
     // Update title text to image's custom "title" attribute.
     changeSlideshowText(isInit, 0, "slideshowTitle", parent.querySelector("h1").innerHTML);
 
     // Update subtitle text to image's custom "subtitle" attribute.
-    changeSlideshowText(isInit, 250, "slideshowSubtitle", parent.querySelector("h2").innerHTML);
+    changeSlideshowText(isInit, 75, "slideshowSubtitle", parent.querySelector("h2").innerHTML);
 
     // Update time text to image's custom "time" attribute.
-    changeSlideshowText(isInit, 500, "slideshowTime", parent.querySelector("h3").innerHTML);
+    changeSlideshowText(isInit, 125, "slideshowTime", parent.querySelector("h3").innerHTML);
 
     if (isInit == true)
     {
@@ -1112,52 +1132,90 @@ function switchSlideshowSlide(showIndex, hideIndex)
   document.getElementsByClassName(SLIDESHOW_BTN_CLASS)[hideIndex].className = SLIDESHOW_BTN_CLASS;
 }
 /**
+ * Determines if Okay to Switch Slides Based on if Any Current Slideshow Animations in Progress
+ * 
+ * @return true if okay to switch, false if not okay.
+ */
+function isReadyToSwitch()
+{
+  // Use title and time offset to verify no animation is starting/ending.
+  // Note: title is first element to move in animation, and time is last.
+  // If no title and time elements are present, aka only images present, allow rapid switching.
+  var titleNode = document.getElementById("slideshowTitle");
+  var timeNode = document.getElementById("slideshowTime");
+
+  if ((titleNode && timeNode) && (titleNode.offsetLeft == 0 && timeNode.offsetLeft == 0))
+  {
+    // Title and time elements exist, animation is complete, return true.
+
+    return true;
+  } else if (titleNode && timeNode)
+  {
+    // Title and time elements exist, but animations are not complete, return false.
+
+    return false;
+  } else
+  {
+    // Only images are present, so return true regardless; rapid image transitions looks okay.
+    
+    return true;
+  }
+}
+/**
  * Selects Slideshow Image
  *
  * @param index Index of slide user selected to view using slideshow selectors.
  */
 function selectSlideshowImg(index)
 {
-  // Stop iterator so slideshow does not switch immediately.
-  clearInterval(slideshowIterator);
-  // Stop previous restarter timeout.
-  clearTimeout(slideshowTimeout);
-
-  // Get shown image index and initialize variable, "index."
-  var shownIndex = getSlideshowShownIndex();
-
-  if (shownIndex != index)
+  // If slideshow is not currently switching, switch slides.
+  if (isReadyToSwitch() == true)
   {
-    // If slide selected is not already shown, switch slides.
-    // Otherwise, do nothing.
+    // Stop iterator so slideshow does not switch immediately.
+    clearInterval(slideshowIterator);
+    // Stop previous restarter timeout.
+    clearTimeout(slideshowTimeout);
 
-    switchSlideshowSlide(index, shownIndex);
+    // Get shown image index and initialize variable, "index."
+    var shownIndex = getSlideshowShownIndex();
+
+    if (shownIndex != index)
+    {
+      // If slide selected is not already shown, switch slides.
+      // Otherwise, do nothing.
+
+      switchSlideshowSlide(index, shownIndex);
+    }
+
+    slideshowTimeout = setTimeout(function(){
+      // Begin iterating through slideshow images.
+      slideshowIterator = setInterval(runSlideshow, SLIDESHOW_INTERVAL);
+    }, SLIDESHOW_TIMEOUT);
   }
-
-  slideshowTimeout = setTimeout(function(){
-    // Begin iterating through slideshow images.
-    slideshowIterator = setInterval(runSlideshow, SLIDESHOW_INTERVAL);
-  }, SLIDESHOW_TIMEOUT);
 }
 /**
  * Changes Slideshow to Previous Slide.
  */
 function selectPreviousSlide()
 {
-  // Get index of currently shown slide.
-  var currentSlide = getSlideshowShownIndex();
-
-  if (currentSlide == 0)
+  // If slideshow is not currently switching, switch slides.
+  if (isReadyToSwitch() == true)
   {
-    // Currently shown slide is the first, so switch to last slide.
+    // Get index of currently shown slide.
+    var currentSlide = getSlideshowShownIndex();
 
-    var slideCount = document.getElementsByClassName(SLIDESHOW_IMG_CLASS).length;
-    selectSlideshowImg(slideCount-1);
-  } else
-  {
-    // If slide index is between 1 and "n", switch to slide with index-1.
+    if (currentSlide == 0)
+    {
+      // Currently shown slide is the first, so switch to last slide.
 
-    selectSlideshowImg(currentSlide-1);
+      var slideCount = document.getElementsByClassName(SLIDESHOW_IMG_CLASS).length;
+      selectSlideshowImg(slideCount-1);
+    } else
+    {
+      // If slide index is between 1 and "n", switch to slide with index-1.
+
+      selectSlideshowImg(currentSlide-1);
+    }
   }
 }
 /**
@@ -1165,20 +1223,24 @@ function selectPreviousSlide()
  */
 function selectNextSlide()
 {
-  // Get index of currently shown slide.
-  var currentSlide = getSlideshowShownIndex();
-
-  var slideCount = document.getElementsByClassName(SLIDESHOW_IMG_CLASS).length;
-  if (currentSlide == slideCount-1)
+  // If slideshow is not currently switching, switch slides.
+  if (isReadyToSwitch() == true)
   {
-    // Currently shown slide is the last, so switch to first slide.
+    // Get index of currently shown slide.
+    var currentSlide = getSlideshowShownIndex();
 
-    selectSlideshowImg(0);
-  } else
-  {
-    // If slide index is between 0 and "n-1", switch to slide with index+1.
+    var slideCount = document.getElementsByClassName(SLIDESHOW_IMG_CLASS).length;
+    if (currentSlide == slideCount-1)
+    {
+      // Currently shown slide is the last, so switch to first slide.
 
-    selectSlideshowImg(currentSlide+1);
+      selectSlideshowImg(0);
+    } else
+    {
+      // If slide index is between 0 and "n-1", switch to slide with index+1.
+
+      selectSlideshowImg(currentSlide+1);
+    }
   }
 }
 /**
@@ -1470,6 +1532,39 @@ function initSkills()
 
     displayLevels();
     displayTools();
+  }
+}
+
+/***********************
+ * PROJECTS THUMBNAILS *
+ ***********************/
+function setProjectsThumbnails()
+{
+  // Contains list of projects sections and corresponding thumbnails.
+  const SECTIONS_THUMBNAILS = [
+    {section:"portfolio", thumbnail:"portfolio_thumbnail"},
+    {section:"alienX", thumbnail:"alienX_thumbnail"},
+    {section:"assassinPlugin", thumbnail:"assassin_plugin_cover"},
+    {section:"pathFollowing", thumbnail:"pathFollowing_thumbnail"},
+    {section:"e-ssue", thumbnail:"e-ssue_cover"}
+  ];
+  // Path to projects' video thumbnails.
+  const PROJECTS_ASSETS_PATH = "../assets/projects/";
+
+  // Get image file extension (.webp vs .jpg) based on already-loaded image.
+  // Note: this is necessary because some browsers do not support .webp extension.
+  var str = document.querySelector("." + SECTIONS_THUMBNAILS[0].section + " img").currentSrc;
+  var ext = str.substring(str.length-4, str.length);
+
+  // Loop through all sections, get video nodes, and set their "poster" source (aka thumbnail).
+  var videosNodes;
+  for (var i = 0; i < SECTIONS_THUMBNAILS.length; i++)
+  {
+    videosNodes = document.querySelectorAll("." + SECTIONS_THUMBNAILS[i].section + " video");
+    for (var j = 0; j < videosNodes.length; j++)
+    {
+      videosNodes[j].poster = PROJECTS_ASSETS_PATH + SECTIONS_THUMBNAILS[i].thumbnail + "." + ext;
+    }
   }
 }
 
