@@ -120,7 +120,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/droneFleet_background.webp">
           <source type="image/png" srcset="../assets/projects/droneFleet_background.png">
-          <img src="../assets/projects/droneFleet_background.png" alt="Image of Tello EDU drawing." loading="lazy" />
+          <img src="../assets/projects/droneFleet_background.png" alt="Image of Tello EDU drawing." />
         </picture>
         <div class="tint"></div>
         <h1>Drone Fleet</h1>
@@ -233,7 +233,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/alienX_background.webp">
           <source type="image/png" srcset="../assets/projects/alienX_background.png">
-          <img src="../assets/projects/alienX_background.png" alt="Image of AlienX button design." loading="lazy" />
+          <img src="../assets/projects/alienX_background.png" alt="Image of AlienX button design." />
         </picture>
         <div class="tint"></div>
         <h1>AlienX Robot Code</h1>
@@ -291,7 +291,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/assassin_plugin_background.webp">
           <source type="image/png" srcset="../assets/projects/assassin_plugin_background.png">
-          <img src="../assets/projects/assassin_plugin_background.png" alt="Image of a Minecraft Sword." loading="lazy" />
+          <img src="../assets/projects/assassin_plugin_background.png" alt="Image of a Minecraft Sword." />
         </picture>
         <div class="tint"></div>
         <h1>Minecraft Assassin Plugin</h1>
@@ -350,7 +350,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/pathFollowing_background.webp">
           <source type="image/png" srcset="../assets/projects/pathFollowing_background.png">
-          <img class="higher" src="../assets/projects/pathFollowing_background.png" alt="Image of generic path arrows." loading="lazy" />
+          <img class="higher" src="../assets/projects/pathFollowing_background.png" alt="Image of generic path arrows." />
         </picture>
         <div class="tint"></div>
         <h1>Path Following Code</h1>
@@ -409,7 +409,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/e-ssue_background.webp">
           <source type="image/png" srcset="../assets/projects/e-ssue_background.png">
-          <img class="higher" src="../assets/projects/e-ssue_background.png" alt="Image of a E-ssue's logo." loading="lazy" />
+          <img class="higher" src="../assets/projects/e-ssue_background.png" alt="Image of a E-ssue's logo." />
         </picture>
         <div class="tint"></div>
         <h1>E-ssue</h1>
@@ -475,7 +475,7 @@
         <picture>
           <source type="image/webp" srcset="../assets/projects/rcar_background.webp">
           <source type="image/png" srcset="../assets/projects/rcar_background.png">
-          <img class="lower" src="../assets/projects/rcar_background.png" alt="Image of Rcar logo." loading="lazy" />
+          <img class="lower" src="../assets/projects/rcar_background.png" alt="Image of Rcar logo." />
         </picture>
         <div class="tint"></div>
         <h1>Rcar</h1>
@@ -519,12 +519,11 @@
       // Set copyright year.
       setCopyrightYear();
 
-      window.addEventListener('DOMContentLoaded', function() {
-        // Set thumbnails for project videos since they are preload="none".
-        setProjectsThumbnails();
-      });
-
       window.addEventListener('load', function () {
+        // Set thumbnails for project videos since they are preload="none".
+        // "onload" to ensure other images (to decipher .jpg or .webp) is loaded.
+        setProjectsThumbnails();
+
         // Initialize slideshow.
         initSlideshow();
 

@@ -1,8 +1,17 @@
 /*********
  * FONTS *
  *********/
-@font-face { font-family: Sarina; src: url('../assets/sarina.ttf'); font-display: swap;}
-@font-face { font-family: SuezOne; src: url('../assets/suezone.ttf'); font-display: swap; }
+@font-face {
+  font-family: Sarina;
+  src: url('../assets/sarina.ttf');
+  font-display: swap;
+}
+@font-face {
+  font-family: SuezOne;
+  src: url('../assets/suezone.ttf');
+  font-display: swap;
+}
+
 /**********
  * GLOBAL *
  **********/
@@ -372,12 +381,6 @@ body#index h1 a:hover { color: #EEEEEE; }
  ***********/
 /* Colors Background of Page */
 body#landing { background-color: #1A1A1A; }
-
-/* "main" Container to Resolve LCP Error in Lighthouse */
-body#landing main {
-  width: 100%;
-  height: 100vh;
-}
 
 /* Style Elements to Take Up Entire Browser Size */
 body#landing div.radialGradient,
