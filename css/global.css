@@ -800,6 +800,12 @@ body#about section#educationSection section.utk article.info {
 body#about section#educationSection section article.info h2 {
   font-size: 1.75vw;
   text-decoration: underline;
+  display: inline-block;
+}
+body#about section#educationSection section article.info h3 {
+  font-size: 1.25vw;
+  margin: 0 0 0 0.4vw;
+  display: inline-block;
 }
 body#about section#educationSection section article.info p {
   font-size: 1.25vw;
