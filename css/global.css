@@ -30,13 +30,14 @@ h1, h2, h3, h4, p, figure, ul {
 /*** Navigation Bar ***/
 /* Navigation Bar Container */
 nav {
-  width: 100vw;
+  /* background-color: red; */
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 998;
   text-align: center;
-  padding: 0 0 0.75vw 1.5vw;
+  padding: 0 0 12.5px 25px;
   transition: background-color 0.25s;
 }
 /* Nav Groups: Left Side Elements, Center (Logo), Right Side Elements */
@@ -50,35 +51,35 @@ nav ul {
 nav ul li { display: inline-block; }
 /* Individual Nav Links */
 nav ul li a {
-  font-size: 1.5vw;
+  font-size: 1.75em;
   font-family: SuezOne;
   color: #CCCCCC;
   transition: color 0.25s;
-  margin-right: 3vw;
-  padding-top: 1.25vw;
+  margin-right: 50px;
+  padding-top: 15px;
   text-decoration: none;
 }
 /* Hovering Effect: Change Color of Text and Create Line on Top */
 nav ul li a:hover {
   color: #EEEEEE;
-  border-top: 1vw solid #EEEEEE;
+  border-top: 10px solid #EEEEEE;
   cursor: pointer;
 }
 /* Current Page's Link: Selected/Lighter Color */
 nav ul li a.active {
   color: #EEEEEE;
-  border-top: 1vw solid #EEEEEE;
+  border-top: 10px solid #EEEEEE;
 }
 /* Extra Spacing for Left Nav Links to Have Logo in Center and Have the Navigation
    Bar Look Even on Both Sides. */
-nav ul:nth-of-type(1) li:not(:nth-of-type(3)) a { margin-right: 4vw; }
+nav ul:nth-of-type(1) li:not(:nth-of-type(3)) a { margin-right: 65px; }
 /* Styling for Logo in Center of Nav Bar */
 nav ul#logoContainer { position: relative; }
-nav ul#logoContainer li { padding-top: 0.85vw; }
+nav ul#logoContainer li { padding-top: 12.5px; }
 nav ul#logoContainer li a { border: none; }
 nav ul#logoContainer li a div {
-  height: 3.75vw;
-  width: 3.25vw;
+  height: 65px;
+  width: 56px;
   display: inline-block;
   vertical-align: middle;
   transition: 0.25s;
@@ -88,6 +89,124 @@ nav ul#logoContainer li a div {
 }
 /* Hovering Effect: Change Background-Image to Lighter Color of Logo */
 nav ul#logoContainer li a:hover div { background-image: url("../assets/logo_eeeeee.png"); }
+/* Hide Mobile Text and Collapse Button Initially */
+nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
+/* Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px)
+{
+  /* Reduce Size of Navigation Bar Text */
+  nav { padding: 0 0 12.5px 30px; }
+  nav ul li a {
+    font-size: 1.25em;
+    margin-right: 25px;
+    padding-top: 10px;
+  }
+  nav ul:nth-of-type(1) li:not(:nth-of-type(3)) a { margin-right: 40px; }
+
+  /* Reduce Size of Navigation Bar Logo */
+  nav ul#logoContainer li { padding-top: 7.5px; }
+  nav ul#logoContainer li a div {
+    height: 50px;
+    width: 43px;
+  }
+}
+@media only screen and (max-width: 768px)
+{
+  /* Make Navigation Bar Collapsible */
+  nav {
+    /* Grid Display Allows for Use of "order" Attribute */
+    display: grid;
+    padding: 0;
+    height: 80px;
+    overflow: hidden;
+  }
+  /* General Styling for Navigation Links */
+  nav ul {
+    width: 100%;
+    /* Order All Collapsible Links After Navigation Header (#logoContainer) */
+    -moz-order: 1;
+    order: 1;
+    background-color: #585858;
+  }
+  /* Separate Links Onto Different Rows For Better Accessibility */
+  nav ul li {
+    display: block;
+    border-bottom: 1px solid #777777;
+  }
+  /* Bottom of Last Link Does Not Need Border For Separation */
+  nav ul:last-of-type li:last-of-type { border: none; }
+  /* Sizing/Positioning Links */
+  nav ul li a {
+    font-size: 1.75em;
+    /* List-Item Display Enables Full Clickability */
+    display: list-item;
+    margin: 0 !important;
+    padding: 20px 0;
+    transition: color 0.25s, background-color 0.25s;
+  }
+  /* Styling Hover/Active Navigation Bar Links Rows */
+  nav ul li a:hover,
+  nav ul li a.active {
+    border: none;
+    background-color: #525252;
+  }
+
+  /* Note: Logo Container is Mobile Navigation Bar Header */
+  /* Includes Logo, "Jovan Yoshioka" Text, and Collapse Button */
+  nav ul#logoContainer {
+    -moz-order: 0;
+    order: 0;
+    background-color: #4E4E4E;
+    border-bottom: 1px solid #777777;
+  }
+  /* Allows Navigation Bar Header Elements to Be in One Row */
+  nav ul#logoContainer li {
+    display: inline-block !important;
+    border: none;
+  }
+  /* Removes Padding That Provides More Clickable Area for Links */
+  /* Area Not Needed For Navigation Bar Header Elements */
+  nav ul#logoContainer li a { padding: 0; }
+  /* Resize Logo */
+  nav ul#logoContainer li a div {
+    height: 60px;
+    width: 52px;
+  }
+  /* Positioning Logo Container */
+  nav ul#logoContainer li:nth-of-type(1) {
+    float: left;
+    padding: 10px 0 10px 12.5px;
+  }
+  /* Positioning "Jovan Yoshioka" Text Container */
+  nav ul#logoContainer li:nth-of-type(2) { padding: 2.5px 0 0 0; }
+  /* Styling "Jovan Yoshioka" Text */
+  nav ul#logoContainer li:nth-of-type(2) h1 {
+    font-size: 1.65em;
+    font-family: Sarina;
+    text-align: left;
+    color: #CCCCCC;
+  }
+  /* Slightly Pushes "Yoshioka" to the Right for Design */
+  nav ul#logoContainer li:nth-of-type(2) h1 span { padding-left: 25px; }
+  /* Sizing/Positioning Collapse Button */
+  nav ul#logoContainer li:nth-of-type(3) {
+    float: right;
+    font-size: 1.5em;
+    padding: 15px 12.5px 0 0;
+  }
+  /* Prevents Center Text From Moving When Icon Changes From Bars to Times */
+  nav ul#logoContainer li:nth-of-type(3) a { width: 1.25em; }
+  
+  /* Animation: Collapse/Retract Navigation Bar Links */
+  @keyframes collapseNav {
+    0% { height: 80px; }
+    100% { height: 550px; }
+  }
+  @keyframes retractNav {
+    0% { height: 550px; }
+    100% { height: 80px; }
+  }
+}
 
 /*** Footer ***/
 /* Footer Container */

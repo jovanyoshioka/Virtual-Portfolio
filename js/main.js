@@ -1,3 +1,8 @@
+/********************
+ * GLOBAL CONSTANTS *
+ ********************/
+const MOBILE_BREAKPOINT = 768;
+
 /*******************************
  * LANDING PARTICLES ANIMATION *
  *******************************/
@@ -877,9 +882,10 @@ const NAV_BACKGROUND_COLOR = "#4E4E4E";
  */
 function changeNavBackgroundColor()
 {
-  if (window.scrollY != 0)
+  if (window.scrollY != 0 || window.innerWidth <= MOBILE_BREAKPOINT)
   {
     // If scroll value is not zero (page is scrolled), add background color.
+    // Also, do not change background to transparent for mobile navigation bar.
 
     document.querySelector("nav").style.backgroundColor = NAV_BACKGROUND_COLOR;
   } else
@@ -888,6 +894,32 @@ function changeNavBackgroundColor()
 
     document.querySelector("nav").style.backgroundColor = "transparent";
   }
+}
+/**
+ * Toggle Collapse on Mobile Navigation Bar
+ */
+function toggleNav()
+{
+  var animation, icon;
+  // Get navigation bar collapse status via times/bars symbol.
+  var isCollapsed = document.querySelector("nav #logoContainer i.fas").classList.value.includes("times");
+  if (isCollapsed) {
+    // Set navigation bar retract values.
+
+    animation = "retractNav";
+    icon = "bars";
+  } else
+  {
+    // Set navigation bar collapse values.
+
+    animation = "collapseNav";
+    icon = "times";
+  }
+
+  // Initiate collapse/retract animation and symbol change.
+  var navNode = document.querySelector("nav");
+  document.querySelector("nav").style.animation = "0.25s " + animation + " ease-out forwards";
+  navNode.querySelector("#logoContainer i.fas").classList = "fas fa-" + icon;
 }
 
 /*************
@@ -938,8 +970,12 @@ function includeNavBar()
     </ul>
     <!-- Nav logo middle link -->
     <ul id="logoContainer">
-      <!-- Logo link -->
+      <!-- Logo/Text link -->
       <li><a href="home.html"><div></div></a></li>
+      <!-- Mobile Text -->
+      <li><h1>Jovan<br><span>Yoshioka</span></h1></li>
+      <!-- Mobile Collapse Button -->
+      <li><a onclick="toggleNav()"><i class="fas fa-bars"></i></a></li>
     </ul>
     <!-- Nav links right group -->
     <ul>
@@ -1576,7 +1612,7 @@ function setProjectsThumbnails()
  */
 function alertIncompatibility()
 {
-  if (window.innerWidth <= 768)
+  if (window.innerWidth <= MOBILE_BREAKPOINT)
   {
     // If screen width is tablet-sized or smaller, alert user of mobile incompatibility.
 
