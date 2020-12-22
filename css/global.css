@@ -117,7 +117,7 @@ nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
     /* Grid Display Allows for Use of "order" Attribute */
     display: grid;
     padding: 0;
-    height: 80px;
+    height: 70px;
     overflow: hidden;
   }
   /* General Styling for Navigation Links */
@@ -169,19 +169,19 @@ nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
   nav ul#logoContainer li a { padding: 0; }
   /* Resize Logo */
   nav ul#logoContainer li a div {
-    height: 60px;
-    width: 52px;
+    height: 58px;
+    width: 50px;
   }
   /* Positioning Logo Container */
   nav ul#logoContainer li:nth-of-type(1) {
     float: left;
-    padding: 10px 0 10px 12.5px;
+    padding: 6px 0 6px 12.5px;
   }
   /* Positioning "Jovan Yoshioka" Text Container */
-  nav ul#logoContainer li:nth-of-type(2) { padding: 2.5px 0 0 0; }
+  nav ul#logoContainer li:nth-of-type(2) { padding: 0; }
   /* Styling "Jovan Yoshioka" Text */
   nav ul#logoContainer li:nth-of-type(2) h1 {
-    font-size: 1.65em;
+    font-size: 1.6em;
     font-family: Sarina;
     text-align: left;
     color: #CCCCCC;
@@ -191,59 +191,103 @@ nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
   /* Sizing/Positioning Collapse Button */
   nav ul#logoContainer li:nth-of-type(3) {
     float: right;
-    font-size: 1.5em;
-    padding: 15px 12.5px 0 0;
+    font-size: 1.25em;
+    padding: 12.5px 12.5px 0 0;
   }
-  /* Prevents Center Text From Moving When Icon Changes From Bars to Times */
-  nav ul#logoContainer li:nth-of-type(3) a { width: 1.25em; }
+  nav ul#logoContainer li:nth-of-type(3) a {
+    /* Prevents Center Text From Moving When Icon Changes From Bars to Times */
+    width: 1.25em;
+    /* Prevents Hover Effect for Collapse Button */
+    background-color: initial;
+  }
   
   /* Animation: Collapse/Retract Navigation Bar Links */
   @keyframes collapseNav {
-    0% { height: 80px; }
-    100% { height: 550px; }
+    0% { height: 70px; }
+    100% { height: 538px; }
   }
   @keyframes retractNav {
-    0% { height: 550px; }
-    100% { height: 80px; }
+    0% { height: 538px; }
+    100% { height: 70px; }
   }
 }
 
 /*** Footer ***/
 /* Footer Container */
 footer {
-  padding: 1.5vw 0 1vw 0;
+  padding: 25px 0 17.5px 0;
   text-align: center;
   background-color: #4E4E4E;
 }
 /* Footer Horizontal Line to Divide Icons and Copyright Statement */
 footer div {
-  width: 33%;
-  border-top: 0.1vw solid #CCCCCC;
-  margin: 1.25vw auto 0.75vw auto;
+  width: 600px;
+  border-top: 1.5px solid #CCCCCC;
+  margin: 25px auto 15px auto;
 }
 /* Styling for Copyright Statement Text */
 footer small {
-  font-size: 0.75vw;
+  font-size: 1em;
   font-family: SuezOne;
   display: block;
   color: #CCCCCC;
 }
 /* Styling for Copyright Symbol */
 footer small span#copyrightSymbol {
-  font-size: 1.25vw;
+  font-size: 1.5em;
   vertical-align: middle;
+}
+/* Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Decrease Top and Bottom Space of Footer */
+  footer { padding: 17.5px 0 12.5px 0; }
+  /* Adjust Horizontal Line */
+  footer div {
+    /* Decrease Horizontal Line Width to Not Overshot Length of Icons */
+    width: 475px;
+    /* Decrease Space Between Line and Icons/Copyright Statement Text */
+    margin: 17.5px auto 10px auto;
+  }
+  /* Reduce Size of Copyright Statement Text */
+  footer small { font-size: 0.8em; }
+  /* Adjust Social Media Icons */
+  footer a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 60px;
+    height: 42.5px;
+    font-size: 2em;
+    padding: 12.5px 0 0 0;
+    /* Decrease Space Between Social Media Icons */
+    margin: 0 7.5px 0 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Increase Top and Bottom Space of Footer */
+  footer { padding: 15px 0 10px 0; }
+  /* Adjust Horizontal Line */
+  footer div {
+    /* Decrease Horizontal Line Width to Not Overshot Length of Icons */
+    width: 375px;
+    /* Decrease Space Between Line and Icons/Copyright Statement Text */
+    margin: 15px auto 7.5px auto;
+  }
+  /* Decrease Space Between Social Media Icons */
+  footer a.socialMediaIcon { margin: 0 5px 0 0; }
 }
 
 /*** Social Media Icons ***/
 /* Social Media Icon Element */
 a.socialMediaIcon {
-  padding: 0.85vw 1vw 0.85vw 1vw;
-  font-size: 2vw;
+  width: 75px;
+  height: 55px;
+  font-size: 2.5em;
+  margin: 0 10px 0 0;
+  padding: 15px 0 0 0;
   text-decoration: none;
+  text-align: center;
   color: #CCCCCC;
   transition: 0.25s;
-  margin: 0 0.5vw 0 0;
-  border-radius: 0.5vw;
+  border-radius: 10%;
 }
 /* Specific Coloring for Different Social Media Icons */
 a.fa-linkedin-in { background-color: #007bb5; }
@@ -252,10 +296,7 @@ a.fa-github {
   color: #211F1F;
 }
 a.fa-twitter { background-color: #55ACEE; }
-a.fa-facebook-f {
-  background-color: #3B5998;
-  padding: 0.85vw 1.375vw 0.85vw 1.375vw;
-}
+a.fa-facebook-f { background-color: #3B5998; }
 a.fa-envelope { background-color: #D44638; }
 
 /* Hovering Effect: Change Icon Color to Lighter Color (Highlight) */
@@ -1122,6 +1163,16 @@ body#contact main div {
 /* Positioning of Social Media Header */
 body#contact main div h2 {
   margin: -1vw 0 -1vw 0;
+}
+/* Temporary Styling for Social Media Icons While Optimizing for Mobile */
+body#contact main div a.socialMediaIcon {
+  width: auto;
+  height: auto;
+  font-size: 2vw;
+  margin: 0 0.5vw 0 0;
+  padding: 0.85vw 1vw 0.85vw 1vw;
+  text-align: left;
+  border-radius: 0.5vw;
 }
 /* Specific Positioning for First Social Media Icons in Each Row */
 body#contact main div a.fa-linkedin-in,
