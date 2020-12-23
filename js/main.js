@@ -18,8 +18,9 @@ const PARTICLES_WAVE_DELAY                = 250;
 const PARTICLES_COLLISION_JUMP            = 10;
 const PARTICLES_COUNT_SCALE_FACTOR        = 9000;
 const PARTICLES_COUNT_MAX                 = 175;
-const PARTICLES_MIN_SIZE                  = 1;
+const PARTICLES_MIN_SIZE                  = 2;
 const PARTICLES_MAX_SIZE                  = 5;
+const PARTICLES_SIZE_SCALE_FACTOR         = 0.01;
 const PARTICLES_COLOR                     = "#CCCCCC";
 const PARTICLES_RADIUS_SCALE_FACTOR       = 6;
 const PARTICLES_MIN_SPEED_FACTOR          = 85;
@@ -330,8 +331,11 @@ function generateProperty(property, explode, particleSize)
     switch (property)
     {
       case "size":
-        // Return random size between min and max size constants' values.
-        return (Math.random() * PARTICLES_MAX_SIZE) + PARTICLES_MIN_SIZE;
+        // Return random size between min and max size constants' values based on canvas width.
+        var scaledSize = canvasObject.canvas.width * PARTICLES_SIZE_SCALE_FACTOR;
+        if (scaledSize > PARTICLES_MAX_SIZE) { return (Math.random() * PARTICLES_MAX_SIZE) + PARTICLES_MIN_SIZE; }
+        else if (scaledSize < PARTICLES_MIN_SIZE) { return (Math.random() * PARTICLES_MIN_SIZE) + scaledSize; }
+        else { return (Math.random() * scaledSize) + PARTICLES_MIN_SIZE; }
       case "position":
         // Position particles in center of screen.
         return {x: canvasObject.canvas.width/2, y: canvasObject.canvas.height/2};
@@ -373,8 +377,11 @@ function generateProperty(property, explode, particleSize)
     switch (property)
     {
       case "size":
-        // Return random size between min and max size constants' values.
-        return (Math.random() * PARTICLES_MAX_SIZE) + PARTICLES_MIN_SIZE;
+        // Return random size between min and max size constants' values based on canvas width.
+        var scaledSize = canvasObject.canvas.width * PARTICLES_SIZE_SCALE_FACTOR;
+        if (scaledSize > PARTICLES_MAX_SIZE) { return (Math.random() * PARTICLES_MAX_SIZE) + PARTICLES_MIN_SIZE; }
+        else if (scaledSize < PARTICLES_MIN_SIZE) { return (Math.random() * PARTICLES_MIN_SIZE) + scaledSize; }
+        else { return (Math.random() * scaledSize) + PARTICLES_MIN_SIZE; }
       case "position":
         // Create position buffer so that particles do not get stuck outside of canvas boundary.
         var posBuffer = particleSize * 2;

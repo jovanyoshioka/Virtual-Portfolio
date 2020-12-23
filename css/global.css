@@ -18,7 +18,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 h1, h2, h3, h4, p, figure, ul {
   margin: 0;
@@ -238,7 +238,7 @@ footer small span#copyrightSymbol {
   vertical-align: middle;
 }
 /* Media Queries */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
   /* Decrease Top and Bottom Space of Footer */
   footer { padding: 17.5px 0 12.5px 0; }
   /* Adjust Horizontal Line */
@@ -255,8 +255,8 @@ footer small span#copyrightSymbol {
     /* Reduce Size of Social Media Icons */
     width: 60px;
     height: 42.5px;
-    font-size: 2em;
     padding: 12.5px 0 0 0;
+    font-size: 2em;
     /* Decrease Space Between Social Media Icons */
     margin: 0 7.5px 0 0;
   }
@@ -266,13 +266,23 @@ footer small span#copyrightSymbol {
   footer { padding: 15px 0 10px 0; }
   /* Adjust Horizontal Line */
   footer div {
-    /* Decrease Horizontal Line Width to Not Overshot Length of Icons */
-    width: 375px;
+    /* Change Width to Scale with Screen to Fit Small/Large Spectrums of Media Query */
+    width: 85%;
     /* Decrease Space Between Line and Icons/Copyright Statement Text */
     margin: 15px auto 7.5px auto;
   }
-  /* Decrease Space Between Social Media Icons */
-  footer a.socialMediaIcon { margin: 0 5px 0 0; }
+  /* Reduce Size of Copyright Statement Text */
+  footer small { font-size: 0.8em; }
+  /* Adjust Social Media Icons */
+  footer a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 50px;
+    height: 37px;
+    padding: 10.5px 0 0 0;
+    font-size: 1.75em;
+    /* Decrease Space Between Social Media Icons */
+    margin: 0 5px 0 0;
+  }
 }
 
 /*** Social Media Icons ***/
@@ -280,9 +290,9 @@ footer small span#copyrightSymbol {
 a.socialMediaIcon {
   width: 75px;
   height: 55px;
+  padding: 15px 0 0 0;
   font-size: 2.5em;
   margin: 0 10px 0 0;
-  padding: 15px 0 0 0;
   text-decoration: none;
   text-align: center;
   color: #CCCCCC;
@@ -355,19 +365,18 @@ a.fa-github:hover { background-color: #EEEEEE; }
 /*** Diagonal Slide Button ***/
 /* Button Container */
 div.diagonalBtn {
-  width: 15.65vw;
+  /* Note: Width & Font-Size Set Specific to Content */
   height: auto;
-  font-size: 2.5vw;
   position: relative;
   overflow: hidden;
-  border: 0.25vw solid #CCCCCC;
+  border: 4px solid #CCCCCC;
   transition: border-color 0.75s;
-  border-radius: 0.5vw;
+  border-radius: 10px;
 }
 /* Clickable Button */
 div.diagonalBtn a.diagonalBtn {
   background-color: #0C54A5;
-  padding: 1vw;
+  padding: 19px;
   text-decoration: none;
 }
 /* Button Text */
@@ -398,6 +407,48 @@ div.diagonalBtn:hover {
 div.diagonalBtn:hover a.diagonalBtn span { color: #EEEEEE; }
 /* Hovering Effect: Slide Diagonal Element Into View */
 div.diagonalBtn:hover a.diagonalBtn::before { transform: skewX(-45deg) translateX(-10%); }
+/* Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Decrease Size of Button */
+  div.diagonalBtn {
+    /* Note: Width & Font-Size Set Specific to Content */
+    border-width: 3px;
+    border-radius: 7.5px;
+  }
+  div.diagonalBtn a.diagonalBtn { padding: 12.5px; }
+}
+@media only screen and (max-width: 768px) {
+  /* Decrease Size of Button */
+  div.diagonalBtn {
+    /* Note: Width & Font-Size Set Specific to Content */
+    border-width: 2px;
+    border-radius: 5px;
+  }
+  div.diagonalBtn a.diagonalBtn { padding: 9px; }
+}
+
+/*** Learn More Diagonal Button ***/
+/* Styling "Learn more" Diagonal Button */
+div.diagonalBtn.learnMore {
+  /* Specifying Width & Font-Size of Button Based on Contents ("Learn more") */
+  width: 300px;
+  font-size: 3em;
+}
+/* Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Decrease Size of "Learn more" Button */
+  div.diagonalBtn.learnMore {
+    width: 200px;
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Decrease Size of "Learn more" Button */
+  div.diagonalBtn.learnMore {
+    width: 170.8px;
+    font-size: 1.75em;
+  }
+}
 
 /*** Slideshow ***/
 /* Slideshow Images */
@@ -526,7 +577,7 @@ body#index h1 {
   margin-top: 30vh;
   color: #CCCCCC;
   /* Only show message if not redirected immediately. */
-  /* This removes unpleasant flash of text when redirect is immediate. */
+  /* This removes unpleasant flash of text when redirect is near immediate. */
   opacity: 0.0;
   animation: 0.5s fadeIn 1s linear forwards;
 }
@@ -548,7 +599,7 @@ body#landing canvas#particlesCanvas,
 body#landing svg,
 body#landing div.blackBackground {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -560,9 +611,9 @@ body#landing div.radialGradient {
   opacity: 0.0;
 }
 
-/* Minimizes JY Logo to Make Room for Redirect Button */
+/* Minimizes JY Logo to Make Room for "My Portfolio" ie Redirect Button */
 @keyframes minimizeLogo {
-  to { height: 88vh }
+  to { height: 85% }
 }
 /* Styling JY Logo */
 body#landing svg {
@@ -571,6 +622,8 @@ body#landing svg {
   stroke-width: 75;
   z-index: 2;
 }
+/* Transform SVG Paths to Fit Viewport */
+body#landing svg g { transform: translate(0px,800px) scale(0.1,-0.1); }
 /* Background Color of Logo - Must Use Another Path Because Other Will Fill Letter Holes */
 body#landing svg g path:nth-of-type(1) {
   fill: #1A1A1A;
@@ -593,13 +646,17 @@ body#landing svg g path:nth-of-type(4) {
   animation: drawSVG 0.5s linear 2s forwards;
 }
 
-/* Styling Redirect Button */
+/* Styling "My Portfolio" Diagonal Button */
 body#landing div.diagonalBtn {
-  width: 19.935vw;
-  font-size: 3vw;
+  /* Specifying Width & Font-Size of Button Based on Contents ("My Portfolio") */
+  width: 396.75px;
+  font-size: 3.75em;
   position: absolute;
-  bottom: 3.5vh;
-  left: 40.0325vw;
+  bottom: 3.5%;
+  /* Center Button */
+  left: 0;
+  right: 0;
+  margin: auto;
   opacity: 0.0;
   pointer-events: none;
   z-index: 3;
@@ -609,6 +666,30 @@ body#landing div.diagonalBtn {
 body#landing div.blackBackground {
   background-color: #000000;
   opacity: 0.0;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Adjust "My Portfolio" Diagonal Button */
+  body#landing div.diagonalBtn {
+    /* Decrease Size of Button */
+    width: 312.5px;
+    font-size: 3em;
+    /* Translate Button Closer to Logo Vertically */
+    bottom: 4.25%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Transform SVG Paths to Fit Viewport */
+  body#landing svg g { transform: translate(100px,725px) scale(0.08,-0.08); }
+  /* Adjust "My Portfolio" Diagonal Button */
+  body#landing div.diagonalBtn {
+    /* Decrease Size of Button */
+    width: 257.5px;
+    font-size: 2.5em;
+    /* Translate Button Closer to Logo Vertically */
+    bottom: 5%;
+  }
 }
 
 /********
@@ -654,6 +735,7 @@ body#home section#slideshowSection section#name {
   background-color: #1A1A1A;
   text-align: center;
 }
+/* Particles Animation Behind Name/Button */
 body#home canvas#particlesCanvas {
   width: 100%;
   height: 100%;
@@ -661,6 +743,7 @@ body#home canvas#particlesCanvas {
   top: 0;
   left: 0;
 }
+/* Hides Particles Travelling Behind Name/Button Container */
 body#home section#slideshowSection section#name div.canvasHider {
   width: 100%;
   height: 22vw;
@@ -678,8 +761,8 @@ body#home section#slideshowSection section#name h1 {
 }
 body#home section#slideshowSection section#name h1#firstName { margin-top: 30vh; }
 body#home section#slideshowSection section#name h1#lastName { margin-bottom: 3vh; }
-/* Centering Learn More Diagonal Button */
-body#home section#slideshowSection section#name div { margin: 0 auto; }
+/* Positioning "Learn more" Diagonal Button */
+body#home section#slideshowSection section#name div.diagonalBtn { margin: 0 auto; }
 
 /*** Latest Activity (Bottom) Section ***/
 /* Container for Latest Activity of Jovan */
@@ -789,6 +872,7 @@ body#home section#latestActivitySection svg path:nth-of-type(8) {
 /*********
  * ABOUT *
  *********/
+/*** Biography Section ***/
 /* Container for Profile Picture and About Me Information Section */
 body#about section#biographySection {
   width: 100%;
@@ -853,16 +937,34 @@ body#about section#biographySection article h2 {
 }
 body#about section#biographySection article p { font-size: 1.5vw; }
 
+/*** Resume Section ***/
 /* Container for Resume Header and Download Button */
 body#about section#resumeSection {
   padding: 2vw 0 3vw 0;
 }
-/* Specific Button Styling for Resume Download Button */
-body#about section#resumeSection div#resumeBtn {
-  width: 24.45vw;
-  font-size: 3.5vw;
+/* Styling Resume Download Diagonal Button */
+body#about section#resumeSection div.diagonalBtn {
+  /* Specifying Width & Font-Size of Button Based on Contents ("View Resume") */
+  width: 468.75px;
+  font-size: 4.2em;
+}
+/* Resume Section Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Decrease Size of "View Resume" Button */
+  body#about section#resumeSection div.diagonalBtn {
+    width: 332.75px;
+    font-size: 3em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Decrease Size of "View Resume" Button */
+  body#about section#resumeSection div.diagonalBtn {
+    width: 248.75px;
+    font-size: 2.25em;
+  }
 }
 
+/*** Sections' General Styling ***/
 /* General Styling for Section Header Containers */
 body#about header {
   width: 100%;
@@ -913,6 +1015,7 @@ body#about section.infoSection section h1.title {
   transition: transform 0.5s;
 }
 
+/*** Education Section ***/
 /* Styling Background Color in Case Background Image Does Not Load */
 body#about section#educationSection { background-color: #1A1A1A;}
 /* Specific Positioning for "Hardin Valley Academy" Title */
@@ -980,6 +1083,7 @@ body#about section#educationSection section article.info p a {
 }
 body#about section#educationSection section article.info p a:hover { color: #EEEEEE; }
 
+/*** Spotlights Section ***/
 /* Styling Background Color in Case Background Image Does Not Load */
 body#about section#spotlightsSection { background-color: #1A1A1A; }
 /* Specific Positioning for HVA Student Spotlight Title */
@@ -997,12 +1101,16 @@ body#about section#spotlightsSection section.ornl h1.title {
 /* :target For Touchscreens That Can Not Hover. */
 body#about section#spotlightsSection section:hover h1.title,
 body#about section#spotlightsSection section:target h1.title { transform: translateY(-50%); }
-/* Specific Styling for "View Spotlight" Button */
+/* Styling "View Spotlight" Diagonal Button */
 body#about section#spotlightsSection section div.diagonalBtn {
-  width: 23.45vw;
-  font-size: 3vw;
+  /* Specifying Width & Font-Size of Button Based on Contents ("View Spotlight") */
+  width: 421px;
+  font-size: 3.35em;
   position: absolute;
-  left: 25.5%;
+  /* Center Button */
+  left: 0;
+  right: 0;
+  margin: auto;
   bottom: 20%;
   opacity: 0;
   transition: border-color 0.75s, opacity 0.5s;
@@ -1011,7 +1119,23 @@ body#about section#spotlightsSection section div.diagonalBtn {
 /* :target For Touchscreens That Can Not Hover. */
 body#about section#spotlightsSection section:hover div.diagonalBtn,
 body#about section#spotlightsSection section:target div.diagonalBtn { opacity: 1.0; }
+/* Spotlights Section Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Decrease Size of "View Spotlight" Button */
+  body#about section#spotlightsSection section div.diagonalBtn {
+    width: 339.25px;
+    font-size: 2.75em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Decrease Size of "View Spotlight" Button */
+  body#about section#spotlightsSection section div.diagonalBtn {
+    width: 247px;
+    font-size: 2em;
+  }
+}
 
+/*** Skills Section ***/
 /* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
 body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
 /* Container for Skills Section */
@@ -1258,10 +1382,9 @@ body.content section.slideshow div.infoContainer h2#slideshowSubtitle { margin: 
 body.content section.slideshow div.infoContainer h2#slideshowTime { margin: 0 0 5% 0; }
 /* Styling for Slide Learn More Button */
 body.content section.slideshow div.infoContainer div#slideshowBtn {
-  width: 18.35vw;
-  font-size: 3vw;
   margin: 0 auto;
   /* Hide for Initial Page Load: Shown by JavaScript */
+  /* Removes Flash of Empty Slideshow Contents */
   visibility: hidden;
 }
 /* Styling for Slideshow Selectors */
