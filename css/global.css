@@ -30,7 +30,6 @@ h1, h2, h3, h4, p, figure, ul {
 /*** Navigation Bar ***/
 /* Navigation Bar Container */
 nav {
-  /* background-color: red; */
   width: 100%;
   position: fixed;
   top: 0;
@@ -112,12 +111,17 @@ nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
 }
 @media only screen and (max-width: 768px)
 {
+  /* Height Variables for Nav Collapse/Retract and Spacer */
+  :root {
+    --navRetractedHeight: 70px;
+    --navCollapsedHeight: 538px;
+  }
   /* Make Navigation Bar Collapsible */
   nav {
     /* Grid Display Allows for Use of "order" Attribute */
     display: grid;
     padding: 0;
-    height: 70px;
+    height: var(--navRetractedHeight);
     overflow: hidden;
   }
   /* General Styling for Navigation Links */
@@ -203,12 +207,18 @@ nav ul#logoContainer li:not(:nth-of-type(1)) { display: none; }
   
   /* Animation: Collapse/Retract Navigation Bar Links */
   @keyframes collapseNav {
-    0% { height: 70px; }
-    100% { height: 538px; }
+    0% { height: var(--navRetractedHeight); }
+    100% { height: var(--navCollapsedHeight); }
   }
   @keyframes retractNav {
-    0% { height: 538px; }
-    100% { height: 70px; }
+    0% { height: var(--navCollapsedHeight); }
+    100% { height: var(--navRetractedHeight); }
+  }
+
+  /* Spacer to Prevent Content From Being Behind Navigation Bar (due to "position:fixed") */
+  div.navSpacer {
+    width: 100%;
+    height: var(--navRetractedHeight);
   }
 }
 
@@ -476,7 +486,7 @@ section.slideshow div.selectorsContainer button.slideshowSelectors {
   background-color: #888888;
   transition: background-color 1s;
   border: none;
-  border-radius: 0.25vw;
+  border-radius: 5px;
 }
 /* Hovering Effect: Change Background Color to in Between Not Selected and Selected Colors */
 section.slideshow div.selectorsContainer button.slideshowSelectors:hover {
@@ -506,7 +516,7 @@ section.infoBanner {
   width: 100%;
   height: auto;
   background-color: #0C54A5;
-  padding: 1vw 0 2vw 0;
+  padding: 25px 0 35px 0;
 }
 /* Creates Padding for Info Text */
 section.infoBanner article {
@@ -518,18 +528,19 @@ section.infoBanner article {
 }
 /* Styling for Title */
 section.infoBanner article h1 {
-  font-size: 4vw;
-  padding: 0 0 0.65vw 0;
+  font-size: 4.5em;
+  padding: 0 0 10px 0;
 }
 /* Styling for Secondary Title/Closing */
 section.infoBanner article h2 {
-  font-size: 2.5vw;
-  padding: 0.65vw 0 0 0;
+  font-size: 3em;
+  padding: 10px 0 0 0;
 }
 /* Styling for Body Text */
+/* Note: Wrapped in "div" for SlideUpFadeIn Animation */
 section.infoBanner article div p {
-  font-size: 2vw;
-  padding: 0 0 0.5vw 0;
+  font-size: 2.175em;
+  padding: 0 0 7.5px 0;
 }
 /* Styling for Links Within Body Text */
 section.infoBanner article div p a {
@@ -540,9 +551,66 @@ section.infoBanner article div p a {
 section.infoBanner article div p a:hover {
   color: #EEEEEE;
 }
-
 /* Styling for Button  */
 section.infoBanner div.diagonalBtn { margin: 0 auto; }
+/* Media Queries */
+@media only screen and (max-width: 1632px) and (min-width: 1201px) {
+  /* Decrease Top/Bottom Padding of Text */
+  section.infoBanner { padding: 20px 0 27.5px 0; }
+  /* Decrease "Left/Right Padding" of Text */
+  section.infoBanner article { width: 85%; }
+  /* Resize/Position Text */
+  section.infoBanner article h1 {
+    font-size: 3.5em;
+    padding: 0 0 7.5px 0;
+  }
+  section.infoBanner article h2 {
+    font-size: 2.5em;
+    padding: 7.5px 0 0 0;
+  }
+  section.infoBanner article div p {
+    font-size: 1.85em;
+    padding: 0 0 5px 0;
+  }
+}
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Decrease Top/Bottom Padding of Text */
+  section.infoBanner { padding: 15px 0 20px 0; }
+  /* Decrease "Left/Right Padding" of Text */
+  section.infoBanner article { width: 90%; }
+  /* Resize/Position Text */
+  section.infoBanner article h1 {
+    font-size: 2.35em;
+    padding: 0 0 5px 0;
+  }
+  section.infoBanner article h2 {
+    font-size: 2em;
+    padding: 5px 0 0 0;
+  }
+  section.infoBanner article div p {
+    font-size: 1.5em;
+    padding: 0 0 2.5px 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Decrease Top/Bottom Padding of Text */
+  section.infoBanner { padding: 10px 0 15px 0; }
+  /* Decrease "Left/Right Padding" of Text */
+  section.infoBanner article { width: 95%; }
+  /* Resize/Position Text */
+  section.infoBanner article h1 {
+    font-size: 1.75em;
+    padding: 0 0 2.5px 0;
+  }
+  section.infoBanner article h2 {
+    font-size: 1.5em;
+    padding: 2.5px 0 0 0;
+  }
+  section.infoBanner article div p {
+    font-size: 1.2em;
+    padding: 0 0 2.5px 0;
+  }
+}
 
 /*** Bouncing Arrow ***/
 /* Bouncing Animation */
@@ -552,7 +620,7 @@ section.infoBanner div.diagonalBtn { margin: 0 auto; }
 }
 /* Arrow */
 button#bouncingArrow {
-  font-size: 3vw;
+  font-size: 3.75em;
   position: absolute;
   bottom: 0;
   left: 48%;
@@ -565,6 +633,11 @@ button#bouncingArrow {
 }
 button#bouncingArrow:hover { cursor: pointer; }
 button#bouncingArrow:focus { outline: none; }
+/* Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Resize Arrow Icon */
+  button#bouncingArrow { font-size: 2.75em; }
+}
 
 /*********
  * INDEX *
@@ -746,15 +819,15 @@ body#home canvas#particlesCanvas {
 /* Hides Particles Travelling Behind Name/Button Container */
 body#home section#slideshowSection section#name div.canvasHider {
   width: 100%;
-  height: 22vw;
+  height: 350px;
   position: absolute;
-  top: 29vh;
+  top: 31vh;
   left: 0;
   background-color: #1A1A1A;
 }
 /* Text Elements for Name */
 body#home section#slideshowSection section#name h1 {
-  font-size: 5vw;
+  font-size: 6em;
   color: #EEEEEE;
   font-family: Sarina;
   position: relative;
@@ -763,11 +836,66 @@ body#home section#slideshowSection section#name h1#firstName { margin-top: 30vh;
 body#home section#slideshowSection section#name h1#lastName { margin-bottom: 3vh; }
 /* Positioning "Learn more" Diagonal Button */
 body#home section#slideshowSection section#name div.diagonalBtn { margin: 0 auto; }
+/* Slideshow (Top) Section Media Queries */
+@media only screen and (max-width: 1632px) and (min-width: 1201px) {
+  /* Resize First/Last Name Text */
+  body#home section#slideshowSection section#name h1 { font-size: 4.25em; }
+  /* Resize Canvas Hider to Match Size of Text/Button */
+  body#home section#slideshowSection section#name div.canvasHider { height: 275px; }
+}
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Resize First/Last Name Text */
+  body#home section#slideshowSection section#name h1 { font-size: 2.75em; }
+  /* Resize Canvas Hider to Match Size of Text/Button */
+  body#home section#slideshowSection section#name div.canvasHider { height: 185px; }
+}
+@media only screen and (max-width: 768px) {
+  /* Change Section Height to Slideshow Images' Heights */
+  body#home section#slideshowSection { height: auto; }
+  /* Change Slideshow to Span Width of Screen and Images' Heights */
+  /* Note: Because Slideshow Images Are "position:absolute," Must Define Height of Parent; This is Done With JavaScript */
+  body#home section#slideshowSection section.slideshow { width: 100%; }
+  /* Allow Images to Size Themselves Based on Image Dimensions and Device Width */
+  body#home section#slideshowSection section.slideshow img.slideshowImages {
+    /* Use Portion of Images That Is Normally Shown on Desktop Version */
+    width: 140%;
+    height: auto;
+  }
+  /* Change Fading Gradient to be Vertical */
+  body#home section#slideshowSection section.slideshow div#fadingGradient {
+    background-image: linear-gradient(rgba(26,26,26,1.0),rgba(26,26,26,0.5) 25%,rgba(26,26,26,0.5) 75%,rgba(26,26,26,1.0));
+  }
+  /* Reduce Size/Spacing of Slideshow Selectors */
+  body#home section#slideshowSection section.slideshow div.selectorsContainer button.slideshowSelectors {
+    width: 40px;
+    margin-right: 7.5px;
+  }
+  /* Position First/Last Name Text & "Learn More" Button Container Within Slideshow Images */
+  body#home section#slideshowSection section#name {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 22.5%;
+    background-color: transparent;
+  }
+  /* Resize First/Last Name Text */
+  body#home section#slideshowSection section#name h1 { font-size: 4em; }
+  /* Remove Margin, Taken Care of by Container's "top" Value */
+  body#home section#slideshowSection section#name h1#firstName { margin-top: 0; }
+  /* Do Not Use Particles Animation nor Bouncing Arrow for Mobile Version */
+  body#home canvas#particlesCanvas,
+  body#home section#slideshowSection section#name div.canvasHider,
+  body#home section#slideshowSection button#bouncingArrow { display: none; }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize First/Last Name Text */
+  body#home section#slideshowSection section#name h1 { font-size: 2.5em; }
+}
 
 /*** Latest Activity (Bottom) Section ***/
 /* Container for Latest Activity of Jovan */
 body#home section#latestActivitySection {
-  height: 90vh;
+  height: auto;
   width: 100%;
   background-image: linear-gradient(-70deg, #2A2A2A 25%, #1A1A1A 55%);
 }
@@ -775,13 +903,12 @@ body#home section#latestActivitySection {
 body#home section#latestActivitySection section#text {
   width: 49%;
   height: 100%;
-  display: inline-block;
   float: left;
 }
 /* Container for Latest Activity Header Shapes and Text */
 body#home section#latestActivitySection section#text header {
   width: 100%;
-  height: 9vw;
+  height: 175px;
   margin: 5% 0 0 0;
   position: relative;
 }
@@ -800,33 +927,35 @@ body#home section#latestActivitySection section#text header div#headerOuterShape
 }
 body#home section#latestActivitySection section#text header div#headerInnerShape {
   width: 97%;
-  height: 82%;
+  height: 150px;
   background-color: #0C54A5;
   clip-path: polygon(0% 0%, 100% 0%, 88.5% 100%, 0% 100%);
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 88.5% 100%, 0% 100%);
-  margin: 1.75% 0 0 0;
+  margin: 12.5px 0 0 0;
 }
 /* Latest Activity Header Text */
 body#home section#latestActivitySection section#text header div#headerInnerShape h1#headerText {
   font-family: SuezOne;
-  font-size: 3vw;
+  font-size: 4em;
   color: #CCCCCC;
   text-align: center;
-  margin: 4% 5% 0 0;
+  margin: 30px 5% 0 0;
 }
+/* Mobile SVG Container for Latest Activity Picture */
+body#home section#latestActivitySection section#text svg { display: none; }
 /* Latest Activity Info Container */
 body#home section#latestActivitySection section#text article {
   width: 90%;
-  margin: 7.5% 0 0 5%;
+  margin: 7.5% 0 5% 5%;
   font-family: SuezOne;
   color: #CCCCCC;
 }
 /* Latest Activity Info Text */
 body#home section#latestActivitySection section#text article h1#latestActivityTitle {
-  font-size: 4vw;
+  font-size: 4.75em;
   margin: -6.5% 0 0 0;
 }
-body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 2vw; }
+body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 2.4em; }
 /* Latest Activity Learn More Button */
 body#home section#latestActivitySection section#text article div#latestActivityBtn { margin: 2% 0 0 0; }
 
@@ -836,7 +965,6 @@ body#home section#latestActivitySection svg {
   height: 100%;
   float: right;
   margin: 0 1% 0 0;
-  display: inline-block;
 }
 /* Hovering Effect: Highlight Latest Activity Picture */
 body#home section#latestActivitySection svg:hover path { stroke: #EEEEEE; }
@@ -867,6 +995,89 @@ body#home section#latestActivitySection svg path:nth-of-type(7) {
 body#home section#latestActivitySection svg path:nth-of-type(8) {
   stroke-dasharray: 335;
   stroke-dashoffset: 335;
+}
+/* Media Queries */
+@media only screen and (max-width: 1632px) and (min-width: 1201px) {
+  /* Resize Title/Body Text */
+  body#home section#latestActivitySection section#text article h1#latestActivityTitle { font-size: 3.5em; }
+  body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 1.75em; }
+}
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Resize Header Shapes */
+  body#home section#latestActivitySection section#text header { height: 125px; }
+  body#home section#latestActivitySection section#text header div#headerInnerShape {
+    height: 100px;
+    clip-path: polygon(0% 0%, 99% 0%, 88.5% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 0%, 99% 0%, 88.5% 100%, 0% 100%);
+  }
+  /* Resize/Position Header Text to Fit New Size of Header Shapes */
+  body#home section#latestActivitySection section#text header div#headerInnerShape h1#headerText {
+    font-size: 2.75em;
+    margin: 18.5px 5% 0 0;
+  }
+  /* Resize Title/Body Text */
+  body#home section#latestActivitySection section#text article h1#latestActivityTitle { font-size: 2.5em; }
+  body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 1.35em; }
+}
+@media only screen and (max-width: 768px) {
+  /* Change Background Gradient to Vertical for Mobile Vertical Layout */
+  body#home section#latestActivitySection { background-image: linear-gradient(#1A1A1A, #2A2A2A 50%, #1A1A1A); }
+  /* Change Latest Activity Content to Fill Width of Screen for Vertical Layout (i.e. One Element Per "Row") */
+  body#home section#latestActivitySection section#text { width: 98%; }
+  /* Resize/Position Header Shapes */
+  body#home section#latestActivitySection section#text header {
+    height: 100px;
+    margin: 4% 0 0 0;
+  }
+  body#home section#latestActivitySection section#text header div#headerOuterShape {
+    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+  }
+  body#home section#latestActivitySection section#text header div#headerInnerShape {
+    height: 85px;
+    clip-path: polygon(0% 0%, 100% 0%, 91.5% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 91.5% 100%, 0% 100%);
+    margin: 8px 0 0 0;
+  }
+  /* Resize/Position Header Text to Fit New Size of Header Shapes */
+  body#home section#latestActivitySection section#text header div#headerInnerShape h1#headerText {
+    font-size: 2.25em;
+    margin: 17.5px 5% 0 0;
+  }
+  /* Position Title/Body Text Container to Remove Margin Top/Reduce Margin Bottom for Vertical Layout */
+  body#home section#latestActivitySection section#text article { margin: 0 0 4% 5%; }
+  /* Resize/Position Title/Body Text */
+  body#home section#latestActivitySection section#text article h1#latestActivityTitle {
+    font-size: 1.75em;
+    margin: 0;
+  }
+  body#home section#latestActivitySection section#text article p#latestActivityBody { font-size: 1.2em; }
+  /* Hide Desktop Version SVG Picture (i.e. Horizontal Version) */
+  /* Note: This is Necessary for the Desired Vertical Design Because This SVG Element is Outside of Text Container */
+  body#home section#latestActivitySection svg { display: none; }
+  /* Mobile Version SVG Picture (i.e. Vertical Version) */
+  /* Note: This Allows for the SVG Picture to be Below the Header and Above the Title/Body Text */
+  body#home section#latestActivitySection section#text svg {
+    width: 95%;
+    margin: 0 1.5% 0 0;
+    /* Show SVG Element, by Default "display:none" Because Generic "svg" is "display:none" as Defined Above */
+    display: block;
+  }
+  /* Translate SVG Picture to Remove Top/Bottom Space */
+  body#home section#latestActivitySection section#text svg g { transform: translate(0px,-100px); }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize/Position Header Shapes */
+  body#home section#latestActivitySection section#text header { height: 75px; }
+  body#home section#latestActivitySection section#text header div#headerInnerShape {
+    height: 60px;
+    margin: 7.5px 0 0 0;
+  }
+  /* Resize/Position Header Text to Fit New Size of Header Shapes */
+  body#home section#latestActivitySection section#text header div#headerInnerShape h1#headerText {
+    font-size: 1.75em;
+    margin: 10px 5% 0 0;
+  }
 }
 
 /*********

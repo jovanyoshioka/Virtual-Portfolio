@@ -72,9 +72,11 @@ var canvasObject;
 
 // Get current mouse position and set mouse variable values.
 window.addEventListener('mousemove', function(event) {
-  if (canvasObject != null && canvasObject.currentWave >= 0)
+  if (canvasObject != null && canvasObject.currentWave >= 0 && canvasObject.canvas.offsetWidth != 0)
   {
     // Only allow mouse interaction if explosion animation is complete.
+    // Also, ensure canvas element is still shown (based on if canvasObject.canvas.offsetWidth != 0) in case page is 
+    // resized and canvas is only shown on desktop version and not mobile version.
 
     // Get mouse's position relative to canvas element.
     canvasObject.mouse.x = event.x - canvasObject.canvas.offsetParent.offsetLeft;
@@ -84,8 +86,11 @@ window.addEventListener('mousemove', function(event) {
 
 // Resizes canvas when window is resized.
 window.addEventListener('resize', function() {
-  if (canvasObject != null)
+  if (canvasObject != null && canvasObject.canvas.offsetWidth != 0)
   {
+    // Ensure canvas element is still shown (based on if canvasObject.canvas.offsetWidth != 0) in case page is 
+    // resized and canvas is only shown on desktop version and not mobile version.
+
     // Set canvas context width and height based on canvas element's size.
     canvasObject.ctx.canvas.width = canvasObject.canvas.offsetWidth;
     canvasObject.ctx.canvas.height = canvasObject.canvas.offsetHeight;
@@ -992,6 +997,12 @@ function includeNavBar()
       <li><a class="` + pages[5].status + `" href="awards.html">Awards</a></li>
     </ul>
   `;
+
+  // Create and append spacer after "nav" element.
+  // Prevents content from being behind mobile navigation bar (due to "position:fixed").
+  var spacerNode = document.createElement("DIV");
+  spacerNode.classList.add("navSpacer");
+  document.querySelector("nav").insertAdjacentElement("afterend", spacerNode);
 }
 /**
  * Includes Footer
@@ -1009,7 +1020,7 @@ function includeFooter()
     <!-- Horizontal line divider -->
     <div></div>
     <!-- Copyright statement -->
-    <small><span id="copyrightSymbol">&copy;</span> <span id="currentYear">2020</span> Jovan Yoshioka. All Rights Reserved.</small>
+    <small><span id="copyrightSymbol">&copy;</span> <span id="currentYear">2021</span> Jovan Yoshioka. All Rights Reserved.</small>
     <small>Created by Jovan Yoshioka</small>
   `;
 }
@@ -1382,6 +1393,22 @@ function initSlideshow()
   // First slide takes longer to switch on page load, so switch faster than normal.
   slideshowInitializing = true;
   slideshowIterator = setInterval(runSlideshow, SLIDESHOW_FIRST_INTERVAL);
+}
+/**
+ * Change Parent Height to Slideshow Images' Height for Mobile Sizing
+ * Note: Only Works if All Slideshow Images Are Same Dimensions
+ */
+function resizeSlideshow()
+{
+  // Resize based on images' height only for mobile, i.e. if equal/below MOBILE_BREAKPOINT.
+  if (window.innerWidth <= MOBILE_BREAKPOINT)
+  {
+    var slideshowImgHeight = document.querySelector("img.slideshowImages").offsetHeight;
+    document.querySelector(".slideshow").style.height = slideshowImgHeight + "px";
+  } else
+  {
+    document.querySelector(".slideshow").style.height = "100%";
+  }
 }
 
 /*******************
