@@ -19,37 +19,64 @@
     <!-- Navigation bar -->
     <nav></nav>
 
-    <!-- Background image behind main container -->
-    <div class="imgContainer">
-      <picture>
-        <source type="image/webp" srcset="../assets/contact/contact.webp">
-        <source type="image/jpeg" srcset="../assets/contact/contact.jpg">
-        <img src="../assets/contact/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
-      </picture>
-    </div>
-
-    <!-- Contact information container -->
+    <!-- Background image, shapes, and contact information container -->
     <main>
-      <!-- Header -->
-      <h1>Connect With Me</h1>
-      <!-- Email and phone information -->
-      <h2 class="email">Email<a href="mailto:jovanyoshioka@gmail.com">jovanyoshioka@gmail.com</a></h2>
-      <h2 class="phone">Phone<a href="tel:865-360-6034">(865) 360-6034</a></h2>
-      <!-- Social media container -->
-      <div>
+      <!-- Background image -->
+      <div class="imgContainer">
+        <picture>
+          <source type="image/webp" srcset="../assets/contact/contact.webp">
+          <source type="image/jpeg" srcset="../assets/contact/contact.jpg">
+          <img src="../assets/contact/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
+        </picture>
+      </div>
+      <!-- Tint on background image -->
+      <div class="tint"></div>
+      <!-- Background diagonal shapes -->
+      <div class="innerShape"></div>
+      <div class="outerShape"></div>
+      <!-- Header & contact information -->
+      <div class="textContainer">
         <!-- Header -->
-        <h2>Social Media</h2>
-        <!-- First row of social media icons and handles -->
-        <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="socialMediaIcon fab fa-linkedin-in"></a>
-        <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="handle">@jovanyoshioka</a>
-        <a href="https://www.github.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-github"></a>
-        <a href="https://www.github.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
-        <br>
-        <!-- Second row of social media icons and handles -->
-        <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-twitter"></a>
-        <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
-        <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="socialMediaIcon fab fa-facebook-f"></a>
-        <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="handle">@jovanyoshioka89</a>
+        <h1 class="slideRightFadeInPrep">Connect With Me</h1>
+        <!-- Contact information -->
+        <div class="infoContainer">
+          <!-- Wrapper/column for email/phone information -->
+          <div>
+            <!-- Email header/link -->
+            <h2>
+              <span>Email</span>
+              <a href="mailto:jovanyoshioka@gmail.com">jovanyoshioka@gmail.com</a>
+            </h2>
+            <!-- Phone header/link -->
+            <h2>
+              <span>Phone</span>
+              <a href="tel:865-360-6034">(865) 360-6034</a>
+            </h2>
+          </div>
+          <!-- Wrapper/column for social media information -->
+          <div>
+            <!-- Header -->
+            <h2><span>Social Media</span></h2>
+            <!-- Social media icons and handles-->
+            <!-- Note: Wrapped in <span> so each icon/handle is on its own row -->
+            <span>
+              <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="socialMediaIcon fab fa-linkedin-in"></a>
+              <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="handle">@jovanyoshioka</a>
+            </span>
+            <span>
+              <a href="https://www.github.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-github"></a>
+              <a href="https://www.github.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
+            </span>
+            <span>
+              <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-twitter"></a>
+              <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
+            </span>
+            <span>
+              <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="socialMediaIcon fab fa-facebook-f"></a>
+              <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="handle">@jovanyoshioka89</a>
+            </span>
+          </div>
+        </div>
       </div>
     </main>
 

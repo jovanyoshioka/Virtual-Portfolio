@@ -20,6 +20,7 @@ html, body {
   padding: 0;
   overflow-x: hidden;
 }
+body { background-color: #1A1A1A; }
 h1, h2, h3, h4, p, figure, ul {
   margin: 0;
   padding: 0;
@@ -1422,108 +1423,160 @@ body#about section#skillsSection section.tools table tr:nth-of-type(even) td.too
 /***********
  * CONTACT *
  ***********/
-/* Container for "Connect With Me" Header and Contact Information. */
+/* Container for Background Image, Shapes, and Contact Information */
 body#contact main {
   width: 100%;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Creates separation of colors and tinted background image on top half. */
-  background-image: linear-gradient(-15deg, #072F5C 0%, #0C54A5 57.5%, #CCCCCC 57.5%, #CCCCCC 58.5%, rgba(26,26,26,0.8) 58.5%);
+  /* 100vh Mobile Webkit Bug Fix */
+  max-height: -webkit-fill-available;
+  position: relative;
+  top: 0;
+  left: 0;
   font-family: SuezOne;
+  overflow: hidden;
 }
-/* Container for Background Image Behind Main Container. */
-body#contact div.imgContainer {
+/* Container for Background Image */
+body#contact main div.imgContainer {
   width: 100%;
   height: 65vh;
   background-color: #1A1A1A;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -3;
   overflow: hidden;
 }
-/* Background Image Behind Main Container Gradient. */
-body#contact div.imgContainer img {
+/* Background Image */
+body#contact main div.imgContainer img {
   min-width: 100%;
   height: 100%;
+  opacity: 0.0;
+  animation: 1s fadeIn 0.9s linear forwards;
 }
-/* General Styling for Contact Elements */
-body#contact main h1,
-body#contact main h2.email,
-body#contact main h2.phone,
-body#contact main div {
+/* Adjustments to Global Tint for Specific Background Image */
+body#contact main div.tint {
+  opacity: 0.75;
+  z-index: -2;
+}
+/* General Styling Diagonal Background Shapes */
+body#contact main div.innerShape,
+body#contact main div.outerShape {
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  left: -50%;
+  margin: 7.5% 0 0 0;
+  transform: translateY(50%) rotate(-15deg);
+}
+/* Inner (Blue) Background Shape */
+body#contact main div.innerShape {
+  top: 25%;
+  background-image: linear-gradient(#0C54A5,#072F5C 40%);
+  animation: 0.75s slideDiagonally 0.15s ease-out forwards;
+}
+/* Outer (White) Background Shape; Serves as Border That Can Be Animated Separately */
+body#contact main div.outerShape {
+  top: 22.5%;
+  background-color: #CCCCCC;
+  animation: 0.75s slideDiagonally ease-out forwards;
+  z-index: -1;
+}
+/* Animation: Slides Diagonal Background Shapes Into View */
+@keyframes slideDiagonally {
+  from { transform: translateY(50%) rotate(-15deg); }
+  to { transform: translateY(0) rotate(-15deg); }
+}
+/* Container for Text Elements (i.e. "Connect With Me" Header & Contact Information) */
+body#contact main div.textContainer {
+  width: 90%;
+  height: 80%;
+  position: absolute;
+  top: 17.5%;
+  left: 8%;
+  /* Diagonal to Position "Connect With Me" Header Relative to Background Shapes */
   transform: rotate(-15deg);
   color: #CCCCCC;
-  position: absolute;
 }
 /* "Connect With Me" Header */
-body#contact main h1 {
-  /* Manually set width to prevent text breaking on smaller devices. */
-  width: 62.5vw;
-  text-align: center;
+body#contact main div.textContainer h1 {
   font-size: 6.75vw;
-  margin: 0 32.5vw 27.5vh 0;
+  padding-left: 2.5%;
+  animation: slideHorizontalTranslate 1s ease-out 0.65s forwards,
+             fadeIn 0.75s linear 0.9s forwards;
+}
+/* Container for Contact Information Elements */
+body#contact main div.textContainer div.infoContainer {
+  width: 90%;
+  height: 82.5%;
+  display: grid;
+  /* Email/Phone on Left, Social Media on Right */
+  grid-template-columns: 40% 60%;
+  margin: 6% 0 0 5%;
+  /* Rotate to Horizontal Orientation */
+  transform: rotate(15deg);
+  opacity: 0.0;
+  animation: 1s fadeIn 0.9s linear forwards;
+}
+/* Wrapper for Each Column of Contact Information (Email/Phone on Left, Social Media on Right) */
+body#contact main div.textContainer div.infoContainer div {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
 }
 /* Contact Information Headers: "Email, Phone, Social Media" */
-body#contact main h2 { font-size: 4vw; }
-body#contact main h2.email {
-  width: 45vw;
-  margin: 10vw 35vw 0 0;
-}
-body#contact main h2.phone {
-  width: 30vw;
-  margin: 0 0 12.5vw 50vw;
-}
+body#contact main div.textContainer div.infoContainer div h2 { font-size: 4vw; }
+/* Underline Contact Information Headers */
+body#contact main div.textContainer div.infoContainer div h2 span { text-decoration: underline; }
 /* Styling for Email and Phone Links */
-body#contact main h2 a {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a {
   font-size: 3vw;
   display: block;
-  margin: -1vw 0 0 5vw;
+  margin: -1% 0 5% 0;
+  color: #CCCCCC;
   transition: color 0.25s;
   text-decoration: none;
-  color: #CCCCCC;
 }
 /* Hovering Effect: Brighten color of links */
-body#contact main h2 a:hover {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a:hover {
   color: #EEEEEE;
   cursor: pointer;
 }
 /* Container for Social Media Header and Handles */
-body#contact main div {
-  width: 55vw;
-  margin: 21vw 0 0 25vw;
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) {
+  margin: -8.5% auto 0 auto;
+  text-align: center;
 }
 /* Positioning of Social Media Header */
-body#contact main div h2 {
-  margin: -1vw 0 -1vw 0;
-}
-/* Temporary Styling for Social Media Icons While Optimizing for Mobile */
-body#contact main div a.socialMediaIcon {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) h2 { margin: -30% 0 3% 0; }
+/* Styling for Contact Page Social Media Icons (Different From Footer Social Media Icons) */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.socialMediaIcon {
   width: auto;
   height: auto;
   font-size: 2vw;
-  margin: 0 0.5vw 0 0;
+  margin: 7.5% 0.5vw 0 0;
   padding: 0.85vw 1vw 0.85vw 1vw;
   text-align: left;
   border-radius: 0.5vw;
 }
-/* Specific Positioning for First Social Media Icons in Each Row */
-body#contact main div a.fa-linkedin-in,
-body#contact main div a.fa-twitter { margin-left: 5vw; }
-/* Specific Positioning for Second Social Media Icons In Each Row */
-body#contact main div a.fa-github,
-body#contact main div a.fa-facebook-f { margin: 1vw 0.5vw 0 2.5vw; }
+/* Position/Size Specific Social Media Icons */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-linkedin-in,
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-twitter { margin-left: 1.5vw; }
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-linkedin-in {
+  /* Margin by "Social Media" Header */
+  margin-top: 0;
+  padding: 0.85vw 1.15vw 0.85vw 1.15vw;
+}
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-github { margin-left: -2.5vw }
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-facebook-f { padding: 0.85vw 1.35vw 0.85vw 1.35vw; }
 /* Styling for Social Media Handle Link */
-body#contact main div a.handle {
-  font-size: 2vw;
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.handle {
+  font-size: 2.5vw;
   transition: color 0.25s;
   text-decoration: none;
   color: #CCCCCC;
 }
 /* Hovering Effect: Brighten Color of Social Media Link */
-body#contact main div a.handle:hover {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.handle:hover {
   color: #EEEEEE;
   cursor: pointer;
 }
@@ -1666,12 +1719,12 @@ body.content section:nth-of-type(2) {
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
 }
 /* Special Styling if Last Section is Light: Straight Bottom */
-body.content section:last-of-type:nth-child(odd) {
+body.content section.light:last-of-type {
   clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
   -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0% 100%);
 }
 /* Special Styling if Last Section is Dark: Straight Bottom */
-body.content section:last-of-type:nth-child(even) {
+body.content section.dark:last-of-type {
   clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
   -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 100%);
 }
@@ -1708,10 +1761,10 @@ body.content section.dark figure:last-of-type {
 body.content section:nth-of-type(2) figure:first-of-type { top: 6%; }
 body.content section:nth-of-type(2) figure:last-of-type { top: 49%; }
 /* Special Positioning for Last Content Section's Image Borders (Due to Straight Bottom) */
-body.content section:last-of-type:nth-child(odd) figure:first-of-type,
-body.content section:last-of-type:nth-child(even) figure:first-of-type { top: 11%; }
-body.content section:last-of-type:nth-child(odd) figure:last-of-type,
-body.content section:last-of-type:nth-child(even) figure:last-of-type { top: 54.5%; }
+body.content section.light:last-of-type figure:first-of-type,
+body.content section.dark:last-of-type figure:first-of-type { top: 11%; }
+body.content section.light:last-of-type figure:last-of-type,
+body.content section.dark:last-of-type figure:last-of-type { top: 54.5%; }
 
 /* General Styling for Image Containers */
 body.content section.light figure div,
@@ -1960,13 +2013,13 @@ body#awards section:nth-of-type(2) figure div {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 95%);
   -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 95%);
 }
-body#awards section:last-of-type:nth-child(odd) figure,
-body#awards section:last-of-type:nth-child(odd) figure div {
+body#awards section.light:last-of-type figure,
+body#awards section.light:last-of-type figure div {
   clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
   -webkit-clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
 }
-body#awards section:last-of-type:nth-child(even) figure,
-body#awards section:last-of-type:nth-child(even) figure div {
+body#awards section.dark:last-of-type figure,
+body#awards section.dark:last-of-type figure div {
   clip-path: polygon(0% 0%, 100% 5%, 100% 100%, 0% 100%);
   -webkit-clip-path: polygon(0% 0%, 100% 5%, 100% 100%, 0% 100%);
 }
