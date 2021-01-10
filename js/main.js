@@ -1605,9 +1605,35 @@ function initSkills()
   }
 }
 
+/**************************
+ * CONTACT MAIN CONTAINER *
+ **************************/
+/**
+ * Resizes Contact Page's Main Container to Fit Height of Screen Taking Into Consideration the Navigation Bar Height.
+ */
+function resizeContactContainer()
+{
+  if (window.innerWidth <= MOBILE_BREAKPOINT && window.innerHeight > window.innerWidth)
+  {
+    // If mobile version and portrait orientation, proceed to set.
+
+    // Set main container's height to window's height minus navigation bar's height.
+    var navHeight = document.querySelector("nav").offsetHeight;
+    document.querySelector("main").style.height = (window.innerHeight-navHeight) + "px";
+  } else
+  {
+    // If not mobile version, set main container's height back to "100vh".
+
+    document.querySelector("main").style.height = "100vh";
+  }
+}
+
 /***********************
  * PROJECTS THUMBNAILS *
  ***********************/
+/**
+ * Sets Projects Videos' Thumbnails With Supported Format (.webp vs .jpg)
+ */
 function setProjectsThumbnails()
 {
   // Contains list of projects sections and corresponding thumbnails.

@@ -22,13 +22,11 @@
     <!-- Background image, shapes, and contact information container -->
     <main>
       <!-- Background image -->
-      <div class="imgContainer">
-        <picture>
-          <source type="image/webp" srcset="../assets/contact/contact.webp">
-          <source type="image/jpeg" srcset="../assets/contact/contact.jpg">
-          <img src="../assets/contact/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
-        </picture>
-      </div>
+      <picture>
+        <source type="image/webp" srcset="../assets/contact/contact.webp">
+        <source type="image/jpeg" srcset="../assets/contact/contact.jpg">
+        <img src="../assets/contact/contact.jpg" alt="Image of Jovan and his robotics programming mentor." />
+      </picture>
       <!-- Tint on background image -->
       <div class="tint"></div>
       <!-- Background diagonal shapes -->
@@ -45,7 +43,7 @@
             <!-- Email header/link -->
             <h2>
               <span>Email</span>
-              <a href="mailto:jovanyoshioka@gmail.com">jovanyoshioka@gmail.com</a>
+              <a href="mailto:jovanyoshioka@gmail.com">jovanyoshioka<span>@gmail.com</span></a>
             </h2>
             <!-- Phone header/link -->
             <h2>
@@ -58,20 +56,20 @@
             <!-- Header -->
             <h2><span>Social Media</span></h2>
             <!-- Social media icons and handles-->
-            <!-- Note: Wrapped in <span> so each icon/handle is on its own row -->
-            <span>
+            <!-- Note: Wrapped in <span> so each icon/handle pair is on its own row -->
+            <span class="wrapper">
               <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="socialMediaIcon fab fa-linkedin-in"></a>
               <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="handle">@jovanyoshioka</a>
             </span>
-            <span>
+            <span class="wrapper">
               <a href="https://www.github.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-github"></a>
               <a href="https://www.github.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
             </span>
-            <span>
+            <span class="wrapper">
               <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-twitter"></a>
               <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="handle">@jovanyoshioka</a>
             </span>
-            <span>
+            <span class="wrapper">
               <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="socialMediaIcon fab fa-facebook-f"></a>
               <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="handle">@jovanyoshioka89</a>
             </span>
@@ -92,8 +90,13 @@
       setCopyrightYear();
 
       window.addEventListener('load', function() {
-        // Alert user of mobile incompatibility if screen is small enough.
-        alertIncompatibility();
+        // Initialize height of main container to fit height of screen taking into consideration navigation bar height for mobile.
+        resizeContactContainer();
+      });
+
+      window.addEventListener('resize', function() {
+        // Set height of main container to fit height of screen taking into consideration navigation bar height for mobile.
+        resizeContactContainer();
       });
 
       window.addEventListener('scroll', function() {

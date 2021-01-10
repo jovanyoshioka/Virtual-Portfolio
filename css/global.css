@@ -261,16 +261,6 @@ footer small span#copyrightSymbol {
   }
   /* Reduce Size of Copyright Statement Text */
   footer small { font-size: 0.8em; }
-  /* Adjust Social Media Icons */
-  footer a.socialMediaIcon {
-    /* Reduce Size of Social Media Icons */
-    width: 60px;
-    height: 42.5px;
-    padding: 12.5px 0 0 0;
-    font-size: 2em;
-    /* Decrease Space Between Social Media Icons */
-    margin: 0 7.5px 0 0;
-  }
 }
 @media only screen and (max-width: 768px) {
   /* Increase Top and Bottom Space of Footer */
@@ -284,16 +274,6 @@ footer small span#copyrightSymbol {
   }
   /* Reduce Size of Copyright Statement Text */
   footer small { font-size: 0.8em; }
-  /* Adjust Social Media Icons */
-  footer a.socialMediaIcon {
-    /* Reduce Size of Social Media Icons */
-    width: 50px;
-    height: 37px;
-    padding: 10.5px 0 0 0;
-    font-size: 1.75em;
-    /* Decrease Space Between Social Media Icons */
-    margin: 0 5px 0 0;
-  }
 }
 
 /*** Social Media Icons ***/
@@ -328,6 +308,32 @@ a.fa-envelope:hover {
   color: #EEEEEE;
 }
 a.fa-github:hover { background-color: #EEEEEE; }
+
+/* Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Adjust Social Media Icons */
+  a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 60px;
+    height: 42.5px;
+    padding: 12.5px 0 0 0;
+    font-size: 2em;
+    /* Decrease Space Between Social Media Icons */
+    margin: 0 7.5px 0 0;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* Adjust Social Media Icons */
+  a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 50px;
+    height: 37px;
+    padding: 10.5px 0 0 0;
+    font-size: 1.75em;
+    /* Decrease Space Between Social Media Icons */
+    margin: 0 5px 0 0;
+  }
+}
 
 /*** Animation Preparation Classes ***/
 /* Prepares Element for Slide Up and Fade in Animation */
@@ -1435,23 +1441,15 @@ body#contact main {
   font-family: SuezOne;
   overflow: hidden;
 }
-/* Container for Background Image */
-body#contact main div.imgContainer {
-  width: 100%;
-  height: 65vh;
-  background-color: #1A1A1A;
+/* Background Image */
+body#contact main img {
+  min-width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -3;
-  overflow: hidden;
-}
-/* Background Image */
-body#contact main div.imgContainer img {
-  min-width: 100%;
-  height: 100%;
   opacity: 0.0;
   animation: 1s fadeIn 0.9s linear forwards;
+  z-index: -3;
 }
 /* Adjustments to Global Tint for Specific Background Image */
 body#contact main div.tint {
@@ -1503,6 +1501,8 @@ body#contact main div.textContainer h1 {
   padding-left: 2.5%;
   animation: slideHorizontalTranslate 1s ease-out 0.65s forwards,
              fadeIn 0.75s linear 0.9s forwards;
+  /* Prevents Text From Breaking Line */
+  white-space: nowrap;
 }
 /* Container for Contact Information Elements */
 body#contact main div.textContainer div.infoContainer {
@@ -1524,7 +1524,11 @@ body#contact main div.textContainer div.infoContainer div {
   justify-content: center;
 }
 /* Contact Information Headers: "Email, Phone, Social Media" */
-body#contact main div.textContainer div.infoContainer div h2 { font-size: 4vw; }
+body#contact main div.textContainer div.infoContainer div h2 {
+  font-size: 4vw;
+  /* Prevents Text From Breaking Line */
+  white-space: nowrap;
+}
 /* Underline Contact Information Headers */
 body#contact main div.textContainer div.infoContainer div h2 span { text-decoration: underline; }
 /* Styling for Email and Phone Links */
@@ -1535,50 +1539,139 @@ body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a {
   color: #CCCCCC;
   transition: color 0.25s;
   text-decoration: none;
+  /* Prevents Text From Breaking Line */
+  white-space: nowrap;
 }
 /* Hovering Effect: Brighten color of links */
 body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a:hover {
   color: #EEEEEE;
   cursor: pointer;
 }
+/* Link's "<span>" Used for Breaking Line, So Remove Underline */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a span { text-decoration: none; }
 /* Container for Social Media Header and Handles */
 body#contact main div.textContainer div.infoContainer div:nth-of-type(2) {
-  margin: -8.5% auto 0 auto;
+  margin: -5% auto 0 auto;
   text-align: center;
 }
 /* Positioning of Social Media Header */
 body#contact main div.textContainer div.infoContainer div:nth-of-type(2) h2 { margin: -30% 0 3% 0; }
-/* Styling for Contact Page Social Media Icons (Different From Footer Social Media Icons) */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.socialMediaIcon {
-  width: auto;
-  height: auto;
-  font-size: 2vw;
-  margin: 7.5% 0.5vw 0 0;
-  padding: 0.85vw 1vw 0.85vw 1vw;
-  text-align: left;
-  border-radius: 0.5vw;
+/* Wrapper for Social Media Icons and Handles Pair */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper {
+  /* Space Between Each Icon/Handle Pair */
+  margin-bottom: 1.5vw;
+  /* Prevents Icon/Handle From Breaking Line */
+  white-space: nowrap;
 }
-/* Position/Size Specific Social Media Icons */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-linkedin-in,
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-twitter { margin-left: 1.5vw; }
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-linkedin-in {
-  /* Margin by "Social Media" Header */
-  margin-top: 0;
-  padding: 0.85vw 1.15vw 0.85vw 1.15vw;
-}
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-github { margin-left: -2.5vw }
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.fa-facebook-f { padding: 0.85vw 1.35vw 0.85vw 1.35vw; }
+/* Position Handle Towards Middle of Icon */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.socialMediaIcon { vertical-align: middle; }
+/* Move LinkedIn and Twitter's Icon More to Right to Stagger Better */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-linkedin-in,
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-twitter { margin-left: 7.5%; }
+/* Align GitHub's Icon With Facebook's Icon Position */
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-github { margin-left: -10%; }
 /* Styling for Social Media Handle Link */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.handle {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle {
   font-size: 2.5vw;
   transition: color 0.25s;
   text-decoration: none;
   color: #CCCCCC;
 }
 /* Hovering Effect: Brighten Color of Social Media Link */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) a.handle:hover {
+body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle:hover {
   color: #EEEEEE;
   cursor: pointer;
+}
+/* Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Essentially Reset Position of "Connect With Me" Header by Moving Towards Right a Little */
+  body#contact main div.textContainer h1 { padding-left: 5%; }
+  /* Resize Social Media Handles */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle { font-size: 3vw; }
+}
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* Position Background Shapes to Cover Entire Width of Screen */
+  body#contact main div.innerShape,
+  body#contact main div.outerShape { left: 0; }
+  /* Position Header/Contact Information to Match Background Shapes' New Positions */
+  body#contact main div.textContainer {
+    height: 70%;
+    top: 25.5%;
+  }
+  /* Resize/Position "Connect With Me" Header */
+  body#contact main div.textContainer h1 {
+    font-size: 10vw;
+    /* Position "Connect With Me" Header Towards Center */
+    padding-left: 8.5%;
+  }
+  /* Increase Size of Info Container to Make Use of Whitespace */
+  body#contact main div.textContainer div.infoContainer {
+    width: 102.5%;
+    margin: 10% 0 0 -8.5%;
+  }
+  /* Resize Contact Information Headers: "Email, Phone, Social Media" */
+  body#contact main div.textContainer div.infoContainer div h2 { font-size: 6vw; }
+  /* Resize Email and Phone Links */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a { font-size: 5vw; }
+  /* Used to Break "@gmail.com" Onto a New Line to Conserve Space */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a span {
+    padding-left: 5%;
+    display: block;
+  }
+  /* Position Social Media Container Towards Middle of Email/Phone Container */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) { margin: 20% auto 0 auto; }
+  /* Resize Social Media Handles */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle { font-size: 4.5vw; }
+}
+@media only screen and (max-width: 600px) and (orientation: portrait) {
+  /* Resize Background Image */
+  body#contact main img {
+    height: 45vh;
+    left: -7.5%;
+  }
+  /* Position "Connect With Me" Header Towards Center */
+  body#contact main div.textContainer h1 { padding-left: 10%; }
+  /* Increase Size of Info Container to Make Use of Whitespace */
+  body#contact main div.textContainer div.infoContainer {
+    width: 105%;
+    margin: 10% 0 0 -10%;
+  }
+  /* Resize Contact Information Headers: "Email, Phone, Social Media" */
+  body#contact main div.textContainer div.infoContainer div h2 { font-size: 8vw; }
+  /* Resize Email and Phone Links */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(1) h2 a { font-size: 5.75vw; }
+  /* Position "Social Media" Header Towards Middle of Email/Phone Container and Center of Social Media Container */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) h2 { margin: -30% 0 3% 10%; }
+  /* Space Between Each Icon/Handle Pair */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper { margin-bottom: 5%; }
+  /* Adjust Social Media Icons */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 40px;
+    height: 31.5px;
+    padding: 8.5px 0 0 0;
+    font-size: 1.5em;
+    margin-right: 0;
+  }
+  /* Position Social Media Icons to Align with Facebook's Icon/Handle Pair */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-linkedin-in,
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-twitter,
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-github { margin-left: 2%; }
+  /* Space Between Email/Phone Container Contents and Social Media Container Contents */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-facebook-f { margin-left: 6%; }
+  /* Resize Social Media Handles */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle { font-size: 4.75vw; }
+}
+@media only screen and (max-width: 432px) and (orientation: portrait) {
+  /* Resize Background Image */
+  body#contact main img { height: 37.5vh; }
+  /* Position Header/Contact Information to Match Background Shapes' Positions */
+  body#contact main div.textContainer {
+    height: 70%;
+    top: 23.5%;
+  }
+  /* Position "Connect With Me" Header Towards Center */
+  body#contact main div.textContainer h1 { padding-left: 14%; }
 }
 
 /*********************************
