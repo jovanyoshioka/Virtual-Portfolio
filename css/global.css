@@ -877,18 +877,16 @@ body#home section#slideshowSection section#name div.diagonalBtn { margin: 0 auto
     width: 40px;
     margin-right: 7.5px;
   }
-  /* Position First/Last Name Text & "Learn More" Button Container Within Slideshow Images */
+  /* Span First/Last Name Text & "Learn More" Button Container Across Slideshow */
   body#home section#slideshowSection section#name {
     width: 100%;
     height: auto;
-    position: absolute;
-    top: 22.5%;
     background-color: transparent;
   }
   /* Resize First/Last Name Text */
   body#home section#slideshowSection section#name h1 { font-size: 4em; }
-  /* Remove Margin, Taken Care of by Container's "top" Value */
-  body#home section#slideshowSection section#name h1#firstName { margin-top: 0; }
+  /* Position First/Last Name Text & "Learn More" Button Container Within Slideshow Images */
+  body#home section#slideshowSection section#name h1#firstName { margin-top: 40%; }
   /* Do Not Use Particles Animation nor Bouncing Arrow for Mobile Version */
   body#home canvas#particlesCanvas,
   body#home section#slideshowSection section#name div.canvasHider,
@@ -897,6 +895,8 @@ body#home section#slideshowSection section#name div.diagonalBtn { margin: 0 auto
 @media only screen and (max-width: 600px) {
   /* Resize First/Last Name Text */
   body#home section#slideshowSection section#name h1 { font-size: 2.5em; }
+  /* Position First/Last Name Text & "Learn More" Button to Flow Better With Slideshow Images in Background */
+  body#home section#slideshowSection section#name h1#firstName { margin-top: 48.5%; }
 }
 
 /*** Latest Activity (Bottom) Section ***/
@@ -1094,16 +1094,21 @@ body#home section#latestActivitySection svg path:nth-of-type(8) {
 /* Container for Profile Picture and About Me Information Section */
 body#about section#biographySection {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
-  background-color: #1A1A1A;
+  background-image: linear-gradient(#0C54A5 10%,#1A1A1A 90%);
   overflow: hidden;
 }
+/* Container for Background Image */
+body#about section#biographySection div.backgroundPic {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 /* Page's Background Image: As Element, Not CSS "background-image", For WEBP. */
-body#about section#biographySection img {
+body#about section#biographySection div.backgroundPic img {
   min-width: 100%;
   min-height: 100%;
-  position: absolute;
 }
 /* Styling Tint Darker Than Its Global Styling To Make Text Easier To Read */
 body#about section#biographySection div.tint { opacity: 0.6; }
@@ -1114,7 +1119,7 @@ body#about section#biographySection div.profilePic {
   position: absolute;
   left: 10%;
   margin: 11% 0 0 0;
-  border: 0.5vw solid #CCCCCC;
+  border: 5px solid #CCCCCC;
   border-radius: 50%;
   overflow: hidden;
   animation: slideVerticalTranslate 1s ease-out forwards,
@@ -1154,12 +1159,107 @@ body#about section#biographySection article h2 {
   margin: -0.75vw 0 1vw 0;
 }
 body#about section#biographySection article p { font-size: 1.5vw; }
+/* Biography Section Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Increase Size of Profile Pic, Creates More Area for Text to Wrap Around */
+  body#about section#biographySection div.profilePic {
+    width: 40vw;
+    height: 37.5vw;
+    left: 2%;
+    margin: 11% 0 0 0;
+  }
+  /* Increase Size of Information Container to Fit Larger Text */
+  body#about section#biographySection article {
+    width: 100%;
+    height: 87.5%;
+    padding: 8.5% 2% 5% 0;
+  }
+  /* Increase Circumference Text Wraps Around */
+  body#about section#biographySection article div {
+    width: 35vw;
+    height: 40vw;
+    margin: 2.5vw 15% 0 0;
+  }
+  /* Resize Information Text */
+  body#about section#biographySection article h1 { font-size: 4.5vw; }
+  body#about section#biographySection article h2 {
+    font-size: 3vw;
+    margin: -0.75vw 0 0 0;
+  }
+  body#about section#biographySection article p { font-size: 1.9vw; }
+}
+@media only screen and (max-width: 768px) {
+  /* Biography Section's Height Based on Content */
+  body#about section#biographySection { min-height: auto; }
+  /* Change Background Image to a Banner */
+  body#about section#biographySection div.backgroundPic {
+    height: 45vw;
+    border-bottom: 5px solid #CCCCCC;
+    overflow: hidden;
+  }
+  /* Resize Image to Mainly Capture Specific Part */
+  body#about section#biographySection div.backgroundPic img {
+    min-height: unset;
+    height: 175%;
+    margin: -3vw 0 0 -13vw;
+  }
+  /* Remove Desktop Version Load Animation & Animation Preparations */
+  body#about section#biographySection div.profilePic,
+  body#about section#biographySection article {
+    opacity: 1.0;
+    transform: none;
+    animation: none;
+  }
+  /* Resize/Position Profile Pic to Flow With New Banner */
+  body#about section#biographySection div.profilePic {
+    width: 50vw;
+    height: 50vw;
+    top: 15vw;
+    left: 25vw;
+    margin: 0;
+  }
+  /* About Me Information Spans Entire Screen Below Profile Pic */
+  body#about section#biographySection article {
+    height: auto;
+    width: 100%;
+    margin: 67.5vw 0 5% 0;
+    padding: 0;
+  }
+  /* Remove Text Wrapping Element */
+  body#about section#biographySection article div { display: none; }
+  /* Adjust Information Text */
+  body#about section#biographySection article h1,
+  body#about section#biographySection article h2,
+  body#about section#biographySection article p {
+    /* Space on Each Side */
+    padding: 0 5% 0 5%;
+    /* Prepare for Load Slide Right Fade In Animation */
+    opacity: 0.0;
+    transform: translateX(-5vw);
+  }
+  /* Resize Information Text and Add Slide Right Fade In Animation */
+  body#about section#biographySection article h1 {
+    font-size: 2em;
+    animation: slideHorizontalTranslate 1s ease-out 0.25s forwards,
+             fadeIn 0.75s linear 0.5s forwards;
+  }
+  body#about section#biographySection article h2 {
+    font-size: 1.3em;
+    animation: slideHorizontalTranslate 1s ease-out 0.5s forwards,
+             fadeIn 0.75s linear 0.75s forwards;
+  }
+  body#about section#biographySection article p {
+    font-size: 1.1em;
+    animation: slideHorizontalTranslate 1s ease-out 0.75s forwards,
+             fadeIn 0.75s linear 1s forwards;
+  }
+  /* Remove Bouncing Arrow */
+  body#about section#biographySection button#bouncingArrow { display: none; }
+}
 
 /*** Resume Section ***/
 /* Container for Resume Header and Download Button */
-body#about section#resumeSection {
-  padding: 2vw 0 3vw 0;
-}
+body#about section#resumeSection { padding: 2vw 0 3vw 0; }
 /* Styling Resume Download Diagonal Button */
 body#about section#resumeSection div.diagonalBtn {
   /* Specifying Width & Font-Size of Button Based on Contents ("View Resume") */
@@ -1175,6 +1275,8 @@ body#about section#resumeSection div.diagonalBtn {
   }
 }
 @media only screen and (max-width: 768px) {
+  /* Increase Info Banner Size */
+  body#about section#resumeSection { padding: 35px 0 40px 0; }
   /* Decrease Size of "View Resume" Button */
   body#about section#resumeSection div.diagonalBtn {
     width: 248.75px;
@@ -1193,15 +1295,14 @@ body#about header:nth-of-type(odd) { background-color: #1A1A1A; }
 body#about header:nth-of-type(even) { background-color: #0C54A5; }
 /* General Styling for Section Header Text */
 body#about header h1 {
-  width: 80%;
-  font-size: 5vw;
+  font-size: 6em;
   font-family: SuezOne;
   color: #CCCCCC;
   padding: 1% 0 1% 0;
   margin: 0 auto;
 }
 
-/* General Styling for About Section Containers: Education, Skills, Spotlights */
+/* General Styling for About Section Containers: Education & Spotlights */
 body#about section.infoSection {
   width: 100%;
   height: 75vh;
@@ -1220,6 +1321,7 @@ body#about section.infoSection section {
 body#about section.infoSection section:nth-of-type(1) { left: 0; }
 body#about section.infoSection section:nth-of-type(2) { right: 0; }
 /* Background image for Left/Right Info Section */
+/* Note: Container "backgroundPic" for Mobile Version */
 body#about section.infoSection section img {
   min-width: 100%;
   height: 100%;
@@ -1231,6 +1333,63 @@ body#about section.infoSection section h1.title {
   position: absolute;
   text-align: center;
   transition: transform 0.5s;
+}
+/* Sections General Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Resize Header Text */
+  body#about header h1 { font-size: 4em; }
+}
+@media only screen and (max-width: 768px) {
+  /* Resize Header Text */
+  body#about header h1 { font-size: 3em; }
+  /* Adjust About Section Containers: Education & Spotlights */
+  body#about section.infoSection {
+    /* Container as Big as Needed */
+    height: auto;
+    /* Reorder for Mobile Banner/Info Design */
+    z-index: 0;
+  }
+  /* Adjust Info Sections for Mobile Banner/Info Design*/
+  body#about section.infoSection section {
+    /* Each Info Section Spans Entire Screen */
+    width: 100%;
+    /* Container as Big as Needed for Text */
+    height: auto;
+    /* Each Info Section on Its Own Row While Containing Own "position:absolute" Elements */
+    position: relative;
+    /* Reorder for Mobile Banner/Info Design */
+    z-index: -2;
+  }
+  /* Banner Container */
+  body#about section.infoSection section div.backgroundPic {
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    /* Reorder for Mobile Banner/Info Design */
+    z-index: -1;
+  }
+  /* Make Background, Now Banner, Image Contained by Banner Container */
+  body#about section.infoSection section img { position: static; }
+  /* Adjust Title for Info Sections */
+  body#about section.infoSection section h1.title {
+    font-size: 2.25em !important;
+    /* Place Title Into "Flow" of Document With Info Elements */
+    position: static;
+    /* Title Centered in Middle of Banner */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Title Remains Stationary Unlike Desktop Version */
+    transform: none !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Header Text */
+  body#about header h1 { font-size: 2.5em; }
+}
+@media only screen and (max-width: 432px) {
+  /* Resize Title Text */
+  body#about section.infoSection section h1.title { font-size: 2em !important; }
 }
 
 /*** Education Section ***/
@@ -1250,7 +1409,7 @@ body#about section#educationSection section.utk h1.title {
   top: 12.5vw;
   left: 0;
 }
-/* Hovering Effect: SLide Title to Top of Section to Make Room for Info Text */
+/* Hovering Effect: Slide Title to Top of Section to Make Room for Info Text */
 /* :target For Touchscreens That Can Not Hover. */
 body#about section#educationSection section.utk:hover h1.title,
 body#about section#educationSection section.utk:target h1.title { transform: translateY(-115%); }
@@ -1271,25 +1430,27 @@ body#about section#educationSection section:target article.info { transform: tra
 body#about section#educationSection section.hva article.info {
   height: 79%;
   top: 7.5vw;
+  overflow-y: auto;
 }
 /* Specific Positioning for University of Tennessee Knoxville Information */
 body#about section#educationSection section.utk article.info {
   height: 65%;
   top: 12.5vw;
+  overflow-y: auto;
 }
 /* Styling for Education Information Text */
 body#about section#educationSection section article.info h2 {
-  font-size: 1.75vw;
+  font-size: 1.7vw;
   text-decoration: underline;
   display: inline-block;
 }
 body#about section#educationSection section article.info h3 {
-  font-size: 1.25vw;
+  font-size: 1.2vw;
   margin: 0 0 0 0.4vw;
   display: inline-block;
 }
 body#about section#educationSection section article.info p {
-  font-size: 1.25vw;
+  font-size: 1.2vw;
   margin: -0.25vw 0 0 0;
 }
 /* Styling for Links Within Information Text */
@@ -1300,6 +1461,70 @@ body#about section#educationSection section article.info p a {
   font-style: italic;
 }
 body#about section#educationSection section article.info p a:hover { color: #EEEEEE; }
+/* Education Section Media Queries */
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
+  /* Resize Education Information Text */
+  body#about section#educationSection section article.info h2 { font-size: 2.25vw; }
+  body#about section#educationSection section article.info h3 { font-size: 1.75vw; }
+  body#about section#educationSection section article.info p { font-size: 1.75vw; }
+}
+@media only screen and (max-width: 768px) {
+  /* Use Grid for "order" Attribute to Display UTK Then HVA */
+  body#about section#educationSection { display: grid; }
+  /* With Background Image Changed to Banner, Background for Text is Gradient */
+  body#about section#educationSection section { background-image: linear-gradient(#0C54A5 10%,#1A1A1A 90%); }
+  /* Reorder to Display UTK Then HVA */
+  body#about section#educationSection section.hva { order: 1; }
+  body#about section#educationSection section.utk { order: 0; }
+  /* Set Size of Banner */
+  body#about section#educationSection section div.backgroundPic { height: 256px; }
+  /* Resize/Position Banner Images to Mainly Capture Specific Part */
+  body#about section#educationSection section.hva div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 225%;
+    margin: -225px 0 0 -75px;
+  }
+  body#about section#educationSection section.utk div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 150%;
+  }
+  /* Resize Title Element to Height of Banner So Text Is in Center of Banner */
+  body#about section#educationSection section h1.title { height: 256px; }
+  /* Intentionally Break "Knoxville" Onto Another Line */
+  body#about section#educationSection section.utk h1.title { margin: 0 65px 0 65px; }
+  /* Adjust Education Information Text Container */
+  body#about section#educationSection section article.info {
+    /* Container as Big as Needed */
+    height: auto !important;
+    /* Place Information Text Container Into "Flow" of Document With Title Element */
+    position: static !important;
+    /* Information Text Remains Stationary Unlike Desktop Version */
+    transform: none !important;
+    padding: 2%;
+  }
+  /* Resize Education Information Text */
+  body#about section#educationSection section article.info h2 { font-size: 1.75em; }
+  body#about section#educationSection section article.info h3 { font-size: 1.25em; }
+  body#about section#educationSection section article.info p { font-size: 1.25em; }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Banner */
+  body#about section#educationSection section div.backgroundPic { height: 180px; }
+  /* Resize/Position Banner Images to Mainly Capture Specific Part */
+  body#about section#educationSection section.hva div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 300%;
+    margin: -235px 0 0 -210px;
+  }
+  body#about section#educationSection section.utk div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 155%;
+  }
+  /* Resize Title Element to Height of Banner So Text Is in Center of Banner */
+  body#about section#educationSection section h1.title { height: 180px; }
+  /* For UTK Title, Remove Intentional Line Break; Smaller Screen Width Breaks Text Instead */
+  body#about section#educationSection section.utk h1.title { margin: 0; }
+}
 
 /*** Spotlights Section ***/
 /* Styling Background Color in Case Background Image Does Not Load */
@@ -1346,24 +1571,86 @@ body#about section#spotlightsSection section:target div.diagonalBtn { opacity: 1
   }
 }
 @media only screen and (max-width: 768px) {
-  /* Decrease Size of "View Spotlight" Button */
+  /* Set Size of Spotlight Section */
+  /* Note: For Spotlights, Banner Spans Entire Spotlight Section, So Essentially Setting Banner Height */
+  body#about section#spotlightsSection section { height: 370px; }
+  /* Banner Spans Entire Spotlight Section */
+  body#about section#spotlightsSection section div.backgroundPic { height: 100%; }
+  /* Resize/Position Banner Images to Mainly Capture Specific Part */
+  body#about section#spotlightsSection section.hva div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 150%;
+    margin: -35px 0 0 -65px;
+  }
+  body#about section#spotlightsSection section.ornl div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 175%;
+    margin: 0 0 0 -40px;
+  }
+  /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
+  body#about section#spotlightsSection section h1 { height: 200px; }
+  /* Position Titles Towards Center of Banners and Intentionally Break Line */
+  body#about section#spotlightsSection section.hva h1.title { margin: 75px 115px 0 115px; }
+  body#about section#spotlightsSection section.ornl h1.title { margin: 75px 60px 0 60px; }
+  /* Adjust "View Spotlight" Button */
   body#about section#spotlightsSection section div.diagonalBtn {
+    /* Decrease Size of Button */
     width: 247px;
     font-size: 2em;
+    /* Place Button Into "Flow" of Document With Title Element */
+    position: relative;
+    bottom: unset;
+    /* Button Remains Visible Unlike Desktop Version */
+    opacity: 1.0 !important;
   }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Spotlight Section */
+  /* Note: For Spotlights, Banner Spans Entire Spotlight Section, So Essentially Resizing Banner Height */
+  body#about section#spotlightsSection section { height: 292.5px; }
+  /* Resize/Position Banner Images to Mainly Capture Specific Part */
+  body#about section#spotlightsSection section.hva img { margin: -35px 0 0 -60px; }
+  body#about section#spotlightsSection section.ornl img {
+    height: 150%;
+    margin: 0 0 0 -40px;
+  }
+  /* Adjust HVA Title Element */
+  body#about section#spotlightsSection section.hva h1.title {
+    /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
+    height: 150px;
+    /* Position Titles Towards Center of Banners and Remove Intentional Line Break */
+    margin: 50px 0 0 0;
+  }
+  /* Adjust ORNL Title Element */
+  body#about section#spotlightsSection section.ornl h1.title {
+    /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
+    height: 125px;
+    font-size: 1.5em !important;
+  }
+}
+@media only screen and (max-width: 432px) {
+  /* For ORNL Title, Remove Intentional Line Break; Smaller Screen Width Breaks Text Instead */
+  body#about section#spotlightsSection section.ornl h1.title { margin: 75px 0 0 0; }
 }
 
 /*** Skills Section ***/
 /* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
 body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
 /* Container for Skills Section */
-body#about section#skillsSection { background-color: #0C54A5; }
+body#about section#skillsSection {
+  height: auto;
+  min-height: 75vh;
+  background-image: linear-gradient(#0C54A5,#0C498E,#0C54A5);
+  font-family: SuezOne;
+  color: #CCCCCC;
+}
 /* General Styling for Skills Languages/Tools Sections */
 body#about section#skillsSection section {
   height: 92.5%;
   display: inline-block;
   text-align: center;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 /* General Styling for Languages/Tools Sections' Title */
 body#about section#skillsSection section h1.sectionTitle {
@@ -1372,14 +1659,14 @@ body#about section#skillsSection section h1.sectionTitle {
   margin: 0 auto 2% auto;
   padding: 0 0 1% 0;
 }
-/* General Positioning for Languages/TooLs Sections' Table */
+/* General Positioning for Languages/Tools Sections' Table */
 body#about section#skillsSection section table { margin: 0 auto; }
 
 /* Container for Languages Title and Table */
 body#about section#skillsSection section.languages {
   width: 45%;
-  margin: 0 0 1.5% 10%;
-  float: left;
+  margin: 2% 0 1.5% 10%;
+  vertical-align: top;
 }
 /* Styling Width of Section Title to Define How Large Border-Bottom is. */
 body#about section#skillsSection section.languages h1.sectionTitle { width: 95%; }
@@ -1412,19 +1699,77 @@ body#about section#skillsSection section.languages table tr td.levelsContainer d
 /* Container for Tools Title and List/Table */
 body#about section#skillsSection section.tools {
   width: 32.5%;
-  margin: 0 10% 1.5% 0;
-  float: right;
+  margin: 2% 0 1.5% 0;
 }
 /* Styling Width of Section Title to Define How Large Border-Bottom is */
 body#about section#skillsSection section.tools h1.sectionTitle { width: 35%; }
 /* Specific Styling for Tool Rows */
 body#about section#skillsSection section.tools table tr td.tool {
   font-size: 2vw;
+  /* Preparing for Slide In Fade In Animation by Making Invisible */
   opacity: 0.0;
 }
 /* Preparing for Slide In Fade In Animation by Offsetting/Translating Horizontally. */
 body#about section#skillsSection section.tools table tr:nth-of-type(odd) td.tool { transform: translateX(-5vw); }
 body#about section#skillsSection section.tools table tr:nth-of-type(even) td.tool { transform: translateX(5vw); }
+/* Skills Section Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Resize Sections' Titles */
+  body#about section#skillsSection section h1.sectionTitle { font-size: 2.25vw; }
+  /* Resize Languages Table Text (Including "Learning"/"Proficient" Text) */
+  body#about section#skillsSection section.languages table tr td { font-size: 1.75vw; }
+  /* Resize Individual Level Elements */
+  body#about section#skillsSection section.languages table tr td.levelsContainer div {
+    width: 6vw;
+    height: 1.5vw;
+    border: 2px solid #CCCCCC;
+  }
+  /* Position Tools Section to Be More Even With Languages Section */
+  body#about section#skillsSection section.tools { margin: 2% 0 1.5% 5%; }
+}
+@media only screen and (max-width: 768px) {
+  /* Change Sections to Be on Own Row for Mobile Version */
+  body#about section#skillsSection section {
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+  /* Resize Sections' Titles */
+  body#about section#skillsSection section h1.sectionTitle { font-size: 1.85em; }
+  /* Resize Languages Table Text (Including "Learning"/"Proficient" Text) */
+  body#about section#skillsSection section.languages table tr td { font-size: 1.5em; }
+  /* Resize/Position Individual Level Elements */
+  body#about section#skillsSection section.languages table tr td.levelsContainer div {
+    width: 50px;
+    height: 15px;
+    margin: 0 0 0 -2px;
+  }
+  /* Resize Tools Text */
+  body#about section#skillsSection section.tools table tr td.tool { font-size: 1.5em; }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Sections' Titles */
+  body#about section#skillsSection section h1.sectionTitle { font-size: 1.5em; }
+  /* Resize Languages Table Text */
+  body#about section#skillsSection section.languages table tr td { font-size: 1.35em; }
+  /* Resize Languages Table "Learning"/"Proficient" Text */
+  body#about section#skillsSection section.languages table tr:nth-of-type(1) td { font-size: 1.25em; }
+  /* Resize Individual Level Elements */
+  body#about section#skillsSection section.languages table tr td.levelsContainer div {
+    width: 40px;
+    height: 12.5px;
+  }
+}
+@media only screen and (max-width: 432px) {
+  /* Resize Languages Table Text */
+  body#about section#skillsSection section.languages table tr td { font-size: 1.15em; }
+  /* Resize Languages Table "Learning"/"Proficient" Text */
+  body#about section#skillsSection section.languages table tr:nth-of-type(1) td { font-size: 1em; }
+  /* Resize Individual Level Elements */
+  body#about section#skillsSection section.languages table tr td.levelsContainer div {
+    width: 30px;
+    height: 10px;
+  }
+}
 
 /***********
  * CONTACT *
@@ -1448,8 +1793,8 @@ body#contact main img {
   top: 0;
   left: 0;
   opacity: 0.0;
-  animation: 1s fadeIn 0.9s linear forwards;
   z-index: -3;
+  animation: 1s fadeIn 0.9s linear forwards;
 }
 /* Adjustments to Global Tint for Specific Background Image */
 body#contact main div.tint {
@@ -1583,9 +1928,21 @@ body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wr
   cursor: pointer;
 }
 /* Media Queries */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px) and (min-width: 769px) {
   /* Essentially Reset Position of "Connect With Me" Header by Moving Towards Right a Little */
   body#contact main div.textContainer h1 { padding-left: 5%; }
+  /* Position "Social Media" Header to Allow for More Space */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) h2 { margin: -32.5% 0 1% 0; }
+  /* Decrease Space Between Each Icon/Handle Pair */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper { margin-bottom: 1vw; }
+  /* Adjust Social Media Icons */
+  body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.socialMediaIcon {
+    /* Reduce Size of Social Media Icons */
+    width: 52.5px;
+    height: 38px;
+    padding: 10.5px 0 0 0;
+    font-size: 1.75em;
+  }
   /* Resize Social Media Handles */
   body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle { font-size: 3vw; }
 }
@@ -1626,7 +1983,7 @@ body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wr
 @media only screen and (max-width: 600px) and (orientation: portrait) {
   /* Resize Background Image */
   body#contact main img {
-    height: 45vh;
+    height: 40vh;
     left: -7.5%;
   }
   /* Position "Connect With Me" Header Towards Center */
