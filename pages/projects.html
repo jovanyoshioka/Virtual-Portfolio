@@ -521,6 +521,9 @@
       setCopyrightYear();
 
       window.addEventListener('load', function () {
+        // Set height of slideshow parent based on smallest image's height for mobile.
+        resizeSlideshow();
+
         // Set thumbnails for project videos since they are preload="none".
         // "onload" to ensure other images (to decipher .jpg or .webp) is loaded.
         setProjectsThumbnails();
@@ -530,9 +533,11 @@
 
         // Scrolls to an element on load if specified in URL.
         scrollOnLoad(getURLAttribute("section"));
+      });
 
-        // Alert user of mobile incompatibility if screen is small enough.
-        alertIncompatibility();
+      window.addEventListener('resize', function() {
+        // Set height of slideshow parent based on smallest image's height for mobile.
+        resizeSlideshow();
       });
 
       window.addEventListener('scroll', function() {

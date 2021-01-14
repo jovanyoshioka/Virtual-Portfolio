@@ -630,9 +630,13 @@ function smoothScrollTo(target, duration)
   // Dead space is between the nav bar & top of element and between bottom of
   // element & bottom of browser.
   var deadSpace = windowHeight - (navBarHeight + elementHeight);
-  // Subtract half of dead space and nav bar height to set target position with
-  // the element in the middle of the screen.
-  var targetPos = document.querySelector(target).offsetTop - (deadSpace/2 + navBarHeight);
+  // Shape offset is target element's portion of the white separating line.
+  var shapeOffset = document.querySelector(target).offsetHeight * 0.03;
+  // Desktop Version: Subtract half of dead space and nav bar height to set target position with the element in the middle of the screen.
+  // Mobile Version: Subtract shape offset and nav bar height to set target position just before target's content.
+  var targetPos = window.innerWidth > MOBILE_BREAKPOINT 
+                ? document.querySelector(target).offsetTop - (deadSpace/2 + navBarHeight)
+                : document.querySelector(target).offsetTop - (navBarHeight - shapeOffset);
   
   // Position of scroll bar when animation begins.
   var startPos = window.pageYOffset;
@@ -1395,19 +1399,35 @@ function initSlideshow()
   slideshowIterator = setInterval(runSlideshow, SLIDESHOW_FIRST_INTERVAL);
 }
 /**
- * Change Parent Height to Slideshow Images' Height for Mobile Sizing
- * Note: Only Works if All Slideshow Images Are Same Dimensions
+ * Change Parent Height to Smallest Slideshow Image Height for Mobile Sizing
+ * Note: Using Slideshow Image With Smallest Height Because Prevents Whitespace From Smaller Images if Based on Largest Height.
+ *       Instead, Larger Images Will be Cut Off Which is Better Than Having Whitespace.
  */
 function resizeSlideshow()
 {
   // Resize based on images' height only for mobile, i.e. if equal/below MOBILE_BREAKPOINT.
   if (window.innerWidth <= MOBILE_BREAKPOINT)
   {
-    var slideshowImgHeight = document.querySelector("img.slideshowImages").offsetHeight;
+    // Is mobile version, so get smallest image height and set slideshow parent to it.
+
+    var slideshowImages = document.getElementsByClassName("slideshowImages");
+    // By default, smallest image height will be first image's height.
+    var slideshowImgHeight = slideshowImages[0].offsetHeight;
+    // Loop through slideshow images and determine smallest image height.
+    for (var i = 0; i < slideshowImages.length; i++)
+    {
+      if (slideshowImages[i].offsetHeight < slideshowImgHeight)
+      {
+        // Current slideshow image is smaller than recorded smallest image height, so replace recorded with current.
+        slideshowImgHeight = slideshowImages[i].offsetHeight;
+      }
+    }
+    // Set slideshow parent height to smallest image height.
     document.querySelector(".slideshow").style.height = slideshowImgHeight + "px";
   } else
   {
-    document.querySelector(".slideshow").style.height = "100%";
+    // Is desktop version, so set slideshow parent height to "100vh".
+    document.querySelector(".slideshow").style.height = "100vh";
   }
 }
 

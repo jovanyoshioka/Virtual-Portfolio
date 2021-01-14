@@ -240,7 +240,7 @@
           <img class="higher" src="../assets/experiences/codetn_logo.png" alt="Image of CodeTN's logo." />
         </picture>
         <div class="tint"></div>
-        <h1>2nd Place: CodeTN Competition</h1>
+        <h1>2nd Place: CodeTN</h1>
         <h2>CodeTN</h2>
         <h3>Spring 2019</h3>
         <p>Excelled in creating and presenting to a panel of judges and audience a <a href="projects.html?section=rCar">web application</a> that solves a school or community problem.</p>
@@ -379,14 +379,19 @@
       setCopyrightYear();
 
       window.addEventListener('load', function () {
+        // Set height of slideshow parent based on smallest image's height for mobile.
+        resizeSlideshow();
+
         // Initialize slideshow.
         initSlideshow();
 
         // Scrolls to an element on load if specified in URL.
         scrollOnLoad(getURLAttribute("section"));
+      });
 
-        // Alert user of mobile incompatibility if screen is small enough.
-        alertIncompatibility();
+      window.addEventListener('resize', function () {
+        // Set height of slideshow parent based on smallest image's height for mobile.
+        resizeSlideshow();
       });
 
       window.addEventListener('scroll', function() {

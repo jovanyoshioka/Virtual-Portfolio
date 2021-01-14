@@ -1430,12 +1430,14 @@ body#about section#educationSection section:target article.info { transform: tra
 body#about section#educationSection section.hva article.info {
   height: 79%;
   top: 7.5vw;
+  /* To Ensure Content is Viewable Even if Content Larger Than Container */
   overflow-y: auto;
 }
 /* Specific Positioning for University of Tennessee Knoxville Information */
 body#about section#educationSection section.utk article.info {
   height: 65%;
   top: 12.5vw;
+  /* To Ensure Content is Viewable Even if Content Larger Than Container */
   overflow-y: auto;
 }
 /* Styling for Education Information Text */
@@ -1649,6 +1651,7 @@ body#about section#skillsSection section {
   height: 92.5%;
   display: inline-block;
   text-align: center;
+  /* To Ensure Content is Viewable Even if Content Larger Than Container */
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -2142,6 +2145,44 @@ body.content section.slideshow button#slideshowPreviousBtn:hover i,
 body.content section.slideshow button#slideshowNextBtn:hover i { color: #EEEEEE; }
 body.content section.slideshow button#slideshowPreviousBtn:hover i { transform: translateX(-25%); }
 body.content section.slideshow button#slideshowNextBtn:hover i { transform: translateX(25%); }
+/* Content Slideshow Media Queries */
+@media only screen and (max-width: 768px) {
+  /* Remove Certain Slideshow Components for Mobile Version */
+  body.content section.slideshow div#blurredBackground,
+  body.content section.slideshow div.infoContainer h2#slideshowSubtitle,
+  body.content section.slideshow div.infoContainer h2#slideshowTime,
+  body.content section.slideshow button#slideshowPreviousBtn,
+  body.content section.slideshow button#slideshowNextBtn { display: none; }
+  /* Prevent Images from Overflowing Since Info Container is "height:auto" */
+  body.content section.slideshow { overflow: hidden; }
+  /* Info Container Spans Entire Slideshow Since No Blurred Background Present */
+  body.content section.slideshow div.infoContainer {
+    width: auto;
+    height: auto;
+    position: static;
+  }
+  /* Slideshow Images Span Entire Width, But Potentially Cut Off On Bottom; Prevents Stretching */
+  /* Note: Slideshow Image With Smallest Height Will Determine Slideshow Height,
+    Prevents Whitespace From Smaller Images if Based on Largest Height */
+  body.content section.slideshow div.infoContainer img.slideshowImages {
+    width: 100%;
+    min-width: unset;
+    height: unset;
+  }
+  /* Resize/Position Slide Title Text */
+  body.content section.slideshow div.infoContainer h1#slideshowTitle {
+    font-size: 6.75vw;
+    margin: 15vw 0 5px 0;
+  }
+}
+@media only screen and (max-width: 600px) {
+  /* Position Slide Title Text */
+  body.content section.slideshow div.infoContainer h1#slideshowTitle { margin: 12.5vw 0 5px 0; }
+}
+@media only screen and (max-width: 432px) {
+  /* Position Slide Title Text */
+  body.content section.slideshow div.infoContainer h1#slideshowTitle { margin: 10vw 0 5px 0; }
+}
 
 /*** Content Sections ***/
 /* General Styling for Content Sections */
@@ -2321,9 +2362,11 @@ body.content section.dark figure div button:hover i { color: #EEEEEE; }
 body.content section.light article,
 body.content section.dark article {
   width: 47.5%;
-  height: 85%;
+  height: 86%;
   color: #CCCCCC;
   font-family: SuezOne;
+  /* To Ensure Content is Viewable Even if Content Larger Than Container */
+  overflow-y: auto;
 }
 /* Specific Positioning of Light Article Container */
 body.content section.light article {
@@ -2402,13 +2445,140 @@ body.content section.dark article p a {
 /* Hovering Effect: Brighten Link Color */
 body.content section.light article p a:hover,
 body.content section.dark article p a:hover { color: #EEEEEE; }
+/* Content Sections Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Resize Article Body Text */
+  body.content section.light article p,
+  body.content section.dark article p { font-size: 1.85vw; }
+}
+@media only screen and (max-width: 768px) {
+  /* Content Sections as Big as Needed for Images/Text */
+  body.content section.light,
+  body.content section.dark { height: auto !important; }
+  /* Align White Separation Lines With Images' Shaped Borders */
+  /* General Light Content Sections */
+  body.content section.light {
+    clip-path: polygon(0% 5%, 100% 3%, 100% 100%, 0% 97.5%);
+    -webkit-clip-path: polygon(0% 5%, 100% 3%, 100% 100%, 0% 97.5%);
+  }
+  /* General Dark Content Sections */
+  body.content section.dark {
+    clip-path: polygon(0% 3%, 100% 5%, 100% 97.5%, 0% 100%);
+    -webkit-clip-path: polygon(0% 3%, 100% 5%, 100% 97.5%, 0% 100%);
+  }
+  /* First Content Section */
+  body.content section:nth-of-type(2) {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 97.5%);
+    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 97.5%);
+  }
+  /* Last Content Section, Light */
+  body.content section.light:last-of-type {
+    clip-path: polygon(0% 5%, 100% 3%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 5%, 100% 3%, 100% 100%, 0% 100%);
+  }
+  /* Last Content Section, Dark */
+  body.content section.dark:last-of-type {
+    clip-path: polygon(0% 3%, 100% 5%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 3%, 100% 5%, 100% 100%, 0% 100%);
+  }
+  /* Increase Size of Images to Span Half of Content Section Each */
+  body.content section.light figure,
+  body.content section.dark figure {
+    height: 45vw !important;
+    width: 80% !important;
+  }
+  /* Vertically Position Top Image for Content Sections */
+  body.content section.light figure:first-of-type,
+  body.content section.dark figure:first-of-type,
+  body.content section.light:last-of-type figure:first-of-type,
+  body.content section.dark:last-of-type figure:first-of-type { top: 12vw; }
+  /* Vertically Position Bottom Image for Content Sections */
+  body.content section.light figure:last-of-type,
+  body.content section.dark figure:last-of-type,
+  body.content section.light:last-of-type figure:last-of-type,
+  body.content section.dark:last-of-type figure:last-of-type { top: 59vw; }
+  /* Position Bottom Image of Light Content Section to the Right */
+  body.content section.light figure:last-of-type {
+    left: unset;
+    right: 2%;
+  }
+  /* Position Top Image of Dark Content Section to the Right */
+  body.content section.dark figure:first-of-type { right: 2%; }
+  /* Position Bottom Image of Dark Content Section to the Left */
+  body.content section.dark figure:last-of-type {
+    right: unset;
+    left: 2%;
+  }
+  /* Special Positioning for First Content Section's Images (Due to Straight Top) */
+  body.content section:nth-of-type(2) figure:first-of-type { top: 2vw; }
+  body.content section:nth-of-type(2) figure:last-of-type { top: 49vw; }
+  /* Increase Size of Play Button */
+  body.content section.light figure div button i,
+  body.content section.dark figure div button i { font-size: 10vw; }
+  /* Article (Content Title, Subtitle, Body) Span Entire Width of Screen and as Big as Needed for Content  */
+  body.content section.light article,
+  body.content section.dark article {
+    width: 90% !important;
+    height: auto;
+    float: unset;
+    padding: 0 5% 8.5% 5% !important;
+  }
+  /* Position Article Below Images */
+  /* Note: Images Are "position:absolute", So Large "padding-top" to Essentially Simulate Images Taking Up Space in 
+    Article Container, for Container's "height:auto". */
+  body.content section.light article,
+  body.content section.dark article { padding-top: 106vw !important; }
+  /* Special Positioning of First Section's Article Below Images */
+  body.content section:nth-of-type(2) article { padding-top: 95vw !important; }
+  /* Adjust Article Background Image */
+  body.content section.light article img,
+  body.content section.dark article img {
+    /* Image Spans Entire Width of Screen */
+    width: 100% !important;
+    /* Position Better */
+    top: 25%;
+  }
+  /* Position Article Background Image (Higher Version) Better */
+  body.content section.light article img.higher,
+  body.content section.dark article img.higher { top: 20%; }
+  /* Tint Must Span Entire Screen to Cover Article Background Image */
+  body.content section.light article div.tint,
+  body.content section.dark article div.tint { width: 100% !important; }
+  /* Resize Article Title Text */
+  body.content section.light article h1,
+  body.content section.dark article h1 { font-size: 5vw; }
+  /* Resize Article Subtitles (Languages/Organization/Time) Text */
+  body.content section.light article h2,
+  body.content section.dark article h2,
+  body.content section.light article h3,
+  body.content section.dark article h3 { font-size: 3.5vw; }
+  /* Resize Article Body Text */
+  body.content section.light article p,
+  body.content section.dark article p { font-size: 3vw; }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Article Title Text */
+  body.content section.light article h1,
+  body.content section.dark article h1 { font-size: 6.6vw; }
+  /* Resize Article Subtitles (Languages/Organization/Time) Text */
+  body.content section.light article h2,
+  body.content section.dark article h2,
+  body.content section.light article h3,
+  body.content section.dark article h3 { font-size: 4.15vw; }
+  /* Resize Article Body Text */
+  body.content section.light article p,
+  body.content section.dark article p { font-size: 4vw; }
+}
 
 /************
  * PROJECTS *
  ************/
-/* Links to Code */
+/* "View Code" Links */
 body#projects section.light article h4,
-body#projects section.dark article h4 { text-align: center; margin: 1% 0 0 0; }
+body#projects section.dark article h4 {
+  text-align: center;
+  margin: 1% 0 0 0;
+}
 body#projects section.light article h4 a,
 body#projects section.dark article h4 a {
   font-size: 1.75vw;
@@ -2416,10 +2586,22 @@ body#projects section.dark article h4 a {
   text-decoration: underline;
   transition: color 0.25s;
 }
+/* Hovering Effect: Brighten color of link */
 body#projects section.light article h4 a:hover,
 body#projects section.dark article h4 a:hover {
   cursor: pointer;
   color: #EEEEEE;
+}
+/* Projects Media Queries */
+@media only screen and (max-width: 1200px) {
+  /* Resize "View Code" Link */
+  body#projects section.light article h4 a,
+  body#projects section.dark article h4 a { font-size: 2vw; }
+}
+@media only screen and (max-width: 768px) {
+  /* Resize "View Code" Link */
+  body#projects section.light article h4 a,
+  body#projects section.dark article h4 a { font-size: 4.5vw; }
 }
 
 /**********
@@ -2478,6 +2660,7 @@ body#awards section.dark:last-of-type figure div {
 body#awards section.light article,
 body#awards section.dark article {
   width: 56%;
+  height: 75%;
   position: absolute;
 }
 /* Specific Positioning of Light Article Container */
@@ -2511,4 +2694,60 @@ body#awards section.light article p,
 body#awards section.dark article p {
   font-size: 2.25vw;
   text-align: center;
+}
+/* Content Sections Media Queries */
+@media only screen and (max-width: 768px) {
+  /* Position Content Section Image in Center */
+  body#awards section.light figure,
+  body#awards section.dark figure {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  /* Vertically Position Image for Content Sections */
+  body#awards section.light figure,
+  body#awards section.dark figure,
+  body#awards section:last-of-type figure { top: 7vw; }
+  /* Special Vertical Positioning for First Content Sections' Image (Due to Straight Top) */
+  body#awards section:nth-of-type(2) figure { top: 2.5vw; }
+  /* Change Position to "static" So Container's Height Can Be Based on Size of Article Content */
+  body#awards section.light article,
+  body#awards section.dark article { position: static; }
+  /* Position Article Below Image */
+  /* Note: Image is "position:absolute", So Large "padding-top" to Essentially Simulate Image Taking Up Space in 
+    Article Container, for Container's "height:auto". */
+  body#awards section.light article,
+  body#awards section.dark article { padding-top: 54vw !important; }
+  /* Special Positioning of First Section's Article Below Image */
+  body#awards section:nth-of-type(2) article { padding-top: 50vw !important; }
+  /* Position Article Background Image Better */
+  body.content section.light article img,
+  body.content section.dark article img { top: 42.5%; }
+  /* Position Article Background Image (Higher Version) Better */
+  body.content section.light article img.higher,
+  body.content section.dark article img.higher { top: 35%; }
+  /* Resize Article Title Text */
+  body#awards section.light article h1,
+  body#awards section.dark article h1 { font-size: 5.5vw; }
+  /* Resize Article Subtitles (Organization/Time) Text */
+  body#awards section.light article h2,
+  body#awards section.dark article h2,
+  body#awards section.light article h3,
+  body#awards section.dark article h3 { font-size: 4vw; }
+  /* Resize Article Body Text */
+  body#awards section.light article p,
+  body#awards section.dark article p { font-size: 3.5vw; }
+}
+@media only screen and (max-width: 600px) {
+  /* Resize Article Title Text */
+  body#awards section.light article h1,
+  body#awards section.dark article h1 { font-size: 6.25vw; }
+  /* Resize Article Subtitles (Organization/Time) Text */
+  body#awards section.light article h2,
+  body#awards section.dark article h2,
+  body#awards section.light article h3,
+  body#awards section.dark article h3 { font-size: 4.75vw; }
+  /* Resize Article Body Text */
+  body#awards section.light article p,
+  body#awards section.dark article p { font-size: 4.25vw; }
 }
