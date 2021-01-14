@@ -2535,15 +2535,23 @@ body.content section.dark article p a:hover { color: #EEEEEE; }
   body.content section.dark article img {
     /* Image Spans Entire Width of Screen */
     width: 100% !important;
+    /* Image Attached to Article Container: A Fix for Position Fixed Z-Index Flickering Bug on iOS Safari */
+    position: absolute;
     /* Position Better */
-    top: 25%;
+    top: 50%;
   }
-  /* Position Article Background Image (Higher Version) Better */
+  /* Position Article Background Image (Higher/Lower Versions) Better */
   body.content section.light article img.higher,
-  body.content section.dark article img.higher { top: 20%; }
+  body.content section.dark article img.higher { top: 45%; }
+  body.content section.light article img.lower,
+  body.content section.dark article img.lower { top: 65%; }
   /* Tint Must Span Entire Screen to Cover Article Background Image */
   body.content section.light article div.tint,
-  body.content section.dark article div.tint { width: 100% !important; }
+  body.content section.dark article div.tint {
+    width: 100% !important;
+    /* Attach Tint to Article Background Image, Which is "position:absolute" */
+    position: absolute;
+  }
   /* Resize Article Title Text */
   body.content section.light article h1,
   body.content section.dark article h1 { font-size: 5vw; }
@@ -2721,11 +2729,11 @@ body#awards section.dark article p {
   /* Special Positioning of First Section's Article Below Image */
   body#awards section:nth-of-type(2) article { padding-top: 50vw !important; }
   /* Position Article Background Image Better */
-  body.content section.light article img,
-  body.content section.dark article img { top: 42.5%; }
+  body#awards section.light article img,
+  body#awards section.dark article img { top: 42.5%; }
   /* Position Article Background Image (Higher Version) Better */
-  body.content section.light article img.higher,
-  body.content section.dark article img.higher { top: 35%; }
+  body#awards section.light article img.higher,
+  body#awards section.dark article img.higher { top: 22.5%; }
   /* Resize Article Title Text */
   body#awards section.light article h1,
   body#awards section.dark article h1 { font-size: 5.5vw; }
