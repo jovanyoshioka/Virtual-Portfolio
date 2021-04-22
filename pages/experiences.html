@@ -30,6 +30,11 @@
         <!-- Slideshow's slides/Images -->
         <!-- Custom title, time, and dest attributes used for other slide content -->
         <picture>
+          <source type="image/webp" srcset="../assets/experiences/ra_eecsBuilding.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/ra_eecsBuilding.jpg">
+          <img class="slideshowImages" section=".eecsRA" src="../assets/experiences/ra_eecsBuilding.jpg" alt="Image of Min H. Kao Electrical Engineering and Computer Science building." />
+        </picture>
+        <picture>
           <source type="image/webp" srcset="../assets/experiences/ornl_campus.webp">
           <source type="image/jpeg" srcset="../assets/experiences/ornl_campus.jpg">
           <img class="slideshowImages" section=".ornlInternship" src="../assets/experiences/ornl_campus.jpg" alt="Image of Oak Ridge National Laboratory campus." />
@@ -65,8 +70,77 @@
     </section>
 
     <!-- First content section must be "light" colored -->
+    <!-- UTK EECS Undergraduate Research Assistant -->
+    <section class="eecsRA light">
+      <!-- Content Images' Borders, Containers, and Elements -->
+      <figure>
+        <div>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ra_eecsBuilding.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ra_eecsBuilding.jpg">
+            <img class="blurred" src="../assets/experiences/ra_eecsBuilding.jpg" alt="Image of Min H. Kao Electrical Engineering and Computer Science building blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ra_eecsBuilding.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ra_eecsBuilding.jpg">
+            <img src="../assets/experiences/ra_eecsBuilding.jpg" alt="Image of Min H. Kao Electrical Engineering and Computer Science building." />
+          </picture>
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ra_mazeTool.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ra_mazeTool.jpg">
+            <img class="blurred" src="../assets/experiences/ra_mazeTool.jpg" alt="Image of block-based coding literacy maze tool blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/ra_mazeTool.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/ra_mazeTool.jpg">
+            <img src="../assets/experiences/ra_mazeTool.jpg" alt="Image of block-based coding literacy maze tool." loading="lazy" />
+          </picture>
+        </div>
+      </figure>
+      <!-- Content Info With Background Image -->
+      <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/ut_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/ut_logo.png">
+          <img class="higher" src="../assets/experiences/ut_logo.png" alt="Image of UTK's logo." />
+        </picture>
+        <div class="tint sLess"></div>
+        <h1>Undergrad Research Assistant</h1>
+        <h2>University of Tennessee Knoxville (UTK)</h2>
+        <h3>Spring 2021 - Present</h3>
+        <p>
+          Conceptualizing, designing, and coding a block-based coding literacy maze tool.
+        </p>
+        <p>
+          The tool generates mazes based on stories' plots for students to traverse using code. With this, 
+          students advance not only their literary sequencing and comprehension abilities, but also their 
+          computer science skills in a challenging, yet fun way. Customizability is implemented as much as possible 
+          to adhere by teachers' specific needs.
+        </p>
+        <p>
+          This tool allows K-5 teachers, whose schools may not have dedicated computer science programs, 
+          to integrate computer science into their pre-existing curriculum, specifically in their ELA courses.
+        </p>
+        <p>
+          My supervisor is <a href="https://www.eecs.utk.edu/people/amir-sadovnik/" target="_blank">Dr. Amir Sadovnik</a>, 
+          an Assistant Professor at the University of Knoxville Tennessee, Min H. Kao Department of Electrical Engineering 
+          and Computer Science. We are collaborating with local K-5 teachers.
+        </p>
+        <p>
+          Preview the web application <a href="https://jovanyoshioka.github.io/Blockly-Tool/" target="_blank">here</a>.
+        </p>
+        <p>
+          View the code <a href="https://github.com/jovanyoshioka/Blockly-Tool" target="_blank">here</a>.
+        </p>
+      </article>
+    </section>
+
     <!-- ORNL Internship -->
-    <section class="ornlInternship light">
+    <section class="ornlInternship dark">
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
@@ -103,7 +177,7 @@
           <source type="image/png" srcset="../assets/experiences/ornl_leaf.png">
           <img class="higher" src="../assets/experiences/ornl_leaf.png" alt="Image of ORNL's logo." />
         </picture>
-        <div class="tint less"></div>
+        <div class="tint"></div>
         <h1>Full Stack Developer Intern</h1>
         <h2>Oak Ridge National Laboratory (ORNL)</h2>
         <h3>Summer 2019</h3>
@@ -137,7 +211,7 @@
     </section>
 
     <!-- FRC -->
-    <section class="frc first resize dark">
+    <section class="frc first resize light">
       <figure>
         <div>
           <picture>
@@ -205,7 +279,7 @@
     </section>
 
     <!-- CodeTN -->
-    <section class="codeTN light">
+    <section class="codeTN dark">
       <figure>
         <div>
           <picture>

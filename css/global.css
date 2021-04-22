@@ -2409,6 +2409,8 @@ body.content section.light article div.tint {
   background-color: #0C54A5;
 }
 body.content section.dark article div.tint { background-color: #1A1A1A; }
+body.content section.light article div.tint.sLess,
+body.content section.dark article div.tint.sLess { opacity: 0.65; }
 body.content section.light article div.tint.less,
 body.content section.dark article div.tint.less { opacity: 0.3; }
 
