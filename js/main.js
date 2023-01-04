@@ -1019,12 +1019,13 @@ function includeFooter()
     <a href="https://www.linkedin.com/in/jovanyoshioka/" target="_blank" class="socialMediaIcon fab fa-linkedin-in"></a>
     <a href="https://www.github.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-github"></a>
     <a href="https://www.twitter.com/jovanyoshioka" target="_blank" class="socialMediaIcon fab fa-twitter"></a>
-    <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="socialMediaIcon fab fa-facebook-f"></a>
+    <!-- <a href="https://www.facebook.com/jovanyoshioka89" target="_blank" class="socialMediaIcon fab fa-facebook-f"></a> -->
     <a href="mailto:jovanyoshioka@gmail.com" class="socialMediaIcon fas fa-envelope"></a>
     <!-- Horizontal line divider -->
     <div></div>
     <!-- Copyright statement -->
-    <small><span id="copyrightSymbol">&copy;</span> <span id="currentYear">2021</span> Jovan Yoshioka. All Rights Reserved.</small>
+    <!-- Note: Must register with USPTO to use copyright symbol -->
+    <small>Copyright <span id="currentYear">2023</span> by Jovan Yoshioka. All Rights Reserved.</small>
     <small>Created by Jovan Yoshioka</small>
   `;
 }

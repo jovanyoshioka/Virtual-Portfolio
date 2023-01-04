@@ -31,6 +31,11 @@
         <!-- Slideshow's slides/Images -->
         <!-- Custom title, time, and dest attributes used for other slide content -->
         <picture>
+          <source type="image/webp" srcset="../assets/experiences/microsoft_campus.webp">
+          <source type="image/jpeg" srcset="../assets/experiences/microsoft_campus.jpg">
+          <img class="slideshowImages" section=".msft" src="../assets/experiences/microsoft_campus.jpg" alt="Image of Microsoft Redmond, WA campus." />
+        </picture>
+        <picture>
           <source type="image/webp" srcset="../assets/experiences/eecs_building.webp">
           <source type="image/jpeg" srcset="../assets/experiences/eecs_building.jpg">
           <img class="slideshowImages" section=".eecsRA" src="../assets/experiences/eecs_building.jpg" alt="Image of Min H. Kao Electrical Engineering and Computer Science building." />
@@ -77,7 +82,72 @@
 
     <!-- First content section must be "light" colored -->
     <!-- UTK EECS Undergraduate Research Assistant -->
-    <section class="eecsRA light">
+    <section class="msft light">
+      <!-- Content Images' Borders, Containers, and Elements -->
+      <figure>
+        <div>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/microsoft_campus.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/microsoft_campus.jpg">
+            <img class="blurred" src="../assets/experiences/microsoft_campus.jpg" alt="Image of Microsoft Redmond, WA campus blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/microsoft_campus.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/microsoft_campus.jpg">
+            <img src="../assets/experiences/microsoft_campus.jpg" alt="Image of Microsoft Redmond, WA campus." />
+          </picture>
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/intern_bay.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/intern_bay.jpg">
+            <img class="blurred" src="../assets/experiences/intern_bay.jpg" alt="Image of Jovan and his intern friends blurred." loading="lazy" />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/experiences/intern_bay.webp">
+            <source type="image/jpeg" srcset="../assets/experiences/intern_bay.jpg">
+            <img src="../assets/experiences/intern_bay.jpg" alt="Image of Jovan and his intern friends." loading="lazy" />
+          </picture>
+        </div>
+      </figure>
+      <!-- Content Info With Background Image -->
+      <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/experiences/msft_logo.webp">
+          <source type="image/png" srcset="../assets/experiences/msft_logo.png">
+          <img class="higher" src="../assets/experiences/msft_logo.png" alt="Image of Microsoft's logo." />
+        </picture>
+        <div class="tint"></div>
+        <h1>Software Engineer Intern</h1>
+        <h2>Microsoft Corporation</h2>
+        <h3>Summer 2022</h3>
+        <p>
+          Developed a dynamic navigation feature in SharePoint (TypeScript, React, Fluent UI) for millions of users to quickly 
+          and easily access apps.
+        </p>
+        <p>
+          Implemented RESTful API proxy endpoints to check user permissions in cross-geo 
+          scenarios (C#). Utilized virtual machines and Fiddler to simulate cross-geo calls, enabling debugging 
+          and optimization. Constructed telemetry dashboards to find and patch bugs, ensuring over 99% success. 
+          Applied methods of dark deployment to maintain reliability and avoid performance regression. Practiced 
+          Agile software development.
+        </p>
+        <p>
+          This was my first internship outside of Knoxville, TN. Therefore, not only did I obtain amazing technical and 
+          professional development, but I also experienced personal growth and gained new insight into future career considerations. 
+          Being able to explore Seattle, WA was a great oppportunity to relax, have fun, and make lasting memories with friends.
+        </p>
+        <p>
+          My manager was Petru Moldovanu and my mentor was <a href="https://www.linkedin.com/in/eli-b-1352084" target="_blank">Eli B</a>. 
+          I also collaborated closely with subject-matter expert <a href="https://www.linkedin.com/in/bmiddha" target="_blank">Bharat Middha</a>.
+        </p>
+      </article>
+    </section>
+
+    <!-- UTK EECS Undergraduate Research Assistant -->
+    <section class="eecsRA dark">
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
@@ -114,14 +184,13 @@
           <source type="image/png" srcset="../assets/experiences/ut_logo.png">
           <img class="higher" src="../assets/experiences/ut_logo.png" alt="Image of UTK's logo." />
         </picture>
-        <div class="tint sLess"></div>
+        <div class="tint"></div> <!-- sLess -->
         <h1>Undergrad Research Assistant</h1>
         <h2>University of Tennessee Knoxville (UTK)</h2>
-        <h3>Spring 2021 - Present</h3>
+        <h3>Spring 2021 - Spring 2022</h3>
         <p>
-          Conceptualizing, designing, coding, and deploying Code a Story, a web application that integrates
-          coding into pre-existing curriculum, specifically ELA courses, for schools that lack dedicated
-          computer science programs.
+          Conceptualized, designed, coded, and deployed Code a Story, a web-based application that integrates coding 
+          into existing K-5 English curriculum via challenges for schools that lack dedicated computer science programs.
         </p>
         <p>
           The tool generates mazes based on stories' plots for students to traverse using code. With this, 
@@ -130,9 +199,12 @@
           as much as possible for busy, diverse teachers.
         </p>
         <p>
-          My supervisor is <a href="https://www.eecs.utk.edu/people/amir-sadovnik/" target="_blank">Dr. Amir Sadovnik</a>, 
+          Led a professional development workshop for 40+ K-5 teachers to introduce Code a Story, gauge interest, and gain feedback.
+        </p>
+        <p>
+          My supervisor was <a href="https://www.eecs.utk.edu/people/amir-sadovnik/" target="_blank">Dr. Amir Sadovnik</a>, 
           an Assistant Professor at the University of Knoxville Tennessee, Min H. Kao Department of Electrical Engineering 
-          and Computer Science. We are collaborating with local K-5 teachers spanning 2 school districts.
+          and Computer Science. We collaborated with local K-5 teachers spanning 2 school districts.
         </p>
         <p>
           Coded in HTML/CSS, JavaScript, PHP, and MySQL. View the code <a href="https://github.com/jovanyoshioka/Blockly-Tool" target="_blank">here</a>.
@@ -141,7 +213,7 @@
     </section>
 
     <!-- ORNL 2021 Internship -->
-    <section class="ornl21 dark">
+    <section class="ornl21 light">
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
@@ -179,14 +251,26 @@
           <img class="higher" src="../assets/experiences/ornl_leaf.png" alt="Image of ORNL's logo." />
         </picture>
         <div class="tint"></div>
-        <h1>Software Engineering Intern</h1>
+        <h1>Software Engineer Intern</h1>
         <h2>Oak Ridge National Laboratory (ORNL)</h2>
         <h3>Summer 2021</h3>
         <p>
           Advanced the ORNL Digital Twin, a virtual replication of Oak Ridge National Laboratory 
           campus transportation systems constructed from real-time traffic flow, parking, and EV 
           charging data. The digital twin enables sustainable campus transportation through its 
-          resultant insights improving situational awareness, travel time, safety, and fuel efficiency. 
+          insights improving situational awareness, travel time, safety, and fuel efficiency. 
+        </p>
+        <p>
+          I developed a real-time vision-based algorithm to count vehicles and measure speed from several 
+          real-time video feeds simultaneously 24/7, achieving 97.2% accuracy over 1,152 vehicles 
+          (Python, OpenCV, FFmpeg). I dynamically visualized this data on a web application (React, 
+          Django, SQLite). I also implemented data processing capabilities to a script reading EV 
+          charging station amperages.
+        </p>
+        <p>
+          Presented an <a href="awards.html?section=ornl21" target="_blank">award-winning poster</a> 
+          at the 2021 Intern Symposium. My work also resulted in a 
+          <a href="https://doi.org/10.1061/9780784484319.004" target="_blank">published paper</a>.
         </p>
         <p>
           My mentors were <a href="https://www.ornl.gov/staff-profile/ross-wang" target="_blank">Dr. Ross Wang</a>, 
@@ -196,22 +280,11 @@
           <a href="https://www.ornl.gov/staff-profile/yunli-shao" target="_blank">Dr. Yunli Shao</a>,
           an R&D Staff Member in the Vehicle Systems Integration Research Group.
         </p>
-        <p>
-          I developed a real-time vision-based algorithm to count vehicles and measure speed from several 
-          real-time video feeds simultaneously 24/7, achieving 97.2% accuracy over 1,152 vehicles 
-          (Python, OpenCV, FFmpeg). After collecting and analyzing traffic flow data, I dynamically 
-          visualized it on a web application (React, Django, SQLite). I also implemented data processing 
-          capabilities to a script reading EV charging station amperages.
-        </p>
-        <p>
-          I presented an <a href="awards.html?section=ornl21" target="_blank">award-winning poster</a> 
-          at the 2021 Intern Symposium.
-        </p>
       </article>
     </section>
 
     <!-- ORNL 2019 Internship -->
-    <section class="ornl19 light">
+    <section class="ornl19 dark">
       <!-- Content Images' Borders, Containers, and Elements -->
       <figure>
         <div>
@@ -262,12 +335,6 @@
           in their areas.
         </p>
         <p>
-          My mentors were <a href="https://www.ornl.gov/staff-profile/ross-wang" target="_blank">Dr. Ross Wang</a>, 
-          at the time an R&D Staff Member in the Transportation Analytics & Decision Sciences Group, and
-          <a href="https://www.ornl.gov/staff-profile/gina-k-accawi">Gina Accawi</a>, at the time a Technical 
-          Senior Staff Member at ORNL specializing in energy consumption analysis.
-        </p>
-        <p>
           I worked to resolve issues/bugs, utilizing team management
           tools like GitLab, and conceptualized, designed, and coded several key
           features, including a custom variables system that improved the UX by
@@ -276,13 +343,19 @@
           experience.
         </p>
         <p>
+          My mentors were <a href="https://www.ornl.gov/staff-profile/ross-wang" target="_blank">Dr. Ross Wang</a>, 
+          at the time an R&D Staff Member in the Transportation Analytics & Decision Sciences Group, and
+          <a href="https://www.ornl.gov/staff-profile/gina-k-accawi">Gina Accawi</a>, at the time a Technical 
+          Senior Staff Member at ORNL specializing in energy consumption analysis.
+        </p>
+        <p>
           Want to learn more? Check out my special <a href="https://orise.orau.gov/ornl/experiences/high-school/yoshioka.html" target="_blank">intern spotlight</a>.
         </p>
       </article>
     </section>
 
     <!-- FRC -->
-    <section class="frc first resize dark">
+    <section class="frc first resize light">
       <figure>
         <div>
           <picture>
@@ -350,7 +423,7 @@
     </section>
 
     <!-- CodeTN -->
-    <section class="codeTN light">
+    <section class="codeTN dark">
       <figure>
         <div>
           <picture>
