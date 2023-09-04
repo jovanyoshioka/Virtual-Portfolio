@@ -1467,7 +1467,7 @@ function initLatestActivity()
 {
   // Init position is the 2/3 point of latestActivitySection element taking into account nav bar height.
   var initPosition = document.getElementById("latestActivitySection").offsetTop -
-      (document.querySelector("nav").offsetHeight + document.getElementById("latestActivitySection").offsetHeight*(2/3));
+      (document.querySelector("nav").offsetHeight + document.getElementById("latestActivitySection").offsetHeight*(3/5));
   // Get current animation of first, and therefore all, path elements.
   var currentPathAnimation = document.getElementsByTagName("path")[0].style.animation;
 
@@ -1659,6 +1659,7 @@ function setProjectsThumbnails()
 {
   // Contains list of projects sections and corresponding thumbnails.
   const SECTIONS_THUMBNAILS = [
+    {section:"hopfieldDrone", thumbnail:"jovi_hopfield_drone"},
     {section:"portfolio", thumbnail:"portfolio_thumbnail"},
     {section:"alienX", thumbnail:"alienX_thumbnail"},
     {section:"assassinPlugin", thumbnail:"assassin_plugin_cover"},
@@ -1682,23 +1683,5 @@ function setProjectsThumbnails()
     {
       videosNodes[j].poster = PROJECTS_ASSETS_PATH + SECTIONS_THUMBNAILS[i].thumbnail + "." + ext;
     }
-  }
-}
-
-/************************
- * MOBILE COMPATIBILITY *
- ************************/
-/**
- * Alert user that the virtual portfolio is not yet mobile compatible.
- */
-function alertIncompatibility()
-{
-  if (window.innerWidth <= MOBILE_BREAKPOINT)
-  {
-    // If screen width is tablet-sized or smaller, alert user of mobile incompatibility.
-
-    alert("Hello there!\n\nI have not yet optimized my virtual portfolio to be mobile " +
-    "compatible. Some content may look out of place. I recommend proceeding on a larger " +
-    "screen or turning your device to landscape orientation. Sorry for the inconvenience.\n\n- Jovan");
   }
 }

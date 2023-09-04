@@ -36,6 +36,11 @@
           <img class="slideshowImages" section=".droneFleet" src="../assets/projects/telloedu.jpg" alt="Image of a Tello EDU drone." />
         </picture>
         <picture>
+          <source type="image/webp" srcset="../assets/projects/hopfield_drone_cv.webp">
+          <source type="image/jpeg" srcset="../assets/projects/hopfield_drone_cv.jpg">
+          <img class="slideshowImages" section=".hopfieldDrone" src="../assets/projects/hopfield_drone_cv.jpg" alt="Image of a drone computer vision system detecting a pattern." />
+        </picture>
+        <picture>
           <source type="image/webp" srcset="../assets/projects/portfolio_cover.webp">
           <source type="image/jpeg" srcset="../assets/projects/portfolio_cover.jpg">
           <img class="slideshowImages" section=".portfolio" src="../assets/projects/portfolio_cover.jpg" alt="Image of virtual portfolio home page." />
@@ -154,8 +159,60 @@
       </article>
     </section>
 
+    <!-- Hopfield Drone -->
+    <section class="hopfieldDrone dark">
+      <figure>
+        <div>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/hopfield_drone_cv.webp">
+            <source type="image/jpeg" srcset="../assets/projects/hopfield_drone_cv.jpg">
+            <img class="blurred" src="../assets/projects/hopfield_drone_cv.jpg" alt="Image of a drone computer vision system detecting a pattern blurred." />
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../assets/projects/hopfield_drone_cv.webp">
+            <source type="image/jpeg" srcset="../assets/projects/hopfield_drone_cv.jpg">
+            <img src="../assets/projects/hopfield_drone_cv.jpg" alt="Image of a drone computer vision system detecting a pattern." />
+          </picture>
+        </div>
+      </figure>
+      <figure>
+        <div>
+          <video class="blurred" muted preload="none"><source src="../assets/projects/hopfield_drone_demo.mp4" type="video/mp4"></video>
+          <video muted preload="none"><source src="../assets/projects/hopfield_drone_demo.mp4" type="video/mp4"></video>
+          <button onclick="playVideos(this)"><i class="fas fa-play"></i></button>
+        </div>
+      </figure>
+      <article>
+        <picture>
+          <source type="image/webp" srcset="../assets/projects/droneFleet_background.webp">
+          <source type="image/png" srcset="../assets/projects/droneFleet_background.png">
+          <img src="../assets/projects/droneFleet_background.png" alt="Image of Tello EDU drawing." />
+        </picture>
+        <div class="tint"></div>
+        <h1>Hopfield Drone</h1>
+        <h2>Python, OpenCV, TelloSDK</h2>
+        <h3>Spring 2023</h3>
+        <p>
+          The Hopfield Drone uses Hopfield neural networks (HNNs) to implement a pattern-based computer vision system for autonomous drone flight. 
+          It demonstrates the feasibility of lightweight, accessible alternatives to current resource-intensive computer vision 
+          algorithms for real-time applications.
+        </p>
+        <p>
+          The general workflow involves (1) retrieving a video stream from the Tello EDU drone, (2) executing image processing to detect the pattern, (3) feeding 
+          the detected pattern into the HNN to retrieve any lost parts of the pattern (using the HNN's associative memory capabilities), (4) correlating the 
+          recognized pattern to a pre-defined drone command, and (5) sending the command to the drone.
+        </p>
+        <p>
+          Please feel free to check out the Hopfield Drone <a href="https://github.com/jovanyoshioka/Hopfield-Drone/blob/main/poster.pdf" target="_blank">poster</a>, which 
+          I presented at a biologically-inspired computing class symposium. For a more in-depth exploration, please read the Hopfield Drone 
+          <a href="https://github.com/jovanyoshioka/Hopfield-Drone/blob/main/paper.pdf" target="_blank">paper</a>.
+        </p>
+        <h4><a href="https://github.com/jovanyoshioka/Hopfield-Drone" target="_blank">View Code</a><h4>
+      </article>
+    </section>
+
     <!-- Virtual Portfolio -->
-    <section class="portfolio dark">
+    <section class="portfolio light">
       <figure>
         <div>
           <picture>
@@ -209,7 +266,7 @@
     </section>
 
     <!-- AlienX Robot Code -->
-    <section class="alienX resize light">
+    <section class="alienX resize dark">
       <figure>
         <div>
           <picture>
@@ -267,7 +324,7 @@
     </section>
 
     <!-- Minecraft Assassin Plugin -->
-    <section class="assassinPlugin resize dark">
+    <section class="assassinPlugin resize light">
       <figure>
         <div>
           <picture>
@@ -326,7 +383,7 @@
     </section>
 
     <!-- Path Following Code -->
-    <section class="pathFollowing light">
+    <section class="pathFollowing dark">
       <figure>
         <div>
           <picture>
@@ -385,7 +442,7 @@
     </section>
 
     <!-- E-ssue -->
-    <section class="e-ssue dark">
+    <section class="e-ssue light">
       <figure>
         <div>
           <picture>
@@ -444,7 +501,7 @@
     </section>
 
     <!-- Rcar -->
-    <section class="rCar resize light">
+    <section class="rCar resize dark">
       <figure>
         <div>
           <picture>
