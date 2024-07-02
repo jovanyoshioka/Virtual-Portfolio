@@ -1913,11 +1913,6 @@ body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wr
 }
 /* Position Handle Towards Middle of Icon */
 body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.socialMediaIcon { vertical-align: middle; }
-/* Move LinkedIn and Twitter's Icon More to Right to Stagger Better */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-linkedin-in,
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-twitter { margin-left: 7.5%; }
-/* Align GitHub's Icon With Facebook's Icon Position */
-body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.fa-github { margin-left: -10%; }
 /* Styling for Social Media Handle Link */
 body#contact main div.textContainer div.infoContainer div:nth-of-type(2) span.wrapper a.handle {
   font-size: 2.5vw;
