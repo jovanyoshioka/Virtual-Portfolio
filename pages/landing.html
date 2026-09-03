@@ -8,47 +8,1692 @@
     <meta name="author" content="Jovan Yoshioka">
     <meta name="image" property="og:image" content="https://jovanyoshioka.com/assets/thumbnail.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/global.css"> -->
     <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="64x64">
     <link rel="preload" href="../assets/suezone.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+
+    <style>
+      @font-face {
+        font-family: SuezOne;
+        src: url('../assets/suezone.ttf');
+        font-display: swap;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+        width: 100%;
+        height: 100%;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      #svg-draw-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        background: black;
+        pointer-events: none;
+        opacity: 1;
+        overflow: hidden;
+        transition: opacity 0.35s ease;
+      }
+
+      #svg-draw-overlay.is-hidden {
+        opacity: 0;
+      }
+
+      #svg-draw-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(70vw, 900px);
+        height: auto;
+        transform: translate(-50%, -50%) scale(1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        pointer-events: none;
+        cursor: default;
+        transition:
+          transform 0.28s ease,
+          filter 0.28s ease;
+      }
+
+      #svg-draw-overlay.is-draw-complete #svg-draw-container {
+        pointer-events: auto;
+        cursor: pointer;
+      }
+
+      #svg-draw-container svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        overflow: visible;
+        pointer-events: visiblePainted;
+      }
+
+      #svg-draw-container svg path,
+      #svg-draw-container svg line,
+      #svg-draw-container svg polyline,
+      #svg-draw-container svg polygon,
+      #svg-draw-container svg circle,
+      #svg-draw-container svg ellipse,
+      #svg-draw-container svg rect {
+        fill: rgba(255, 255, 255, 0) !important;
+        stroke: white !important;
+        stroke-width: 8 !important;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        pointer-events: visiblePainted;
+        transition:
+          fill 0.28s ease,
+          stroke 0.18s ease,
+          stroke-width 0.28s ease,
+          filter 0.28s ease;
+      }
+
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover {
+        transform: translate(-50%, -50%) scale(1.02);
+        filter:
+          drop-shadow(0 0 3px rgba(255, 255, 255, 0.55))
+          drop-shadow(0 0 7px rgba(255, 255, 255, 0.26))
+          drop-shadow(0 0 14px rgba(170, 210, 255, 0.14));
+      }
+
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg path,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg line,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg polyline,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg polygon,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg circle,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg ellipse,
+      #svg-draw-overlay.is-draw-complete #svg-draw-container:hover svg rect {
+        fill: rgba(255, 255, 255, 0.045) !important;
+        stroke-width: 8.35 !important;
+      }
+
+      #intro-click-cue {
+        position: fixed;
+        left: 50%;
+        top: calc(50% + 10.5vh);
+        z-index: 11;
+        color: #CCCCCC;
+        font-family: SuezOne;
+        font-size: 2vh;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-50%);
+        transition:
+          opacity 0.35s ease,
+          visibility 0s linear 0.35s;
+      }
+
+      #svg-draw-overlay.is-draw-complete #intro-click-cue {
+        opacity: 1;
+        visibility: visible;
+        animation: tooltipBounce 1.5s ease 0.15s alternate infinite;
+        transition:
+          opacity 1.1s ease 0.15s,
+          visibility 0s linear 0s;
+      }
+
+      #svg-draw-overlay.is-hidden #intro-click-cue {
+        opacity: 0;
+        visibility: hidden;
+        animation: none;
+        transform: translateX(-50%);
+        transition:
+          opacity 0.35s ease,
+          visibility 0s linear 0.35s;
+      }
+
+      @keyframes tooltipBounce {
+        from { transform: translate(-50%, -2vh); }
+        to { transform: translate(-50%, 0); }
+      }
+
+      #portfolio-cta {
+        width: 19.33239vh;
+        font-size: 3.609375vh;
+        position: absolute;
+        bottom: 4.25%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        z-index: 3;
+        transition:
+          opacity 0.8s ease,
+          visibility 0s linear 0.8s;
+      }
+
+      #portfolio-cta.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition-delay: 0s;
+      }
+
+      /*** Diagonal Slide Button ***/
+      div.diagonalBtn {
+        height: auto;
+        position: relative;
+        overflow: hidden;
+        border: 0.240624vh solid #CCCCCC;
+        border-radius: 0.601562vh;
+        background: #0C54A5;
+        transition:
+          border-color 0.75s,
+          box-shadow 0.75s;
+      }
+
+      div.diagonalBtn button.diagonalBtn {
+        position: relative;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        border: 0;
+        background-color: #0C54A5;
+        padding: 0.902344vh;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      div.diagonalBtn button.diagonalBtn span {
+        position: relative;
+        z-index: 1;
+        font-family: SuezOne;
+        color: #CCCCCC;
+        font-size: inherit;
+        transition: color 0.75s;
+      }
+
+      div.diagonalBtn button.diagonalBtn::before {
+        content: '';
+        width: 125%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: skewX(-45deg) translateX(-110%);
+        transition: transform 0.75s;
+        background-color: #367FCF;
+      }
+
+      div.diagonalBtn:hover,
+      div.diagonalBtn:focus-within {
+        border-color: #EEEEEE;
+        box-shadow: 0 0 1.323437vh rgba(54, 127, 207, 0.32);
+      }
+
+      div.diagonalBtn:hover button.diagonalBtn span,
+      div.diagonalBtn:focus-within button.diagonalBtn span {
+        color: #EEEEEE;
+      }
+
+      div.diagonalBtn:hover button.diagonalBtn::before,
+      div.diagonalBtn:focus-within button.diagonalBtn::before {
+        transform: skewX(-45deg) translateX(-10%);
+      }
+
+      div.diagonalBtn button.diagonalBtn:focus-visible {
+        outline: 0.120313vh solid #FFFFFF;
+        outline-offset: -0.360938vh;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #svg-draw-overlay.is-draw-complete #intro-click-cue {
+          animation: none;
+          transform: translateX(-50%);
+        }
+      }
+    </style>
   </head>
+
   <body id="landing">
-    <!-- Dark outer, light inner background -->
-    <div class="radialGradient"></div>
-
-    <!-- Particles container -->
-    <canvas id="particlesCanvas"></canvas>
-
-    <!-- Self-drawing JY logo -->
-    <svg viewBox="75 -25 700 850">
-      <g>
-        <path d="M4187 7805 c-119 -30 -283 -132 -454 -283 -206 -181 -633 -590 -1073 -1027 -1048 -1039 -1181 -1165 -1364 -1286 -261 -172 -566 -195 -686 -51 -78 93 -129 268 -150 504 -23 270 -29 330 -35 336 -12 12 -102 -122 -165 -246 -96 -192 -135 -354 -118 -492 24 -195 84 -326 203 -445 44 -44 109 -97 145 -118 180 -104 464 -143 666 -92 110 28 305 132 469 249 102 73 304 240 431 358 141 130 731 705 1189 1158 330 326 781 747 790 738 3 -2 -11 -99 -31 -214 -19 -115 -77 -508 -129 -874 -53 -366 -104 -717 -116 -780 -25 -141 -68 -328 -82 -354 -5 -11 -64 -85 -132 -165 -828 -990 -1139 -1568 -1220 -2266 -17 -150 -20 -465 -5 -616 63 -632 295 -1052 593 -1076 86 -7 126 8 197 73 173 160 331 540 514 1229 73 277 161 653 290 1240 164 746 224 1002 280 1196 l16 55 43 -40 c99 -96 262 -146 497 -153 239 -7 378 27 556 138 113 71 242 193 334 317 41 55 76 100 77 99 0 -1 -12 -156 -28 -345 -25 -306 -31 -346 -49 -370 -12 -14 -110 -125 -219 -246 -268 -300 -358 -409 -456 -556 -304 -456 -586 -1144 -700 -1707 -168 -830 -29 -1349 402 -1498 181 -63 372 -54 538 25 424 204 690 893 850 2200 45 367 94 906 141 1535 l18 230 132 270 c73 149 185 385 249 525 64 140 150 319 190 398 40 78 67 142 61 142 -51 0 -205 -153 -411 -407 -89 -110 -131 -155 -133 -143 -4 20 12 138 103 795 145 1042 195 1480 195 1718 l0 117 -117 2 c-192 4 -453 1 -459 -5 -3 -3 -12 -78 -20 -167 -72 -826 -333 -1602 -707 -2098 -170 -227 -373 -381 -504 -382 -82 0 -204 62 -317 162 l-49 44 65 136 c107 223 229 419 370 597 71 89 64 99 -34 52 -81 -39 -216 -141 -328 -247 -48 -46 -90 -84 -92 -84 -11 0 40 381 108 805 29 187 61 387 70 445 8 58 27 173 41 255 34 205 40 332 19 415 -54 209 -252 327 -459 275z m-846 -4366 c-76 -357 -158 -699 -252 -1054 -79 -295 -222 -790 -231 -800 -16 -16 -2 530 16 665 70 504 222 947 445 1292 30 48 57 86 58 84 1 -1 -15 -85 -36 -187z m2243 -166 c-8 -49 -32 -254 -54 -458 -89 -809 -130 -1073 -212 -1370 -89 -324 -218 -556 -376 -680 l-57 -45 -13 26 c-8 14 -25 69 -38 122 -71 279 -26 672 132 1157 117 358 331 834 532 1185 35 61 92 150 96 150 1 0 -3 -39 -10 -87z" />
-        <path d="M 4187 7805 c -119 -30 -283 -132 -454 -283 -206 -181 -633 -590 -1073 -1027 -1048 -1039 -1181 -1165 -1364 -1286 -261 -172 -566 -195 -686 -51 -78 93 -129 268 -150 504 -23 270 -29 330 -35 336 -12 12 -102 -122 -165 -246 -96 -192 -135 -354 -118 -492 24 -195 84 -326 203 -445 44 -44 109 -97 145 -118 180 -104 464 -143 666 -92 110 28 305 132 469 249 102 73 304 240 431 358 141 130 731 705 1189 1158 330 326 781 747 790 738 3 -2 -11 -99 -31 -214 -19 -115 -77 -508 -129 -874 -53 -366 -104 -717 -116 -780 -25 -141 -68 -328 -82 -354 -5 -11 -64 -85 -132 -165 -828 -990 -1139 -1568 -1220 -2266 -17 -150 -20 -465 -5 -616 63 -632 295 -1052 593 -1076 86 -7 126 8 197 73 173 160 331 540 514 1229 73 277 161 653 290 1240 164 746 224 1002 280 1196 l16 55 43 -40 c 99 -96 262 -146 497 -153 239 -7 378 27 556 138 113 71 242 193 334 317 41 55 76 100 77 99 0 -1 -12 -156 -28 -345 -25 -306 -31 -346 -49 -370 -12 -14 -110 -125 -219 -246 -268 -300 -358 -409 -456 -556 -304 -456 -586 -1144 -700 -1707 -168 -830 -29 -1349 402 -1498 181 -63 372 -54 538 25 424 204 690 893 850 2200 45 367 94 906 141 1535 l18 230 132 270 c 73 149 185 385 249 525 64 140 150 319 190 398 40 78 67 142 61 142 -51 0 -205 -153 -411 -407 -89 -110 -131 -155 -133 -143 -4 20 12 138 103 795 145 1042 195 1480 195 1718 l0 117 -117 2 c -192 4 -453 1 -459 -5 -3 -3 -12 -78 -20 -167 -72 -826 -333 -1602 -707 -2098 -170 -227 -373 -381 -504 -382 -82 0 -204 62 -317 162 l-49 44 65 136 c 107 223 229 419 370 597 71 89 64 99 -34 52 -81 -39 -216 -141 -328 -247 -48 -46 -90 -84 -92 -84 -11 0 40 381 108 805 29 187 61 387 70 445 8 58 27 173 41 255 34 205 40 332 19 415 -54 209 -252 327 -459 275 z" />
-        <path d="M 3370 3450 c -76 -357 -158 -699 -252 -1054 -79 -295 -222 -790 -231 -800 -16 -16 -2 530 16 665 70 504 222 947 445 1292 30 48 57 86 58 84 1 -1 -15 -85 -36 -187 z" />
-        <path d="M 5575 3250 c -8 -49 -32 -254 -54 -458 -89 -809 -130 -1073 -212 -1370 -89 -324 -218 -556 -376 -680 l -57 -45 -13 26 c -8 14 -25 69 -38 122 -71 279 -26 672 132 1157 117 358 331 834 532 1185 35 61 92 150 96 150 1 0 -3 -39 -10 -87 z" />
-      </g>
-    </svg>
-
-    <!-- Button to redirect to home page -->
-    <div class="diagonalBtn">
-      <a class="diagonalBtn" onclick="goHome()"><span>My Portfolio</span></a>
+    <div id="svg-draw-overlay">
+      <div
+        id="svg-draw-container"
+        role="button"
+        tabindex="0"
+        aria-label="Launch the space animation"
+        aria-disabled="true"
+      ></div>
+      <div id="intro-click-cue" aria-hidden="true">
+        Try clicking my name!
+      </div>
     </div>
 
-    <!-- Used to fade out page after redirect button has been clicked -->
-    <div class="blackBackground"></div>
+    <div id="portfolio-cta" class="diagonalBtn">
+      <button class="diagonalBtn" type="button" onclick="goHome()">
+        <span>Explore</span>
+      </button>
+    </div>
 
-    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
     <script>
-      setTimeout(function() {
-        // Wait until after JY logo has been drawn (4 seconds/4000ms).
+      // -----------------------------
+      // Basic setup
+      // -----------------------------
 
-        // Instantiates canvas object.
-        createCanvas("particlesCanvas");
-        // Creates particles with explosion effect.
-        initParticles(true);
-        // Animates particles movement.
-        animateParticles();
-      }, 4000);
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000008);
+      scene.fog = new THREE.FogExp2(0x000008, 0.004);
+
+      const camera = new THREE.PerspectiveCamera(
+        70,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1200
+      );
+
+      camera.position.set(0, 0, 0);
+      camera.lookAt(0, 0, -1);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false
+      });
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      document.body.appendChild(renderer.domElement);
+
+      const clock = new THREE.Clock();
+
+      // -----------------------------
+      // Config
+      // -----------------------------
+
+      const FORWARD_SPEED = 35;
+
+      const STAR_COUNT = 1500;
+      const STAR_FIELD_WIDTH = 260;
+      const STAR_FIELD_HEIGHT = 150;
+      const STAR_FIELD_DEPTH = 700;
+
+      const LOGO_MODEL_PATH = "../assets/models/jovan_yoshioka_logo.glb";
+      const SVG_DRAW_PATH = "../assets/jovan_yoshioka_logo_outline.svg";
+
+      const LOGO_DISTANCE_FROM_CAMERA = 90;
+      const LOGO_DESIRED_WIDTH = 95;
+
+      const SVG_DRAW_SECONDS = 5;
+
+      const SVG_LARGE_PATH_TOTAL_STAGGER_SECONDS = 0.25;
+      const SVG_SMALL_PATH_START_DELAY_SECONDS = 1.15;
+      const SVG_SMALL_PATH_TOTAL_STAGGER_SECONDS = 0.85;
+
+      const SVG_SMALL_PATH_LENGTH_RATIO = 0.28;
+
+      const STAR_EXPLOSION_SECONDS = 1.45;
+
+      const LOGO_ROTATION_X = 0;
+      const LOGO_ROTATION_Y = 0;
+      const LOGO_ROTATION_Z = 0;
+
+      const LOGO_MOUSE_MOVE_X = 2.0;
+      const LOGO_MOUSE_MOVE_Y = 1.2;
+
+      const LOGO_MOUSE_ROTATE_X = 0.2;
+      const LOGO_MOUSE_ROTATE_Y = 0.38;
+
+      const LOGO_POSITION_EASE = 0.08;
+      const LOGO_ROTATION_EASE = 0.08;
+
+      const SVG_OVERLAY_SCALE_MULTIPLIER = 1.04;
+      const SVG_OVERLAY_X_OFFSET_PX = 0;
+      const SVG_OVERLAY_Y_OFFSET_PX = 0;
+
+      let introHasBeenClicked = false;
+      let explosionStartTime = null;
+      let svgOverlayHasBeenHidden = false;
+      let hasMouseMovedAfterExplosion = false;
+
+      const mouse = {
+        x: 0,
+        y: 0
+      };
+
+      const logoTargetPosition = new THREE.Vector3(0, 0, 0);
+
+      const logoCurrentRotation = {
+        x: LOGO_ROTATION_X,
+        y: LOGO_ROTATION_Y,
+        z: LOGO_ROTATION_Z
+      };
+
+      // -----------------------------
+      // SVG self-draw intro
+      // -----------------------------
+
+      const svgDrawOverlay = document.getElementById("svg-draw-overlay");
+      const svgDrawContainer = document.getElementById("svg-draw-container");
+      const introClickCue = document.getElementById("intro-click-cue");
+      const portfolioCta = document.getElementById("portfolio-cta");
+
+      let svgDrawStartTime = null;
+      let svgDrawableItems = [];
+      let svgDrawIsComplete = false;
+      let portfolioButtonHasBeenShown = false;
+
+      function easeInOutCubic(t) {
+        if (t < 0.5) {
+          return 4 * t * t * t;
+        }
+
+        return 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+
+      function easeOutCubicForSvg(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function elementIsInsideNonDrawableContainer(element) {
+        return Boolean(
+          element.closest("defs, clipPath, mask, pattern, marker, symbol")
+        );
+      }
+
+      function elementLooksDrawable(element) {
+        if (elementIsInsideNonDrawableContainer(element)) {
+          return false;
+        }
+
+        const computedStyle = window.getComputedStyle(element);
+
+        if (
+          computedStyle.display === "none" ||
+          computedStyle.visibility === "hidden" ||
+          Number(computedStyle.opacity) === 0
+        ) {
+          return false;
+        }
+
+        try {
+          const box = element.getBBox();
+
+          if (box.width === 0 && box.height === 0) {
+            return false;
+          }
+        } catch (error) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function getDrawableLength(element) {
+        element.removeAttribute("pathLength");
+
+        let length = 0;
+
+        try {
+          length = element.getTotalLength();
+        } catch (error) {
+          try {
+            const box = element.getBBox();
+            length = Math.max(1, box.width * 2 + box.height * 2);
+          } catch (innerError) {
+            length = 0;
+          }
+        }
+
+        if (!Number.isFinite(length) || length <= 0) {
+          return 0;
+        }
+
+        return length;
+      }
+
+      function setupSvgSelfDraw(svg) {
+        const allDrawableElements = Array.from(
+          svg.querySelectorAll("path, line, polyline, polygon, circle, ellipse, rect")
+        );
+
+        const drawableElementsWithLengths = allDrawableElements
+          .filter(function(element) {
+            return elementLooksDrawable(element);
+          })
+          .map(function(element) {
+            return {
+              element: element,
+              length: getDrawableLength(element)
+            };
+          })
+          .filter(function(item) {
+            return item.length > 0;
+          });
+
+        const drawableElements = drawableElementsWithLengths.map(function(item) {
+          return item.element;
+        });
+
+        svgDrawableItems = [];
+        svgDrawIsComplete = false;
+        svgDrawOverlay.classList.remove("is-draw-complete");
+
+        const longestPathLength = drawableElementsWithLengths.reduce(
+          function(longestLength, item) {
+            return Math.max(longestLength, item.length);
+          },
+          0
+        );
+
+        const smallPathMaxLength = longestPathLength * SVG_SMALL_PATH_LENGTH_RATIO;
+
+        const largePathItems = drawableElementsWithLengths.filter(function(item) {
+          return item.length > smallPathMaxLength;
+        });
+
+        const smallPathItems = drawableElementsWithLengths.filter(function(item) {
+          return item.length <= smallPathMaxLength;
+        });
+
+        function getStaggeredDelay(index, total, totalStaggerSeconds) {
+          if (total <= 1) return 0;
+          return (index / (total - 1)) * totalStaggerSeconds;
+        }
+
+        function setupDrawableItem(item, delay, easingFunction) {
+          const element = item.element;
+          const length = item.length;
+
+          element.style.fill = "rgba(255, 255, 255, 0)";
+          element.style.stroke = "white";
+          element.style.strokeWidth = "8";
+          element.style.strokeLinecap = "round";
+          element.style.strokeLinejoin = "round";
+          element.style.removeProperty("vector-effect");
+          element.removeAttribute("vector-effect");
+          element.style.pointerEvents = "visiblePainted";
+          element.style.transition =
+            "fill 0.28s ease, stroke 0.18s ease, stroke-width 0.28s ease, filter 0.28s ease";
+
+          element.style.strokeDasharray = length + " " + length;
+          element.style.strokeDashoffset = length;
+
+          const duration = Math.max(0.1, SVG_DRAW_SECONDS - delay);
+
+          svgDrawableItems.push({
+            element: element,
+            length: length,
+            delay: delay,
+            duration: duration,
+            easingFunction: easingFunction
+          });
+        }
+
+        largePathItems.forEach(function(item, index) {
+          const delay = getStaggeredDelay(
+            index,
+            largePathItems.length,
+            SVG_LARGE_PATH_TOTAL_STAGGER_SECONDS
+          );
+
+          setupDrawableItem(item, delay, easeInOutCubic);
+        });
+
+        smallPathItems.forEach(function(item, index) {
+          const delay =
+            SVG_SMALL_PATH_START_DELAY_SECONDS +
+            getStaggeredDelay(
+              index,
+              smallPathItems.length,
+              SVG_SMALL_PATH_TOTAL_STAGGER_SECONDS
+            );
+
+          setupDrawableItem(item, delay, easeOutCubicForSvg);
+        });
+
+        allDrawableElements.forEach(function(element) {
+          if (!drawableElements.includes(element)) {
+            element.style.display = "none";
+          }
+        });
+
+        svgDrawStartTime = clock.elapsedTime;
+      }
+
+      function updateSvgSelfDraw(elapsedTime) {
+        if (svgDrawStartTime === null || svgDrawableItems.length === 0) {
+          return;
+        }
+
+        let allPathsComplete = true;
+
+        svgDrawableItems.forEach(function(item) {
+          const pathElapsed = elapsedTime - svgDrawStartTime - item.delay;
+
+          const rawProgress = THREE.MathUtils.clamp(
+            pathElapsed / item.duration,
+            0,
+            1
+          );
+
+          const easedProgress = item.easingFunction(rawProgress);
+          const newOffset = item.length * (1 - easedProgress);
+
+          item.element.style.strokeDashoffset = newOffset;
+
+          if (rawProgress < 1) {
+            allPathsComplete = false;
+          } else {
+            item.element.style.strokeDashoffset = 0;
+          }
+        });
+
+        if (allPathsComplete && !svgDrawIsComplete) {
+          svgDrawIsComplete = true;
+
+          svgDrawableItems.forEach(function(item) {
+            item.element.style.strokeDashoffset = 0;
+          });
+
+          svgDrawOverlay.classList.add("is-draw-complete");
+          svgDrawContainer.setAttribute("aria-disabled", "false");
+        }
+      }
+
+      function trimSvgToActualPathBounds(svg) {
+        try {
+          const box = svg.getBBox();
+
+          if (box.width > 0 && box.height > 0) {
+            svg.setAttribute(
+              "viewBox",
+              box.x + " " + box.y + " " + box.width + " " + box.height
+            );
+
+            svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+          }
+        } catch (error) {
+          console.warn("Could not trim SVG to path bounds.", error);
+        }
+      }
+
+      function loadSvgIntro() {
+        fetch(SVG_DRAW_PATH)
+          .then(function(response) {
+            if (!response.ok) {
+              throw new Error("Failed to load SVG: " + SVG_DRAW_PATH);
+            }
+
+            return response.text();
+          })
+          .then(function(svgText) {
+            svgDrawContainer.innerHTML = svgText;
+
+            const svg = svgDrawContainer.querySelector("svg");
+            if (!svg) return;
+
+            svg.removeAttribute("width");
+            svg.removeAttribute("height");
+
+            requestAnimationFrame(function() {
+              trimSvgToActualPathBounds(svg);
+
+              requestAnimationFrame(function() {
+                setupSvgSelfDraw(svg);
+                syncSvgOverlayToLogo();
+              });
+            });
+          })
+          .catch(function(error) {
+            console.error(error);
+            svgDrawOverlay.style.display = "none";
+          });
+      }
+
+      loadSvgIntro();
+
+      function getLogoScreenPosition() {
+        if (!logo) {
+          return {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+          };
+        }
+
+        const projected = logo.position.clone().project(camera);
+
+        return {
+          x: (projected.x * 0.5 + 0.5) * window.innerWidth,
+          y: (-projected.y * 0.5 + 0.5) * window.innerHeight
+        };
+      }
+
+      function getProjectedLogoWidthPixels() {
+        if (!logo) {
+          return Math.min(window.innerWidth * 0.62, 900);
+        }
+
+        const distanceFromCamera = camera.position.z - logo.position.z;
+
+        const verticalFovRadians = THREE.MathUtils.degToRad(camera.fov);
+        const visibleHeight =
+          2 * Math.tan(verticalFovRadians / 2) * distanceFromCamera;
+        const visibleWidth = visibleHeight * camera.aspect;
+
+        const projectedWidth =
+          (LOGO_DESIRED_WIDTH / visibleWidth) * window.innerWidth;
+
+        return projectedWidth * SVG_OVERLAY_SCALE_MULTIPLIER;
+      }
+
+      function syncSvgOverlayToLogo() {
+        const screenPosition = getLogoScreenPosition();
+        const projectedLogoWidth = getProjectedLogoWidthPixels();
+
+        svgDrawContainer.style.width = projectedLogoWidth + "px";
+        svgDrawContainer.style.left =
+          screenPosition.x + SVG_OVERLAY_X_OFFSET_PX + "px";
+        svgDrawContainer.style.top =
+          screenPosition.y + SVG_OVERLAY_Y_OFFSET_PX + "px";
+
+        const unscaledLogoHeight = svgDrawContainer.offsetHeight;
+        const tooltipGap = window.innerHeight * 0.105;
+        const tooltipBottomMargin = window.innerHeight * 0.053704;
+
+        introClickCue.style.left = screenPosition.x + "px";
+        introClickCue.style.top =
+          Math.min(
+            window.innerHeight - tooltipBottomMargin,
+            screenPosition.y + unscaledLogoHeight / 2 + tooltipGap
+          ) + "px";
+      }
+
+      function triggerMainSceneFromIntroClick() {
+        if (introHasBeenClicked || !svgDrawIsComplete) return;
+
+        introHasBeenClicked = true;
+        explosionStartTime = clock.elapsedTime;
+
+        nextShapeBatchStartTime =
+          clock.elapsedTime + SHAPE_INITIAL_BATCH_DELAY_SECONDS;
+
+        svgOverlayHasBeenHidden = true;
+        svgDrawOverlay.classList.add("is-hidden");
+        svgDrawOverlay.style.pointerEvents = "none";
+        svgDrawContainer.style.pointerEvents = "none";
+        svgDrawContainer.style.cursor = "default";
+
+        window.setTimeout(function() {
+          svgDrawOverlay.style.display = "none";
+        }, 380);
+      }
+
+      svgDrawContainer.addEventListener("click", triggerMainSceneFromIntroClick);
+
+      svgDrawContainer.addEventListener("keydown", function(event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        triggerMainSceneFromIntroClick();
+      });
+
+      function revealPortfolioButton() {
+        if (portfolioButtonHasBeenShown) return;
+
+        portfolioButtonHasBeenShown = true;
+        portfolioCta.classList.add("is-visible");
+      }
+
+      function goHome() {
+        window.location.href = "./home.html";
+      }
+
+      function updateSvgIntroVisibility(elapsedTime) {
+        if (svgOverlayHasBeenHidden) return;
+
+        syncSvgOverlayToLogo();
+        updateSvgSelfDraw(elapsedTime);
+      }
+
+      // -----------------------------
+      // Flying GLB model config
+      // -----------------------------
+
+      const FLYING_MODEL_PATHS = [
+        "../assets/models/gt_logo.glb",
+        "../assets/models/ornl_logo.glb",
+        "../assets/models/microsoft_logo.glb",
+        "../assets/models/utk_logo.glb"
+      ];
+
+      const SHAPE_BATCH_SIZE = 4;
+
+      /*
+        First icon in each batch starts here.
+      */
+      const SHAPE_BATCH_START_DISTANCE = 230;
+
+      /*
+        Distance between each icon in the same batch.
+      */
+      const SHAPE_BATCH_Z_SPACING = 48;
+
+      /*
+        Small delay before the first batch appears after the space scene starts.
+      */
+      const SHAPE_INITIAL_BATCH_DELAY_SECONDS = 0.45;
+
+      /*
+        This fixes the "3 seconds too late" issue.
+
+        The next batch now starts once the current batch is visually gone / close
+        enough to the camera, rather than waiting for every icon to be fully
+        despawned behind the camera.
+
+        Higher = next batch appears sooner.
+        Lower = next batch appears later.
+      */
+      const NEXT_BATCH_DISTANCE_TRIGGER = 72;
+
+      const SHAPE_DESPAWN_BEHIND = 35;
+
+      const SHAPE_Y_RANGE = 28;
+
+      const SHAPE_MIN_SIZE = 12;
+      const SHAPE_MAX_SIZE = 22;
+
+      const SHAPE_FADE_IN_SECONDS = 1.6;
+
+      const LOGO_SHAPE_CLEARANCE = 20;
+      const LOGO_CLEARANCE_MULTIPLIER = 1.12;
+      const SHAPE_SCREEN_EDGE_PADDING = 8;
+
+      let nextShapeSide = -1;
+      let nextFlyingModelIndex = 0;
+
+      let currentShapeBatchId = 0;
+      let firstShapeBatchHasSpawned = false;
+      let nextShapeBatchStartTime = null;
+      let currentBatchSpawnedNextBatch = false;
+
+      // -----------------------------
+      // Lighting
+      // -----------------------------
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.38);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+      keyLight.position.set(-10, 12, 12);
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0x8fa8ff, 0.55);
+      fillLight.position.set(8, -4, 8);
+      scene.add(fillLight);
+
+      const rimLight = new THREE.DirectionalLight(0xffffff, 1.15);
+      rimLight.position.set(8, 8, -10);
+      scene.add(rimLight);
+
+      const cameraLight = new THREE.PointLight(0xffffff, 0.75, 260);
+      scene.add(cameraLight);
+
+      // -----------------------------
+      // Normal moving stars
+      // -----------------------------
+
+      const starGeometry = new THREE.BufferGeometry();
+      const starPositions = new Float32Array(STAR_COUNT * 3);
+
+      function randomStarZ() {
+        return camera.position.z - Math.random() * STAR_FIELD_DEPTH;
+      }
+
+      for (let i = 0; i < STAR_COUNT; i++) {
+        const i3 = i * 3;
+
+        starPositions[i3 + 0] = THREE.MathUtils.randFloatSpread(STAR_FIELD_WIDTH);
+        starPositions[i3 + 1] = THREE.MathUtils.randFloatSpread(STAR_FIELD_HEIGHT);
+        starPositions[i3 + 2] = randomStarZ();
+      }
+
+      starGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starPositions, 3)
+      );
+
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.75,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false,
+        depthTest: true
+      });
+
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      stars.frustumCulled = false;
+      stars.visible = false;
+      scene.add(stars);
+
+      function recycleStars() {
+        const positions = starGeometry.attributes.position.array;
+
+        const behindZ = camera.position.z + 20;
+        const farAheadZ = camera.position.z - STAR_FIELD_DEPTH;
+
+        for (let i = 0; i < STAR_COUNT; i++) {
+          const i3 = i * 3;
+
+          if (positions[i3 + 2] > behindZ) {
+            positions[i3 + 0] = THREE.MathUtils.randFloatSpread(STAR_FIELD_WIDTH);
+            positions[i3 + 1] = THREE.MathUtils.randFloatSpread(STAR_FIELD_HEIGHT);
+            positions[i3 + 2] = farAheadZ - Math.random() * 120;
+          }
+        }
+
+        starGeometry.attributes.position.needsUpdate = true;
+      }
+
+      // -----------------------------
+      // Center star explosion
+      // -----------------------------
+
+      const EXPLOSION_STAR_COUNT = 550;
+      const EXPLOSION_START_Z = -65;
+      const EXPLOSION_MAX_RADIUS = 125;
+
+      const explosionGeometry = new THREE.BufferGeometry();
+      const explosionPositions = new Float32Array(EXPLOSION_STAR_COUNT * 3);
+      const explosionDirections = [];
+
+      for (let i = 0; i < EXPLOSION_STAR_COUNT; i++) {
+        const i3 = i * 3;
+
+        explosionPositions[i3 + 0] = 0;
+        explosionPositions[i3 + 1] = 0;
+        explosionPositions[i3 + 2] = EXPLOSION_START_Z;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radiusBias = THREE.MathUtils.randFloat(0.45, 1.0);
+
+        const direction = new THREE.Vector3(
+          Math.cos(angle) * radiusBias,
+          Math.sin(angle) * radiusBias,
+          THREE.MathUtils.randFloat(-0.24, 0.2)
+        ).normalize();
+
+        explosionDirections.push(direction);
+      }
+
+      explosionGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(explosionPositions, 3)
+      );
+
+      const explosionMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 1.05,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        depthTest: true
+      });
+
+      const explosionStars = new THREE.Points(
+        explosionGeometry,
+        explosionMaterial
+      );
+
+      explosionStars.frustumCulled = false;
+      explosionStars.visible = false;
+      scene.add(explosionStars);
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function updateStarExplosion(elapsedTime) {
+        if (explosionStartTime === null) {
+          explosionStars.visible = false;
+          explosionMaterial.opacity = 0;
+          return;
+        }
+
+        const explosionTime = elapsedTime - explosionStartTime;
+
+        if (explosionTime < 0 || explosionTime > STAR_EXPLOSION_SECONDS) {
+          explosionStars.visible = false;
+          explosionMaterial.opacity = 0;
+          return;
+        }
+
+        explosionStars.visible = true;
+
+        const progress = THREE.MathUtils.clamp(
+          explosionTime / STAR_EXPLOSION_SECONDS,
+          0,
+          1
+        );
+
+        const easedProgress = easeOutCubic(progress);
+        const positions = explosionGeometry.attributes.position.array;
+
+        for (let i = 0; i < EXPLOSION_STAR_COUNT; i++) {
+          const i3 = i * 3;
+          const direction = explosionDirections[i];
+
+          const individualOffset = 0.75 + (i % 11) * 0.035;
+          const distance = EXPLOSION_MAX_RADIUS * easedProgress * individualOffset;
+
+          positions[i3 + 0] = direction.x * distance;
+          positions[i3 + 1] = direction.y * distance;
+          positions[i3 + 2] = EXPLOSION_START_Z + direction.z * distance;
+        }
+
+        explosionGeometry.attributes.position.needsUpdate = true;
+
+        if (progress < 0.18) {
+          explosionMaterial.opacity = THREE.MathUtils.smoothstep(
+            progress,
+            0,
+            0.18
+          );
+        } else {
+          explosionMaterial.opacity = 1 - THREE.MathUtils.smoothstep(
+            progress,
+            0.58,
+            1
+          );
+        }
+      }
+
+      // -----------------------------
+      // Flying GLB model setup
+      // -----------------------------
+
+      const activeShapes = [];
+      const flyingModelTemplates = [];
+
+      const gltfLoader = new THREE.GLTFLoader();
+
+      function cloneMaterial(material) {
+        const clonedMaterial = material.clone();
+        clonedMaterial.transparent = true;
+        clonedMaterial.opacity = 0;
+        clonedMaterial.depthWrite = true;
+        clonedMaterial.depthTest = true;
+        clonedMaterial.needsUpdate = true;
+        return clonedMaterial;
+      }
+
+      function prepareModelMaterials(object) {
+        object.traverse(function(child) {
+          if (!child.isMesh) return;
+
+          child.castShadow = false;
+          child.receiveShadow = false;
+          child.frustumCulled = false;
+
+          if (child.geometry) {
+            child.geometry.computeVertexNormals();
+          }
+
+          if (Array.isArray(child.material)) {
+            child.material = child.material.map(function(material) {
+              return cloneMaterial(material);
+            });
+          } else if (child.material) {
+            child.material = cloneMaterial(child.material);
+          } else {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0xffffff,
+              roughness: 0.45,
+              metalness: 0.05,
+              transparent: true,
+              opacity: 0,
+              depthWrite: true,
+              depthTest: true
+            });
+          }
+        });
+      }
+
+      function setObjectOpacity(object, opacity) {
+        object.traverse(function(child) {
+          if (!child.isMesh || !child.material) return;
+
+          if (Array.isArray(child.material)) {
+            child.material.forEach(function(material) {
+              material.transparent = true;
+              material.opacity = opacity;
+              material.needsUpdate = true;
+            });
+          } else {
+            child.material.transparent = true;
+            child.material.opacity = opacity;
+            child.material.needsUpdate = true;
+          }
+        });
+      }
+
+      function disposeObjectMaterials(object) {
+        object.traverse(function(child) {
+          if (!child.isMesh || !child.material) return;
+
+          if (Array.isArray(child.material)) {
+            child.material.forEach(function(material) {
+              material.dispose();
+            });
+          } else {
+            child.material.dispose();
+          }
+        });
+      }
+
+      function normalizeModelForTemplate(model) {
+        const wrapper = new THREE.Group();
+        wrapper.add(model);
+
+        const box = new THREE.Box3().setFromObject(model);
+        const center = new THREE.Vector3();
+        const size = new THREE.Vector3();
+
+        box.getCenter(center);
+        box.getSize(size);
+
+        model.position.x -= center.x;
+        model.position.y -= center.y;
+        model.position.z -= center.z;
+
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const normalizingScale = maxDimension > 0 ? 1 / maxDimension : 1;
+        model.scale.setScalar(normalizingScale);
+
+        wrapper.visible = false;
+        return wrapper;
+      }
+
+      function loadFlyingModel(path) {
+        return new Promise(function(resolve, reject) {
+          gltfLoader.load(
+            path,
+            function(gltf) {
+              const template = normalizeModelForTemplate(gltf.scene);
+              template.userData.sourcePath = path;
+              flyingModelTemplates.push(template);
+              resolve(template);
+            },
+            undefined,
+            function(error) {
+              console.error("Failed to load flying GLB model:", path, error);
+              reject(error);
+            }
+          );
+        });
+      }
+
+      function loadFlyingModels() {
+        Promise.all(FLYING_MODEL_PATHS.map(loadFlyingModel))
+          .then(function() {
+            console.log("Loaded flying GLB models:", FLYING_MODEL_PATHS);
+          })
+          .catch(function(error) {
+            console.error("One or more flying GLB models failed to load.", error);
+          });
+      }
+
+      function getNextFlyingModelTemplate() {
+        if (flyingModelTemplates.length === 0) return null;
+
+        const template = flyingModelTemplates[
+          nextFlyingModelIndex % flyingModelTemplates.length
+        ];
+
+        nextFlyingModelIndex++;
+        return template;
+      }
+
+      function createFlyingModelInstance(template) {
+        const instance = template.clone(true);
+        instance.visible = true;
+
+        prepareModelMaterials(instance);
+        setObjectOpacity(instance, 0);
+
+        instance.userData.age = 0;
+        instance.userData.spawnSide = 0;
+        instance.userData.batchId = -1;
+
+        instance.userData.driftX = 0;
+        instance.userData.driftY = 0;
+        instance.userData.rotationSpeedX = 0;
+        instance.userData.rotationSpeedY = 0;
+        instance.userData.rotationSpeedZ = 0;
+
+        return instance;
+      }
+
+      function getVisibleHalfWidthAtDistance(distanceFromCamera) {
+        const verticalFovRadians = THREE.MathUtils.degToRad(camera.fov);
+        const visibleHeight =
+          2 * Math.tan(verticalFovRadians / 2) * distanceFromCamera;
+        const visibleWidth = visibleHeight * camera.aspect;
+
+        return visibleWidth / 2;
+      }
+
+      function getLogoProjectedClearanceAtLogoDepth(shapeHalfWidth) {
+        const logoCenterX = logo ? logo.position.x : 0;
+
+        const logoHalfWidth =
+          LOGO_DESIRED_WIDTH *
+          0.5 *
+          LOGO_CLEARANCE_MULTIPLIER;
+
+        return {
+          centerX: logoCenterX,
+          safeHalfWidth: logoHalfWidth + shapeHalfWidth + LOGO_SHAPE_CLEARANCE
+        };
+      }
+
+      function getSafeTrajectoryShapePosition(shapeHalfWidth, side, spawnDistance) {
+        const visibleHalfWidthAtLogo =
+          getVisibleHalfWidthAtDistance(LOGO_DISTANCE_FROM_CAMERA);
+
+        const logoClearance = getLogoProjectedClearanceAtLogoDepth(shapeHalfWidth);
+
+        const leftMinX =
+          -visibleHalfWidthAtLogo + shapeHalfWidth + SHAPE_SCREEN_EDGE_PADDING;
+
+        const leftMaxX =
+          logoClearance.centerX - logoClearance.safeHalfWidth;
+
+        const rightMinX =
+          logoClearance.centerX + logoClearance.safeHalfWidth;
+
+        const rightMaxX =
+          visibleHalfWidthAtLogo - shapeHalfWidth - SHAPE_SCREEN_EDGE_PADDING;
+
+        let x;
+
+        if (side < 0) {
+          x = THREE.MathUtils.randFloat(leftMinX, leftMaxX);
+        } else {
+          x = THREE.MathUtils.randFloat(rightMinX, rightMaxX);
+        }
+
+        const y = THREE.MathUtils.randFloat(-SHAPE_Y_RANGE, SHAPE_Y_RANGE);
+        const z = camera.position.z - spawnDistance;
+
+        return new THREE.Vector3(x, y, z);
+      }
+
+      function spawnShape(spawnDistance, batchId) {
+        const template = getNextFlyingModelTemplate();
+        if (!template) return false;
+
+        const model = createFlyingModelInstance(template);
+
+        const side = nextShapeSide;
+        const size = THREE.MathUtils.randFloat(SHAPE_MIN_SIZE, SHAPE_MAX_SIZE);
+        const shapeHalfWidth = size * 0.5;
+
+        model.scale.setScalar(size);
+
+        const position = getSafeTrajectoryShapePosition(
+          shapeHalfWidth,
+          side,
+          spawnDistance
+        );
+
+        model.position.copy(position);
+
+        model.rotation.set(
+          THREE.MathUtils.randFloat(-0.25, 0.25),
+          THREE.MathUtils.randFloat(-0.35, 0.35),
+          THREE.MathUtils.randFloat(-0.18, 0.18)
+        );
+
+        model.userData.age = 0;
+        model.userData.spawnSide = side;
+        model.userData.batchId = batchId;
+
+        model.userData.driftX = THREE.MathUtils.randFloat(-0.035, 0.035);
+        model.userData.driftY = THREE.MathUtils.randFloat(-0.22, 0.22);
+
+        model.userData.rotationSpeedX = THREE.MathUtils.randFloat(-0.18, 0.18);
+        model.userData.rotationSpeedY = THREE.MathUtils.randFloat(-0.32, 0.32);
+        model.userData.rotationSpeedZ = THREE.MathUtils.randFloat(-0.16, 0.16);
+
+        scene.add(model);
+        activeShapes.push(model);
+
+        nextShapeSide *= -1;
+
+        return true;
+      }
+
+      function spawnShapeBatch() {
+        if (flyingModelTemplates.length === 0) return false;
+
+        const batchId = currentShapeBatchId;
+
+        for (let i = 0; i < SHAPE_BATCH_SIZE; i++) {
+          const spawnDistance =
+            SHAPE_BATCH_START_DISTANCE + i * SHAPE_BATCH_Z_SPACING;
+
+          spawnShape(spawnDistance, batchId);
+        }
+
+        currentShapeBatchId++;
+        firstShapeBatchHasSpawned = true;
+        currentBatchSpawnedNextBatch = false;
+
+        return true;
+      }
+
+      function getNewestBatchId() {
+        return currentShapeBatchId - 1;
+      }
+
+      function getShapesInNewestBatch() {
+        const newestBatchId = getNewestBatchId();
+
+        return activeShapes.filter(function(shape) {
+          return shape.userData.batchId === newestBatchId;
+        });
+      }
+
+      function updateShapeBatchSpawning(elapsedTime) {
+        if (!introHasBeenClicked) return;
+
+        if (!firstShapeBatchHasSpawned) {
+          if (
+            nextShapeBatchStartTime !== null &&
+            elapsedTime >= nextShapeBatchStartTime
+          ) {
+            spawnShapeBatch();
+          }
+
+          return;
+        }
+
+        if (currentBatchSpawnedNextBatch) {
+          return;
+        }
+
+        /*
+          Spawn the next batch once the current/newest batch is visually gone,
+          instead of waiting until every icon is fully despawned behind the camera.
+
+          This removes the extra late gap caused by invisible-but-still-active icons.
+        */
+        const newestBatchShapes = getShapesInNewestBatch();
+
+        if (newestBatchShapes.length === 0) {
+          spawnShapeBatch();
+          return;
+        }
+
+        const newestBatchIsVisuallyGone = newestBatchShapes.every(function(shape) {
+          const distanceFromCamera = camera.position.z - shape.position.z;
+          return distanceFromCamera <= NEXT_BATCH_DISTANCE_TRIGGER;
+        });
+
+        if (newestBatchIsVisuallyGone) {
+          currentBatchSpawnedNextBatch = true;
+          spawnShapeBatch();
+        }
+      }
+
+      function computeShapeOpacity(shape, distanceFromCamera) {
+        const fadeOutStart = 55;
+        const fadeOutEnd = 10;
+
+        let opacity = THREE.MathUtils.clamp(
+          shape.userData.age / SHAPE_FADE_IN_SECONDS,
+          0,
+          1
+        );
+
+        if (distanceFromCamera < fadeOutStart) {
+          opacity *= THREE.MathUtils.smoothstep(
+            distanceFromCamera,
+            fadeOutEnd,
+            fadeOutStart
+          );
+        }
+
+        return THREE.MathUtils.clamp(opacity, 0, 1);
+      }
+
+      function recycleShape(shape, index) {
+        setObjectOpacity(shape, 0);
+        scene.remove(shape);
+        disposeObjectMaterials(shape);
+        activeShapes.splice(index, 1);
+      }
+
+      function updateShapes(delta) {
+        for (let i = activeShapes.length - 1; i >= 0; i--) {
+          const shape = activeShapes[i];
+
+          const distanceFromCamera = camera.position.z - shape.position.z;
+
+          shape.userData.age += delta;
+
+          shape.position.x += shape.userData.driftX * delta;
+          shape.position.y += shape.userData.driftY * delta;
+
+          shape.rotation.x += shape.userData.rotationSpeedX * delta;
+          shape.rotation.y += shape.userData.rotationSpeedY * delta;
+          shape.rotation.z += shape.userData.rotationSpeedZ * delta;
+
+          const shapeOpacity = computeShapeOpacity(shape, distanceFromCamera);
+          setObjectOpacity(shape, shapeOpacity);
+
+          if (
+            !portfolioButtonHasBeenShown &&
+            shape.userData.batchId === 0 &&
+            shapeOpacity >= 0.15
+          ) {
+            revealPortfolioButton();
+          }
+
+          if (shape.position.z > camera.position.z + SHAPE_DESPAWN_BEHIND) {
+            recycleShape(shape, i);
+          }
+        }
+      }
+
+      // -----------------------------
+      // Logo model
+      // -----------------------------
+
+      let logo = null;
+
+      function colorIsLight(color) {
+        const brightness = color.r * 0.299 + color.g * 0.587 + color.b * 0.114;
+        return brightness > 0.5;
+      }
+
+      function convertToStableLightingMaterial(originalMaterial) {
+        let originalColor = new THREE.Color(0xffffff);
+
+        if (originalMaterial && originalMaterial.color) {
+          originalColor.copy(originalMaterial.color);
+        }
+
+        const isLight = colorIsLight(originalColor);
+
+        const materialColor = isLight
+          ? new THREE.Color(0xffffff)
+          : new THREE.Color(0x020202);
+
+        const material = new THREE.MeshStandardMaterial({
+          color: materialColor,
+          roughness: isLight ? 0.82 : 0.58,
+          metalness: 0.0,
+          side: THREE.FrontSide,
+          transparent: false,
+          opacity: 1,
+          depthWrite: true,
+          depthTest: true
+        });
+
+        if (!isLight) {
+          material.emissive = new THREE.Color(0x030305);
+          material.emissiveIntensity = 0.18;
+        }
+
+        return material;
+      }
+
+      gltfLoader.load(
+        LOGO_MODEL_PATH,
+        function(gltf) {
+          logo = gltf.scene;
+
+          logo.traverse(function(child) {
+            if (child.isMesh) {
+              child.castShadow = false;
+              child.receiveShadow = false;
+              child.frustumCulled = false;
+
+              if (child.geometry) {
+                child.geometry.computeVertexNormals();
+              }
+
+              if (Array.isArray(child.material)) {
+                child.material = child.material.map(function(mat) {
+                  return convertToStableLightingMaterial(mat);
+                });
+              } else {
+                child.material = convertToStableLightingMaterial(child.material);
+              }
+            }
+          });
+
+          const box = new THREE.Box3().setFromObject(logo);
+          const center = new THREE.Vector3();
+          const size = new THREE.Vector3();
+
+          box.getCenter(center);
+          box.getSize(size);
+
+          logo.position.x -= center.x;
+          logo.position.y -= center.y;
+          logo.position.z -= center.z;
+
+          const desiredScale = LOGO_DESIRED_WIDTH / size.x;
+          logo.scale.setScalar(desiredScale);
+
+          logo.rotation.set(LOGO_ROTATION_X, LOGO_ROTATION_Y, LOGO_ROTATION_Z);
+
+          logo.position.set(
+            0,
+            0,
+            camera.position.z - LOGO_DISTANCE_FROM_CAMERA
+          );
+
+          logo.visible = false;
+
+          scene.add(logo);
+
+          syncSvgOverlayToLogo();
+        },
+        undefined,
+        function(error) {
+          console.error("Failed to load logo model:", error);
+        }
+      );
+
+      loadFlyingModels();
+
+      function updateLogo() {
+        if (!logo) return;
+
+        logo.visible = true;
+
+        const t = clock.elapsedTime;
+
+        const effectiveMouseX = hasMouseMovedAfterExplosion ? mouse.x : 0;
+        const effectiveMouseY = hasMouseMovedAfterExplosion ? mouse.y : 0;
+
+        const idleFloatY = hasMouseMovedAfterExplosion
+          ? Math.sin(t * 0.65) * 0.35
+          : 0;
+
+        const targetX = effectiveMouseX * LOGO_MOUSE_MOVE_X;
+        const targetY = effectiveMouseY * LOGO_MOUSE_MOVE_Y + idleFloatY;
+        const targetZ = camera.position.z - LOGO_DISTANCE_FROM_CAMERA;
+
+        logoTargetPosition.set(targetX, targetY, targetZ);
+
+        logo.position.x = THREE.MathUtils.lerp(
+          logo.position.x,
+          logoTargetPosition.x,
+          LOGO_POSITION_EASE
+        );
+
+        logo.position.y = THREE.MathUtils.lerp(
+          logo.position.y,
+          logoTargetPosition.y,
+          LOGO_POSITION_EASE
+        );
+
+        logo.position.z = targetZ;
+
+        const targetRotationX =
+          LOGO_ROTATION_X - effectiveMouseY * LOGO_MOUSE_ROTATE_X;
+
+        const targetRotationY =
+          LOGO_ROTATION_Y + effectiveMouseX * LOGO_MOUSE_ROTATE_Y;
+
+        logoCurrentRotation.x = THREE.MathUtils.lerp(
+          logoCurrentRotation.x,
+          targetRotationX,
+          LOGO_ROTATION_EASE
+        );
+
+        logoCurrentRotation.y = THREE.MathUtils.lerp(
+          logoCurrentRotation.y,
+          targetRotationY,
+          LOGO_ROTATION_EASE
+        );
+
+        logoCurrentRotation.z = THREE.MathUtils.lerp(
+          logoCurrentRotation.z,
+          LOGO_ROTATION_Z,
+          LOGO_ROTATION_EASE
+        );
+
+        logo.rotation.set(
+          logoCurrentRotation.x,
+          logoCurrentRotation.y,
+          logoCurrentRotation.z
+        );
+      }
+
+      function hideMainSceneObjects() {
+        stars.visible = false;
+
+        if (logo) {
+          logo.visible = false;
+        }
+
+        for (let i = 0; i < activeShapes.length; i++) {
+          activeShapes[i].visible = false;
+        }
+      }
+
+      function showMainSceneObjects() {
+        stars.visible = true;
+
+        for (let i = 0; i < activeShapes.length; i++) {
+          activeShapes[i].visible = true;
+        }
+      }
+
+      // -----------------------------
+      // Mouse movement
+      // -----------------------------
+
+      function updateMouseFromClientPosition(clientX, clientY) {
+        mouse.x = (clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -((clientY / window.innerHeight) * 2 - 1);
+
+        const explosionIsDone =
+          explosionStartTime !== null &&
+          clock.elapsedTime >= explosionStartTime + STAR_EXPLOSION_SECONDS;
+
+        if (explosionIsDone) {
+          hasMouseMovedAfterExplosion = true;
+        }
+      }
+
+      window.addEventListener("mousemove", function(event) {
+        updateMouseFromClientPosition(event.clientX, event.clientY);
+      });
+
+      window.addEventListener(
+        "touchmove",
+        function(event) {
+          if (!event.touches || event.touches.length === 0) return;
+
+          const touch = event.touches[0];
+          updateMouseFromClientPosition(touch.clientX, touch.clientY);
+        },
+        { passive: true }
+      );
+
+      // -----------------------------
+      // Animation loop
+      // -----------------------------
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const delta = Math.min(clock.getDelta(), 0.05);
+        const elapsedTime = clock.elapsedTime;
+
+        updateSvgIntroVisibility(elapsedTime);
+
+        if (!introHasBeenClicked) {
+          hideMainSceneObjects();
+          explosionStars.visible = false;
+          explosionMaterial.opacity = 0;
+          renderer.render(scene, camera);
+          return;
+        }
+
+        showMainSceneObjects();
+
+        camera.position.z -= FORWARD_SPEED * delta;
+
+        cameraLight.position.set(
+          camera.position.x,
+          camera.position.y,
+          camera.position.z + 8
+        );
+
+        recycleStars();
+        updateShapeBatchSpawning(elapsedTime);
+        updateShapes(delta);
+        updateLogo();
+        updateStarExplosion(elapsedTime);
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // -----------------------------
+      // Resize
+      // -----------------------------
+
+      window.addEventListener("resize", function() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        syncSvgOverlayToLogo();
+      });
     </script>
   </body>
 </html>
