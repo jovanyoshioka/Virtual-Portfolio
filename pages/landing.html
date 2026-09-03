@@ -257,6 +257,28 @@
         outline-offset: -0.360938vh;
       }
 
+      #page-fade-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: #000000;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 1s ease,
+          visibility 0s linear 1s;
+      }
+
+      #page-fade-overlay.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+          opacity 1s ease,
+          visibility 0s linear 0s;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         #svg-draw-overlay.is-draw-complete #intro-click-cue {
           animation: none;
@@ -285,6 +307,8 @@
         <span>Explore</span>
       </button>
     </div>
+
+    <div id="page-fade-overlay" aria-hidden="true"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -391,11 +415,14 @@
       const svgDrawContainer = document.getElementById("svg-draw-container");
       const introClickCue = document.getElementById("intro-click-cue");
       const portfolioCta = document.getElementById("portfolio-cta");
+      const portfolioButton = portfolioCta.querySelector("button");
+      const pageFadeOverlay = document.getElementById("page-fade-overlay");
 
       let svgDrawStartTime = null;
       let svgDrawableItems = [];
       let svgDrawIsComplete = false;
       let portfolioButtonHasBeenShown = false;
+      let pageFadeIsActive = false;
 
       function easeInOutCubic(t) {
         if (t < 0.5) {
@@ -762,7 +789,44 @@
       }
 
       function goHome() {
-        window.location.href = "./home.html";
+        if (pageFadeIsActive) return;
+
+        pageFadeIsActive = true;
+        portfolioButton.disabled = true;
+        pageFadeOverlay.setAttribute("aria-hidden", "false");
+        pageFadeOverlay.classList.add("is-active");
+
+        let navigationHasStarted = false;
+
+        function navigateHome() {
+          if (navigationHasStarted) return;
+
+          navigationHasStarted = true;
+          window.location.href = "./home.html";
+        }
+
+        function handleFadeComplete(event) {
+          if (
+            event.target !== pageFadeOverlay ||
+            event.propertyName !== "opacity"
+          ) {
+            return;
+          }
+
+          pageFadeOverlay.removeEventListener(
+            "transitionend",
+            handleFadeComplete
+          );
+
+          navigateHome();
+        }
+
+        pageFadeOverlay.addEventListener(
+          "transitionend",
+          handleFadeComplete
+        );
+
+        window.setTimeout(navigateHome, 1500);
       }
 
       function updateSvgIntroVisibility(elapsedTime) {
