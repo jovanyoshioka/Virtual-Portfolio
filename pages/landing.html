@@ -58,12 +58,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0;
         overflow: visible;
         pointer-events: none;
         cursor: default;
         transition:
           transform 0.28s ease,
           filter 0.28s ease;
+      }
+
+      #svg-draw-container.is-svg-ready {
+        opacity: 1;
       }
 
       #svg-draw-overlay.is-draw-complete #svg-draw-container {
@@ -637,6 +642,7 @@
             return response.text();
           })
           .then(function(svgText) {
+            svgDrawContainer.classList.remove("is-svg-ready");
             svgDrawContainer.innerHTML = svgText;
 
             const svg = svgDrawContainer.querySelector("svg");
@@ -651,6 +657,7 @@
               requestAnimationFrame(function() {
                 setupSvgSelfDraw(svg);
                 syncSvgOverlayToLogo();
+                svgDrawContainer.classList.add("is-svg-ready");
               });
             });
           })
