@@ -1129,7 +1129,7 @@ body#about section#biographySection div.profilePic {
 body#about section#biographySection div.profilePic img {
   min-width: 100.5%;
   height: 100.25%;
-  margin: -0.125% 0 0 -0.25%;
+  margin: -0.125% 0 0 -3%;
 }
 /* Container for About Me Information */
 body#about section#biographySection article {
