@@ -1401,15 +1401,10 @@ body#about section.infoSection section h1.title {
 /*** Education Section ***/
 /* Styling Background Color in Case Background Image Does Not Load */
 body#about section#educationSection { background-color: #1A1A1A;}
-/* Specific Positioning for "Hardin Valley Academy" Title */
-body#about section#educationSection section.hva h1.title {
-  top: 15.5vw;
-  left: 4.5%;
+/* Adjusting Backdrops Tints */
+body#about section#educationSection div.tint {
+  opacity: 0.8; /* or any custom opacity / background-color */
 }
-/* Hovering Effect: Slide Title to Top of Section to Make Room for Info Text */
-/* :target For Touchscreens That Can Not Hover. */
-body#about section#educationSection section.hva:hover h1.title,
-body#about section#educationSection section.hva:target h1.title { transform: translateY(-280%); }
 /* Specific Positioning for "University of Tennessee Knoxville" Title */
 body#about section#educationSection section.utk h1.title {
   top: 12.5vw;
@@ -1419,6 +1414,15 @@ body#about section#educationSection section.utk h1.title {
 /* :target For Touchscreens That Can Not Hover. */
 body#about section#educationSection section.utk:hover h1.title,
 body#about section#educationSection section.utk:target h1.title { transform: translateY(-115%); }
+/* Specific Positioning for "Georgia Institute of Technology" Title */
+body#about section#educationSection section.gt h1.title {
+  top: 12.5vw;
+  left: 0;
+}
+/* Hovering Effect: Slide Title to Top of Section to Make Room for Info Text */
+/* :target For Touchscreens That Can Not Hover. */
+body#about section#educationSection section.gt:hover h1.title,
+body#about section#educationSection section.gt:target h1.title { transform: translateY(-115%); }
 /* Container for Education Information Text. */
 body#about section#educationSection section article.info {
   width: 91%;
@@ -1432,15 +1436,15 @@ body#about section#educationSection section article.info {
 /* :target For Touchscreens That Can Not Hover. */
 body#about section#educationSection section:hover article.info,
 body#about section#educationSection section:target article.info { transform: translateY(-5%); }
-/* Specific Positioning for Hardin Valley Academy Information */
-body#about section#educationSection section.hva article.info {
-  height: 79%;
-  top: 7.5vw;
+/* Specific Positioning for University of Tennessee Knoxville Information */
+body#about section#educationSection section.utk article.info {
+  height: 65%;
+  top: 12.5vw;
   /* To Ensure Content is Viewable Even if Content Larger Than Container */
   overflow-y: auto;
 }
-/* Specific Positioning for University of Tennessee Knoxville Information */
-body#about section#educationSection section.utk article.info {
+/* Specific Positioning for Georgia Institute of Technology Information */
+body#about section#educationSection section.gt article.info {
   height: 65%;
   top: 12.5vw;
   /* To Ensure Content is Viewable Even if Content Larger Than Container */
@@ -1477,22 +1481,21 @@ body#about section#educationSection section article.info p a:hover { color: #EEE
   body#about section#educationSection section article.info p { font-size: 1.75vw; }
 }
 @media only screen and (max-width: 768px) {
-  /* Use Grid for "order" Attribute to Display UTK Then HVA */
+  /* Use Grid for "order" Attribute to Display UTK Then GT */
   body#about section#educationSection { display: grid; }
   /* With Background Image Changed to Banner, Background for Text is Gradient */
   body#about section#educationSection section { background-image: linear-gradient(#0C54A5 10%,#1A1A1A 90%); }
-  /* Reorder to Display UTK Then HVA */
-  body#about section#educationSection section.hva { order: 1; }
-  body#about section#educationSection section.utk { order: 0; }
+  /* Reorder to Display GT Then UTK */
+  body#about section#educationSection section.utk { order: 1; }
+  body#about section#educationSection section.gt { order: 0; }
   /* Set Size of Banner */
   body#about section#educationSection section div.backgroundPic { height: 256px; }
   /* Resize/Position Banner Images to Mainly Capture Specific Part */
-  body#about section#educationSection section.hva div.backgroundPic img {
-    /* Note: Changing Height Essentially Zooms Image In/Out */
-    height: 225%;
-    margin: -225px 0 0 -75px;
-  }
   body#about section#educationSection section.utk div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 150%;
+  }
+  body#about section#educationSection section.gt div.backgroundPic img {
     /* Note: Changing Height Essentially Zooms Image In/Out */
     height: 150%;
   }
@@ -1519,12 +1522,11 @@ body#about section#educationSection section article.info p a:hover { color: #EEE
   /* Resize Banner */
   body#about section#educationSection section div.backgroundPic { height: 180px; }
   /* Resize/Position Banner Images to Mainly Capture Specific Part */
-  body#about section#educationSection section.hva div.backgroundPic img {
-    /* Note: Changing Height Essentially Zooms Image In/Out */
-    height: 300%;
-    margin: -235px 0 0 -210px;
-  }
   body#about section#educationSection section.utk div.backgroundPic img {
+    /* Note: Changing Height Essentially Zooms Image In/Out */
+    height: 155%;
+  }
+  body#about section#educationSection section.gt div.backgroundPic img {
     /* Note: Changing Height Essentially Zooms Image In/Out */
     height: 155%;
   }
@@ -2298,7 +2300,7 @@ body.content section.light article div.tint,
 body.content section.dark article div.tint {
   width: 50%;
   position: fixed;
-  opacity: 0.75;
+  opacity: 0.8;
   z-index: -1;
 }
 body.content section.light article div.tint {
