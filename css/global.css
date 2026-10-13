@@ -1534,113 +1534,6 @@ body#about section#educationSection section article.info p a:hover { color: #EEE
   body#about section#educationSection section.utk h1.title { margin: 0; }
 }
 
-/*** Spotlights Section ***/
-/* Styling Background Color in Case Background Image Does Not Load */
-body#about section#spotlightsSection { background-color: #1A1A1A; }
-/* Specific Positioning for HVA Student Spotlight Title */
-body#about section#spotlightsSection section.hva h1.title {
-  top: 34%;
-  left: 0;
-}
-/* Specific Positioning for ORNL Intern Spotlight Title */
-body#about section#spotlightsSection section.ornl h1.title {
-  font-size: 3vw;
-  top: 37.5%;
-  left: 0;
-}
-/* Hovering Effect: Slide Up Title to Make Top and Bottom Even When Button is Displayed */
-/* :target For Touchscreens That Can Not Hover. */
-body#about section#spotlightsSection section:hover h1.title,
-body#about section#spotlightsSection section:target h1.title { transform: translateY(-50%); }
-/* Styling "View Spotlight" Diagonal Button */
-body#about section#spotlightsSection section div.diagonalBtn {
-  /* Specifying Width & Font-Size of Button Based on Contents ("View Spotlight") */
-  width: 421px;
-  font-size: 3.35em;
-  position: absolute;
-  /* Center Button */
-  left: 0;
-  right: 0;
-  margin: auto;
-  bottom: 20%;
-  opacity: 0;
-  transition: border-color 0.75s, opacity 0.5s;
-}
-/* Hovering Effect: Fade In View Spotlight Button */
-/* :target For Touchscreens That Can Not Hover. */
-body#about section#spotlightsSection section:hover div.diagonalBtn,
-body#about section#spotlightsSection section:target div.diagonalBtn { opacity: 1.0; }
-/* Spotlights Section Media Queries */
-@media only screen and (max-width: 1200px) and (min-width: 769px) {
-  /* Decrease Size of "View Spotlight" Button */
-  body#about section#spotlightsSection section div.diagonalBtn {
-    width: 339.25px;
-    font-size: 2.75em;
-  }
-}
-@media only screen and (max-width: 768px) {
-  /* Set Size of Spotlight Section */
-  /* Note: For Spotlights, Banner Spans Entire Spotlight Section, So Essentially Setting Banner Height */
-  body#about section#spotlightsSection section { height: 370px; }
-  /* Banner Spans Entire Spotlight Section */
-  body#about section#spotlightsSection section div.backgroundPic { height: 100%; }
-  /* Resize/Position Banner Images to Mainly Capture Specific Part */
-  body#about section#spotlightsSection section.hva div.backgroundPic img {
-    /* Note: Changing Height Essentially Zooms Image In/Out */
-    height: 150%;
-    margin: -35px 0 0 -65px;
-  }
-  body#about section#spotlightsSection section.ornl div.backgroundPic img {
-    /* Note: Changing Height Essentially Zooms Image In/Out */
-    height: 175%;
-    margin: 0 0 0 -40px;
-  }
-  /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
-  body#about section#spotlightsSection section h1 { height: 200px; }
-  /* Position Titles Towards Center of Banners and Intentionally Break Line */
-  body#about section#spotlightsSection section.hva h1.title { margin: 75px 115px 0 115px; }
-  body#about section#spotlightsSection section.ornl h1.title { margin: 75px 60px 0 60px; }
-  /* Adjust "View Spotlight" Button */
-  body#about section#spotlightsSection section div.diagonalBtn {
-    /* Decrease Size of Button */
-    width: 247px;
-    font-size: 2em;
-    /* Place Button Into "Flow" of Document With Title Element */
-    position: relative;
-    bottom: unset;
-    /* Button Remains Visible Unlike Desktop Version */
-    opacity: 1.0 !important;
-  }
-}
-@media only screen and (max-width: 600px) {
-  /* Resize Spotlight Section */
-  /* Note: For Spotlights, Banner Spans Entire Spotlight Section, So Essentially Resizing Banner Height */
-  body#about section#spotlightsSection section { height: 292.5px; }
-  /* Resize/Position Banner Images to Mainly Capture Specific Part */
-  body#about section#spotlightsSection section.hva img { margin: -35px 0 0 -60px; }
-  body#about section#spotlightsSection section.ornl img {
-    height: 150%;
-    margin: 0 0 0 -40px;
-  }
-  /* Adjust HVA Title Element */
-  body#about section#spotlightsSection section.hva h1.title {
-    /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
-    height: 150px;
-    /* Position Titles Towards Center of Banners and Remove Intentional Line Break */
-    margin: 50px 0 0 0;
-  }
-  /* Adjust ORNL Title Element */
-  body#about section#spotlightsSection section.ornl h1.title {
-    /* Resize Title Element So Text Can Be in Center of Banner While Leaving Room for Button */
-    height: 125px;
-    font-size: 1.5em !important;
-  }
-}
-@media only screen and (max-width: 432px) {
-  /* For ORNL Title, Remove Intentional Line Break; Smaller Screen Width Breaks Text Instead */
-  body#about section#spotlightsSection section.ornl h1.title { margin: 75px 0 0 0; }
-}
-
 /*** Skills Section ***/
 /* Add Border to Bottom of Skills Header to Separate from Languages/Tools Sections. */
 body#about header#skillsHeader h1#skillsTitle { border-bottom: 10px double #CCCCCC; }
@@ -1678,7 +1571,7 @@ body#about section#skillsSection section.languages {
   vertical-align: top;
 }
 /* Styling Width of Section Title to Define How Large Border-Bottom is. */
-body#about section#skillsSection section.languages h1.sectionTitle { width: 95%; }
+body#about section#skillsSection section.languages h1.sectionTitle { width: 85%; }
 /* Styling Languages Column in Table */
 body#about section#skillsSection section.languages table tr td {
   font-size: 1.25vw;
@@ -1711,7 +1604,7 @@ body#about section#skillsSection section.tools {
   margin: 2% 0 1.5% 0;
 }
 /* Styling Width of Section Title to Define How Large Border-Bottom is */
-body#about section#skillsSection section.tools h1.sectionTitle { width: 35%; }
+body#about section#skillsSection section.tools h1.sectionTitle { width: 65%; }
 /* Specific Styling for Tool Rows */
 body#about section#skillsSection section.tools table tr td.tool {
   font-size: 2vw;
