@@ -1111,7 +1111,7 @@ body#about section#biographySection div.backgroundPic img {
   min-height: 100%;
 }
 /* Styling Tint Darker Than Its Global Styling To Make Text Easier To Read */
-body#about section#biographySection div.tint { opacity: 0.6; }
+body#about section#biographySection div.tint { opacity: 0.8; }
 /* Circular Profile Picture Element */
 body#about section#biographySection div.profilePic {
   width: 32.5vw;
@@ -1265,6 +1265,12 @@ body#about section#resumeSection div.diagonalBtn {
   /* Specifying Width & Font-Size of Button Based on Contents ("View Resume") */
   width: 468.75px;
   font-size: 4.2em;
+  margin: 0 auto 0.25em auto;
+}
+/* Styling Resume Last Updated Disclaimer */
+body#about section#resumeSection article p#resumeLastUpdated {
+  font-size: 1.5em;
+  font-style: italic;
 }
 /* Resume Section Media Queries */
 @media only screen and (max-width: 1200px) and (min-width: 769px) {

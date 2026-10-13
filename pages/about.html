@@ -47,13 +47,16 @@
         <h2>My name is Jovan Yoshioka.</h2>
         <p>
           I am a software engineer striving to improve the human condition through 
-          innovative projects. I taught myself how to code at the age of ten. Taking 
-          this initiative has instilled in me a strong passion for learning through 
-          hands-on experience and developing creative solutions to complex challenges. 
-          I have worked on web apps, robotics, computer vision, video-games, 
-          and data science. I have come to love the process of conceptualizing, 
-          designing, coding, and sharing projects, especially when collaborating 
-          with cross-disciplinary teams.
+          innovation. I taught myself to code at the age of ten, sparking a passion 
+          for hands-on learning and developing creative solutions to complex challenges.
+          <br /><br />
+          I specialize in web-based apps, with a broader background in robotics, computer 
+          vision, game development, and data science. At Microsoft, I work on SharePoint 
+          experiences used by millions, creating impact at scale. I enjoy exploring new 
+          technologies, streamlining workflows with AI, and building AI-powered experiences, 
+          like Copilot, that empower others. I love bringing ideas to life alongside 
+          cross-disciplinary teams to create products that make a meaningful difference 
+          in people's lives.
         </p>
       </article>
       <!-- Bouncing arrow to tell user there is more content below -->
@@ -70,6 +73,10 @@
       <div id="resumeBtn" class="diagonalBtn slideUpFadeInPrep">
         <a class="diagonalBtn" href="../assets/Jovan_Yoshioka_Resume.pdf" target="_blank"><span>View Resume</span></a>
       </div>
+
+      <article>
+        <p id="resumeLastUpdated" class="slideUpFadeInPrep">Last updated: July 1, 2024</p>
+      </article>
     </section>
 
     <!-- Education section header -->
@@ -291,7 +298,7 @@
         changeNavBackgroundColor();
 
         // Initialize elements' display animations if page is scrolled to target element.
-        initScrolledSlideUpFadeIn("resumeSection", ["resumeTitle","resumeBtn"]);
+        initScrolledSlideUpFadeIn("resumeSection", ["resumeTitle","resumeBtn", "resumeLastUpdated"]);
         initScrolledSlideUpFadeIn("educationHeader", ["educationTitle"]);
         initScrolledSlideUpFadeIn("skillsHeader", ["skillsTitle"]);
         initScrolledSlideUpFadeIn("spotlightsHeader", ["spotlightsTitle"]);
