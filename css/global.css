@@ -675,7 +675,6 @@ body#landing { background-color: #1A1A1A; }
 
 /* Style Elements to Take Up Entire Browser Size */
 body#landing div.radialGradient,
-body#landing canvas#particlesCanvas,
 body#landing svg,
 body#landing div.blackBackground {
   width: 100%;
@@ -1107,9 +1106,7 @@ body#home section#slideshowSection section#name div.diagonalBtn {
   body#home section#slideshowSection section#name div.diagonalBtn {
     display: none;
   }
-  /* Do Not Use Particles Animation nor Bouncing Arrow for Mobile Version */
-  body#home canvas#particlesCanvas,
-  body#home section#slideshowSection section#name div.canvasHider,
+  /* Do Not Use Bouncing Arrow for Mobile Version */
   body#home section#slideshowSection button#bouncingArrow { display: none; }
 }
 @media only screen and (max-width: 600px) {
