@@ -777,6 +777,11 @@ function runSlideshow()
  */
 function createSlideSelectors(slideCount)
 {
+  var selectorsContainer = document.querySelector(".selectorsContainer");
+  if (selectorsContainer)
+  {
+    selectorsContainer.innerHTML = "";
+  }
   // Repeat the element creation process "slideCount" times.
   for (var i = 0; i < slideCount; i++)
   {
@@ -793,7 +798,10 @@ function createSlideSelectors(slideCount)
     // Set onclick action to select corresponding slide.
     node.setAttribute("onclick","selectSlideshowImg(" + i + ")");
     // Append button element node to slideshow selectors container.
-    document.querySelector(".selectorsContainer").appendChild(node);
+    if (selectorsContainer)
+    {
+      selectorsContainer.appendChild(node);
+    }
   }
 }
 /**
